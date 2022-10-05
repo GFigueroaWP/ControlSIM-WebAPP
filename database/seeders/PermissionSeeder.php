@@ -117,7 +117,7 @@ class PermissionSeeder extends Seeder
         $role = Role::create(['name' => 'gestor'])->givePermissionTo(['ordenes_create', 'ordenes_edit', 'ordenes_show', 'ordenes_delete', 'ordenes_access', 'tareas_create', 'tareas_edit', 'tareas_show', 'tareas_delete', 'tareas_access', 'comentarios_create', 'comentarios_edit', 'comentarios_show', 'comentarios_delete', 'comentarios_access', 'informes_create', 'informes_edit', 'informes_show', 'informes_delete', 'informes_access', 'viaticos_create', 'viaticos_edit', 'viaticos_show', 'viaticos_delete', 'viaticos_access', 'boletas_create', 'boletas_edit', 'boletas_show', 'boletas_delete', 'boletas_access']);
         $role = Role::create(['name' => 'empleado'])->givePermissionTo(['ordenes_access', 'ordenes_show', 'comentarios_create', 'comentarios_edit', 'comentarios_show', 'comentarios_delete', 'comentarios_access', 'informes_create', 'informes_edit', 'informes_show', 'informes_delete', 'informes_access', 'viaticos_create', 'viaticos_edit', 'viaticos_show', 'viaticos_delete', 'viaticos_access', 'boletas_create', 'boletas_edit', 'boletas_show', 'boletas_delete', 'boletas_access']);
 
-        $super = User::factory()->create([
+        $super = User::create([
             'us_username' => 'Test',
             'us_nombre' => 'Test',
             'us_apellido' => 'User',
