@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Empleados\IndexEmpleados;
+use App\Http\Livewire\Empleados\CreateEmpleados;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,4 +29,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/empleados', IndexEmpleados::class)->name('empleados');
+    Route::get('/empleados/create', CreateEmpleados::class);
 });
