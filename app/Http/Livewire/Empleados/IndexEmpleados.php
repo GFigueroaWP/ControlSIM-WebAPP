@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire\Empleados;
 
+use App\Models\User;
 use Livewire\Component;
-
 use Livewire\WithPagination;
 
-use App\Models\User;
-
-class View extends Component
+class IndexEmpleados extends Component
 {
     use WithPagination;
 
@@ -17,7 +15,7 @@ class View extends Component
     public function render()
     {
         $filtro = '%'.$this->filtro .'%';
-        return view('livewire.empleados.view',[
+        return view('livewire.empleados.index-empleados', [
             'empleados' => User::latest()
                         ->orWhere('us_nombre','LIKE',$filtro)
                         ->orWhere('us_username','LIKE',$filtro)
