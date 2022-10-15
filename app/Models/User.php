@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\States\User\UserState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\ModelStates\HasStates;
 use Spatie\Permission\Traits\HasRoles; //Spatie-Permissions
 
 class User extends Authenticatable
@@ -18,6 +20,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles; //Spatie-Permissions
+    use HasStates; //Spatie-Laravel-model-states
 
     /**
      * The attributes that are mass assignable.
@@ -50,7 +53,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        //
+        'state' => UserState::class
     ];
 
     /**

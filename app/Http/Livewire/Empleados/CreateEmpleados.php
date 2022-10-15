@@ -40,7 +40,7 @@ class CreateEmpleados extends Component
     }
 
     protected $rules = [
-        'us_username' => 'required|alpha|unique:users',
+        'us_username' => 'required|alpha_num|unique:users',
         'us_nombre' => 'required|alpha',
         'us_apellido' => 'required|alpha',
         'us_rut' => 'required|size:10',
@@ -51,7 +51,7 @@ class CreateEmpleados extends Component
 
     protected $messages = [
         'us_username.required' => 'El campo de Usuario es obligatorio',
-        'us_username.alpha' => 'El campo de Usuario debe ser en formato alfabético',
+        'us_username.alpha_num' => 'El campo de Usuario debe ser en formato alfanumerico',
         'us_username.unique' => 'El nombre de usuario especificado ya esta en uso',
         'us_nombre.required' => 'El campo de Nombre es obligatorio',
         'us_nombre.alpha' => 'El campo de nombre debe ser en formato alfabético',
