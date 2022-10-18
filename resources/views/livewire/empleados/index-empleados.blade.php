@@ -46,6 +46,9 @@
                                 Cargo
                             </th>
                             <th scope="col" class="py-2 px-6">
+                                Estado
+                            </th>
+                            <th scope="col" class="py-2 px-6">
                                 Acciones
                             </th>
                         </tr>
@@ -57,13 +60,18 @@
                             <td class="py-3 px-6">{{ $empleado->us_username }}</td>
                             <td class="py-3 px-6">{{ $empleado->us_nombre }} {{ $empleado->us_apellido}}</td>
                             <td class="py-3 px-6">{{ $empleado->getRoleNames()->first() }}</td>
+                            <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
                             <td class="py-3 px-6">
                                 @can('users_show')
                                     <a href="empleados/{{ $empleado->id }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 @endcan
-                                @can('users_delete')
-                                    <x-jet-danger-button>{{ __('Deshabilitar') }}</x-jet-danger-button>
-                                @endcan
+                                @if($empleado->us_estado == 'activo')
+                                    @can('users_delete')
+                                        <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled'>{{ __('Deshabilitar') }}</x-jet-danger-button>
+                                    @endcan
+                                @else
+                                    <x-jet-danger-button>{{ _('Habilitar') }}</x-jet-danger-button>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -81,4 +89,21 @@
             </div>
         </div>
     </div>
+    {{-- Modal de confirmación de suspension de usuario --}}
+    <x-jet-confirmation-modal wire:model='modalDeshabilitacion'>
+        <x-slot name="title">
+            {{ _('Deshabilitar usuario') }}
+        </x-slot>
+        <x-slot name="content">
+            {{ _('Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser deshecha') }}
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalDeshabilitacion')" wire:loading.attr='"disabled'>
+                {{ _('Cancelar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacion }})' wire:loading.attr='disabled'>
+                {{ _('Deshabilitar') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-confirmation-modal>
 </div>

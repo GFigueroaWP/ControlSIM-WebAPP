@@ -53,7 +53,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'state' => UserState::class
+        'us_estado' => UserState::class
     ];
 
     /**
