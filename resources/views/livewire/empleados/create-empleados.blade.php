@@ -13,10 +13,13 @@
                     @csrf
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
-                            <label for="us_username" class="block mb-2 text-sm font-medium text-gray-900 ">Usuario</label>
+                            <x-jet-label for="us_username" value="{{ __('Usuario') }}" />
+                            <x-jet-input id="us_username" type="text" class="mt-1 block w-full"/>
+                            <x-jet-input-error for="us_username" class="mt-2" />
+                            {{-- <label for="us_username" class="block mb-2 text-sm font-medium text-gray-900 ">Usuario</label>
                             <input wire:model='us_username' type="text" id="us_username"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                placeholder="usuario">
+                                placeholder="usuario"> --}}
                         </div>
                         <div>
                             <label for="us_rut" class="block mb-2 text-sm font-medium text-gray-900 ">Rut</label>

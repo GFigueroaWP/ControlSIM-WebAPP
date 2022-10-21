@@ -13,6 +13,7 @@ class IndexEmpleados extends Component
 
     public $filtro;
     public $modalDeshabilitacion = false;
+    public $modalMostrar = false;
 
     public function render()
     {
