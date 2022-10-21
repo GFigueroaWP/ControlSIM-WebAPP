@@ -63,7 +63,7 @@
                             <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
                             <td class="py-3 px-6">
                                 @can('users_show')
-                                    <a href="empleados/{{ $empleado->id }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
+                                    <x-jet-button wire:click=''>{{ __('Ver') }}</x-jet-button>
                                 @endcan
                                 @if($empleado->us_estado == 'activo')
                                     @can('users_delete')
@@ -106,4 +106,5 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
+    @livewire('empleados.show-empleados')
 </div>
