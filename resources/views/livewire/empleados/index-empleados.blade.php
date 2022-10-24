@@ -11,9 +11,7 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('users_create')
-                            <a href="empleados/create"><button type="button"
-                                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-sm shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Añadir
-                                nuevo usuario</button></a>
+                            <x-jet-button wire:click="$toggle('modalCreacion')">{{ __('Crear') }}</x-jet-button>
                         @endcan
                     </div>
                     <label for="search_empleados" class="sr-only">Buscar</label>
@@ -98,13 +96,82 @@
             {{ _('Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser deshecha') }}
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('modalDeshabilitacion')" wire:loading.attr='"disabled'>
+            <x-jet-secondary-button wire:click="cancelDeshabilitar">
                 {{ _('Cancelar') }}
             </x-jet-secondary-button>
-            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacion }})' wire:loading.attr='disabled'>
+            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacion }})'>
                 {{ _('Deshabilitar') }}
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
-    @livewire('empleados.show-empleados')
+
+    {{-- Modal de creación de usuario --}}
+    <x-jet-dialog-modal wire:model='modalCreacion'>
+        <x-slot name="title">
+            {{ _('Añadir nuevo usuario') }}
+        </x-slot>
+        <x-slot name="content">
+            <form wire:submit.prevent='submit' class="space-y-4">
+                @csrf
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <x-jet-label for="us_username" value="{{ __('Usuario') }}" />
+                        <x-jet-input id="us_username" wire:model='us_username' type="text" placeholder="Username" class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_username" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="us_rut" value="{{ __('Rut') }}" />
+                        <x-jet-input id="us_rut" wire:model='us_rut' wire:change="formatRut" wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_rut" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="us_nombre" value="{{ __('Nombre') }}" />
+                        <x-jet-input id="us_nombre" wire:model='us_nombre' type="text" placeholder='John' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_nombre" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="us_apellido" value="{{ __('Apellido') }}" />
+                        <x-jet-input id="us_apellido" wire:model='us_apellido' type="text" placeholder='Doe' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_apellido" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="us_telefono" value="{{ __('Telefono') }}" />
+                        <x-jet-input id="us_telefono" wire:model='us_telefono' type="text" placeholder='912344678' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_telefono" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="us_email" value="{{ __('Email') }}" />
+                        <x-jet-input id="us_email" wire:model='us_email' type="email" placeholder='user@controlsim.cl' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_email" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="password" value="{{ __('Apellido') }}" />
+                        <x-jet-input id="password" wire:model='password' type="password" placeholder='********' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="password" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-jet-label for="cargo" value="{{ __('Cargo') }}" />
+                        <select name="cargo" id="cargo" wire:model='cargo' default=''
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            value=''>
+                            <option selected value="cargo">cargo</option>
+                            @foreach ($cargos as $cargo)
+                                @if ($cargo!='super-admin')
+                                    <option value="{{ $cargo }}">{{ $cargo }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="cancelCrear">
+                {{ _('Cancelar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button type='submit' wire:click='submit'>
+                {{ _('Crear') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>
