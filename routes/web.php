@@ -29,5 +29,4 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/empleados', IndexEmpleados::class)->name('empleados');
-    Route::get('/empleados/create', CreateEmpleados::class);
 });

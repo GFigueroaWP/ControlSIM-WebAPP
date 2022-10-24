@@ -61,14 +61,14 @@
                             <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
                             <td class="py-3 px-6">
                                 @can('users_show')
-                                    <x-jet-button wire:click=''>{{ __('Ver') }}</x-jet-button>
+                                    <x-jet-button>{{ __('Editar') }}</x-jet-button>
                                 @endcan
                                 @if($empleado->us_estado == 'activo')
                                     @can('users_delete')
-                                        <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled'>{{ __('Deshabilitar') }}</x-jet-danger-button>
+                                        <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}</x-jet-danger-button>
                                     @endcan
                                 @else
-                                    <x-jet-danger-button>{{ _('Habilitar') }}</x-jet-danger-button>
+                                    <x-jet-danger-button class="m-1">{{ _('Habilitar') }}</x-jet-danger-button>
                                 @endif
                             </td>
                         </tr>
@@ -87,6 +87,7 @@
             </div>
         </div>
     </div>
+
     {{-- Modal de confirmación de suspension de usuario --}}
     <x-jet-confirmation-modal wire:model='modalDeshabilitacion'>
         <x-slot name="title">
@@ -96,10 +97,10 @@
             {{ _('Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser deshecha') }}
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="cancelDeshabilitar">
+            <x-jet-secondary-button wire:click="cancelDeshabilitar" class="m-1">
                 {{ _('Cancelar') }}
             </x-jet-secondary-button>
-            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacion }})'>
+            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacion }})' class="m-1">
                 {{ _('Deshabilitar') }}
             </x-jet-danger-button>
         </x-slot>
@@ -152,7 +153,7 @@
                     <div>
                         <x-jet-label for="cargo" value="{{ __('Cargo') }}" />
                         <select name="cargo" id="cargo" wire:model='cargo' default=''
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block mt-1 w-full p-2.5"
                             value=''>
                             <option selected value="cargo">cargo</option>
                             @foreach ($cargos as $cargo)
@@ -161,15 +162,16 @@
                                 @endif
                             @endforeach
                         </select>
+                        <x-jet-input-error for="cargo" class="mt-2" />
                     </div>
                 </div>
             </form>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="cancelCrear">
+            <x-jet-secondary-button wire:click="cancelCrear" class="m-1">
                 {{ _('Cancelar') }}
             </x-jet-secondary-button>
-            <x-jet-danger-button type='submit' wire:click='submit'>
+            <x-jet-danger-button type='submit' wire:click='submit' class="m-1">
                 {{ _('Crear') }}
             </x-jet-danger-button>
         </x-slot>

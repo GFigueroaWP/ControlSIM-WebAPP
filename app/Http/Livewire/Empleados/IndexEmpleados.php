@@ -79,7 +79,8 @@ class IndexEmpleados extends Component
             'us_rut' => 'required|size:10',
             'us_telefono' => 'required|numeric',
             'us_email' => 'required|email|unique:users',
-            'password' => 'required'
+            'password' => 'required',
+            'cargo' =>  'exists:roles'
         ];
 
         protected $messages = [
@@ -98,6 +99,7 @@ class IndexEmpleados extends Component
             'us_email.email' => 'El campo de Email debe tener formato email@email.xx',
             'us_email.unique' => 'La dirección de correo ya esta en uso por otro usuario',
             'password.required' => 'El campo de Contraseña es obligatorio',
+            'cargo.exists' => 'El cargo seleccionado no se encuentra en los registros'
         ];
 
         public function submit()
@@ -118,5 +120,7 @@ class IndexEmpleados extends Component
             session()->flash('flash.bannerStyle', 'success');
 
             $this->modalCreacion = false;
+
+            return redirect()->to('/empleados');
         }
 }
