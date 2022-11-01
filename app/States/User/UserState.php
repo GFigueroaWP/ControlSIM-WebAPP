@@ -19,6 +19,6 @@ abstract class UserState extends State
     {
         return parent::config()
             ->default(Activo::class)
-            ->allowTransition(Activo::class, Deshabilitado::class);
+            ->allowTransition([Activo::class,Deshabilitado::class], Deshabilitado::class);
     }
 }

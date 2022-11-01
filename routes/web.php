@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Empleados\Empleados;
+use App\Http\Livewire\Empleados\ShowEmpleados;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,4 +29,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/empleados', Empleados::class)->name('empleados');
+    Route::get('/empleados/{id}', ShowEmpleados::class);
 });

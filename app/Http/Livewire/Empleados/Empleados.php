@@ -26,8 +26,9 @@ class Empleados extends Component
         $filtro = '%'.$this->filtro .'%';
 
         return view('livewire.empleados.empleados', [
-            'empleados' => User::where('us_estado','activo')
+            'empleados' => User::latest()
                         ->orWhere('us_nombre','LIKE',$filtro)
+                        ->orWhere('us_apellido','LIKE',$filtro)
                         ->orWhere('us_username','LIKE',$filtro)
                         ->paginate(10),
             'roles' => Role::all()->pluck('name')
@@ -85,7 +86,7 @@ class Empleados extends Component
         'us_telefono' => 'required|numeric',
         'us_email' => 'required|email|unique:users',
         'password' => 'required',
-        'cargo' =>  'exists:roles'
+        'cargo' =>  'exists:roles,name'
     ];
 
     protected $messages = [

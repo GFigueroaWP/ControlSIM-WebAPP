@@ -61,7 +61,7 @@
                             <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
                             <td class="py-3 px-6">
                                 @can('users_edit')
-                                    <x-jet-button wire:click='confirmEmpleadoEdicion ({{ $empleado->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Editar') }}</x-jet-button>
+                                    <a href="/empleados/{{ $empleado->id }}"><x-jet-button>{{ __('Editar') }}</x-jet-button></a>
                                 @endcan
                                 @if($empleado->us_estado == 'activo')
                                     @can('users_delete')
@@ -177,7 +177,7 @@
         </x-slot>
     </x-jet-dialog-modal>
 
-    <x-jet-dialog-modal wire:model='modalEdicion'>
+    {{-- <x-jet-dialog-modal wire:model='modalEdicion'>
         <x-slot name="title">
             {{ _('Editar usuario') }}
         </x-slot>
@@ -248,5 +248,5 @@
                 {{ _('Crear') }}
             </x-jet-danger-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-jet-dialog-modal> --}}
 </div>
