@@ -20,6 +20,11 @@
                             {{ __('Empleados') }}
                         </x-jet-nav-link>
                     @endcan
+                    @can('clientes_access')
+                        <x-jet-nav-link href="{{ route('clientes') }}" :active="request()->routeIs('clientes')">
+                            {{ __('Clientes') }}
+                        </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 

@@ -2,6 +2,8 @@
 
 use App\Http\Livewire\Empleados\Empleados;
 use App\Http\Livewire\Empleados\ShowEmpleados;
+use App\Http\Livewire\Clientes\Clientes;
+use App\Http\Livewire\Clientes\ShowClientes;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,4 +32,6 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/empleados', Empleados::class)->name('empleados');
     Route::get('/empleados/{empleado}', ShowEmpleados::class);
+    Route::get('/clientes', Clientes::class)->name('clientes');
+    Route::get('/clientes/{cliente}', ShowClientes::class);
 });
