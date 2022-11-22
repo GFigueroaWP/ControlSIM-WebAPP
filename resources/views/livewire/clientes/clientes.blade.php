@@ -123,12 +123,12 @@
                     <div>
                         <x-jet-label for="cli_nombre" value="{{ __('Nombre') }}" />
                         <x-jet-input id="cli_nombre" wire:model.lazy='cli_nombre' type="text" placeholder='Empresa ejemplo' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_rut" class="mt-2" />
+                        <x-jet-input-error for="cli_nombre" class="mt-2" />
                     </div>
                     <div>
                         <x-jet-label for="cli_razonsocial" value="{{ __('Razón social') }}" />
                         <x-jet-input id="cli_razonsocial" wire:model.lazy='cli_razonsocial' type="text" placeholder='Empresa ejemplo SA' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_nombre" class="mt-2" />
+                        <x-jet-input-error for="cli_razonsocial" class="mt-2" />
                     </div>
                     <div>
                         <x-jet-label for="cli_email" value="{{ __('Email') }}" />

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\States\Cliente\ClienteState;
+/* use App\States\Cliente\ClienteState; */
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\ModelStates\HasStates;
@@ -24,6 +24,6 @@ class Cliente extends Model
     ];
 
     protected $casts = [
-        'cli_estado' => ClienteState::class
+        /* 'cli_estado' => ClienteState::class */
     ];
 }
