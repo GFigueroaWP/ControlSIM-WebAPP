@@ -14,46 +14,45 @@ class Empleados extends Component
 {
     use WithPagination;
 
-    public $filtro;
-    public $modalDeshabilitacion = false;
-    public $modalMostrar = false;
-    public $modalCreacion = false;
-    public $modalEdicion = false;
+    public $filtro_us;
+    public $modalDeshabilitacionEmpleado = false;
+    public $modalCreacionEmpleado = false;
+    /* public $modalEdicionEmpleado = false; */
     public $edit, $selected_id;
 
     public function render()
     {
-        $filtro = '%'.$this->filtro .'%';
+        $filtro_us = '%'.$this->filtro_us .'%';
 
         return view('livewire.empleados.empleados', [
             'empleados' => User::latest()
-                        ->orWhere('us_nombre','LIKE',$filtro)
-                        ->orWhere('us_apellido','LIKE',$filtro)
-                        ->orWhere('us_username','LIKE',$filtro)
+                        ->orWhere('us_nombre','LIKE',$filtro_us)
+                        ->orWhere('us_apellido','LIKE',$filtro_us)
+                        ->orWhere('us_username','LIKE',$filtro_us)
                         ->paginate(10),
             'roles' => Role::all()->pluck('name')
         ]);
     }
 
     public function confirmEmpleadoDeshabilitacion ($id){
-        $this->modalDeshabilitacion = $id;
+        $this->modalDeshabilitacionEmpleado = $id;
     }
 
     public function cancelDeshabilitar (){
-        $this->modalDeshabilitacion = false;
+        $this->modalDeshabilitacionEmpleado = false;
     }
 
     public function cancelCrear (){
-        $this->modalCreacion = false;
+        $this->modalCreacionEmpleado = false;
     }
 
-    public function cancelEditar (){
-        $this->modalEdicion = false;
-    }
+    /* public function cancelEditar (){
+        $this->modalEdicionEmpleado = false;
+    } */
 
     public function deshabilitarEmpleado (User $empleado){
         $empleado->us_estado->transitionTo(Deshabilitado::class);
-        $this->modalDeshabilitacion = false;
+        $this->modalDeshabilitacionEmpleado = false;
     }
 
     public $us_username, $us_nombre, $us_apellido, $us_rut,
@@ -122,11 +121,11 @@ class Empleados extends Component
         ])->assignRole($this->cargo);
         session()->flash('flash.banner', 'Nuevo usuario añadido con éxito');
         session()->flash('flash.bannerStyle', 'success');
-        $this->modalCreacion = false;
+        $this->modalCreacionEmpleado = false;
         return redirect()->to('/empleados');
     }
 
-    public function confirmEmpleadoEdicion ($id){
+    /* public function confirmEmpleadoEdicion ($id){
         $edit = User::findOrFail($id);
 
         $this->selected_id = $id;
@@ -139,10 +138,10 @@ class Empleados extends Component
         $this->password = $edit->us_password;
         $this->cargo = $edit->getRoleNames()->first();
 
-        $this->modalEdicion = true;
-    }
+        $this->modalEdicionEmpleado = true;
+    } */
 
-    public function update()
+    /* public function update()
     {
         $this->validate();
 
@@ -160,8 +159,8 @@ class Empleados extends Component
 
             session()->flash('flash.banner', 'Nuevo usuario añadido con éxito');
             session()->flash('flash.bannerStyle', 'success');
-            $this->modalEdicion = false;
+            $this->modalEdicionEmpleado = false;
             return redirect()->to('/empleados');
         }
-    }
+    } */
 }

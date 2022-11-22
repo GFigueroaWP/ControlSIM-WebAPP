@@ -11,7 +11,7 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('users_create')
-                            <x-jet-button wire:click="$toggle('modalCreacion')">{{ __('Crear') }}</x-jet-button>
+                            <x-jet-button wire:click="$toggle('modalCreacionEmpleado')">{{ __('Crear') }}</x-jet-button>
                         @endcan
                     </div>
                     <label for="search_empleados" class="sr-only">Buscar</label>
@@ -24,7 +24,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input wire:model='filtro' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
+                        <input wire:model='filtro_us' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
                             name="search_empleados" id="search_empleados" placeholder="Buscar Empleados">
                     </div>
                 </div>
@@ -89,7 +89,7 @@
     </div>
 
     {{-- Modal de confirmación de suspension de usuario --}}
-    <x-jet-confirmation-modal wire:model='modalDeshabilitacion'>
+    <x-jet-confirmation-modal wire:model='modalDeshabilitacionEmpleado'>
         <x-slot name="title">
             {{ _('Deshabilitar usuario') }}
         </x-slot>
@@ -100,14 +100,14 @@
             <x-jet-secondary-button wire:click="cancelDeshabilitar" class="m-1">
                 {{ _('Cancelar') }}
             </x-jet-secondary-button>
-            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacion }})' class="m-1">
+            <x-jet-danger-button wire:click='deshabilitarEmpleado ({{ $modalDeshabilitacionEmpleado }})' class="m-1">
                 {{ _('Deshabilitar') }}
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
 
     {{-- Modal de creación de usuario --}}
-    <x-jet-dialog-modal wire:model='modalCreacion'>
+    <x-jet-dialog-modal wire:model='modalCreacionEmpleado'>
         <x-slot name="title">
             {{ _('Añadir nuevo usuario') }}
         </x-slot>
