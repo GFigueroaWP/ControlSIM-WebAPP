@@ -31,7 +31,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/empleados', Empleados::class)->name('empleados');
-    Route::get('/empleados/{empleado}', ShowEmpleados::class);
+    Route::get('/empleados/{empleado}', ShowEmpleados::class)->name('showEmpleados');
     Route::get('/clientes', Clientes::class)->name('clientes');
     Route::get('/clientes/{cliente}', ShowClientes::class);
 });

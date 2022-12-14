@@ -88,24 +88,6 @@
         </div>
     </div>
 
-    {{-- Modal de confirmación de suspension de usuario --}}
-    {{-- <x-jet-confirmation-modal wire:model='modalDeshabilitacionCliente'>
-        <x-slot name="title">
-            {{ _('Deshabilitar usuario') }}
-        </x-slot>
-        <x-slot name="content">
-            {{ _('Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser deshecha') }}
-        </x-slot>
-        <x-slot name="footer">
-            <x-jet-secondary-button wire:click="cancelDeshabilitar" class="m-1">
-                {{ _('Cancelar') }}
-            </x-jet-secondary-button>
-            <x-jet-danger-button wire:click='deshabilitarCliente ({{ $modalDeshabilitacionCliente }})' class="m-1">
-                {{ _('Deshabilitar') }}
-            </x-jet-danger-button>
-        </x-slot>
-    </x-jet-confirmation-modal> --}}
-
     {{-- Modal de creación de usuario --}}
     <x-jet-dialog-modal wire:model='modalCreacionCliente'>
         <x-slot name="title">

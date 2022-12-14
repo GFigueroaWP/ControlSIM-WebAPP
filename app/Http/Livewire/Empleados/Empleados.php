@@ -17,7 +17,6 @@ class Empleados extends Component
     public $filtro_us;
     public $modalDeshabilitacionEmpleado = false;
     public $modalCreacionEmpleado = false;
-    /* public $modalEdicionEmpleado = false; */
     public $edit, $selected_id;
 
     public function render()
@@ -45,10 +44,6 @@ class Empleados extends Component
     public function cancelCrear (){
         $this->modalCreacionEmpleado = false;
     }
-
-    /* public function cancelEditar (){
-        $this->modalEdicionEmpleado = false;
-    } */
 
     public function deshabilitarEmpleado (User $empleado){
         $empleado->us_estado->transitionTo(Deshabilitado::class);
@@ -125,42 +120,4 @@ class Empleados extends Component
         return redirect()->to('/empleados');
     }
 
-    /* public function confirmEmpleadoEdicion ($id){
-        $edit = User::findOrFail($id);
-
-        $this->selected_id = $id;
-        $this->us_username = $edit->us_username;
-        $this->us_nombre = $edit->us_nombre;
-        $this->us_apellido = $edit->us_apellido;
-        $this->us_rut = $edit->us_rut;
-        $this->us_telefono = $edit->us_telefono;
-        $this->us_email = $edit->us_email;
-        $this->password = $edit->us_password;
-        $this->cargo = $edit->getRoleNames()->first();
-
-        $this->modalEdicionEmpleado = true;
-    } */
-
-    /* public function update()
-    {
-        $this->validate();
-
-        if ($this->selected_id) {
-			$record = User::find($this->selected_id);
-            $record->update([
-                'us_username' => $this->us_username,
-                'us_nombre' => $this->us_nombre,
-                'us_apellido' => $this->us_apellido,
-                'us_rut' => $this->us_rut,
-                'us_telefono' => $this->us_telefono,
-                'us_email' => $this->us_email,
-                'password' => Hash::make($this->password)
-            ])->assignRole($this->cargo);
-
-            session()->flash('flash.banner', 'Nuevo usuario añadido con éxito');
-            session()->flash('flash.bannerStyle', 'success');
-            $this->modalEdicionEmpleado = false;
-            return redirect()->to('/empleados');
-        }
-    } */
 }

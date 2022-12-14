@@ -26,4 +26,11 @@ class Cliente extends Model
     protected $casts = [
         /* 'cli_estado' => ClienteState::class */
     ];
+
+    public function contactos()
+    {
+        return $this->hasMany(Contacto::class, 'cli_id');
+    }
+
+
 }

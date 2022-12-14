@@ -13,16 +13,17 @@
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('Informacion almacenada del empleado seleccionado') }}
+                    {{ __('Información almacenada del empleado seleccionado') }}
                 </x-slot>
 
                 <x-slot name="form">
+                    {{ $empleado->us_username }}
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="us_username" value="{{ __('Usuario') }}" />
-                        <x-jet-input id="us_username" wire:model.defer='us_username' value='{{ $empleado->us_username }}' type="text" placeholder="Username" class="mt-1 block w-full"/>
+                        <x-jet-input id="us_username" wire:ignore.self wire:model.lazy='us_username' value='{{ $empleado->us_username }}' type="text" placeholder="Username" class="mt-1 block w-full"/>
                         <x-jet-input-error for="us_username" class="mt-2" />
                     </div>
-                    <div class="col-span-6 sm:col-span-4">
+                    {{-- <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="us_rut" value="{{ __('Rut') }}" />
                         <x-jet-input id="us_rut" wire:model.defer='us_rut' wire:change="formatRut" wire:keyup="formatRut" value='{{ $empleado->us_rut }}' type="text" placeholder='11222333-4' class="mt-1 block w-full"/>
                         <x-jet-input-error for="us_rut" class="mt-2" />
@@ -47,11 +48,11 @@
                         <x-jet-input id="us_email" wire:model.defer='us_email' value='{{ $empleado->us_email }}' type="email" placeholder='user@controlsim.cl' class="mt-1 block w-full"/>
                         <x-jet-input-error for="us_email" class="mt-2" />
                     </div>
-                    {{-- <div>
+                    <div>
                         <x-jet-label for="password" value="{{ __('Contraseña') }}" />
                         <x-jet-input id="password" wire:model='password' type="password" placeholder='********' class="mt-1 block w-full"/>
                         <x-jet-input-error for="password" class="mt-2" />
-                    </div> --}}
+                    </div>
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="cargo" value="{{ __('Cargo') }}" />
                         <select name="cargo" id="cargo" wire:model='cargo'
@@ -68,13 +69,39 @@
                             @endforeach
                         </select>
                         <x-jet-input-error for="cargo" class="mt-2" />
-                    </div>
+                    </div> --}}
                 </x-slot>
 
                 <x-slot name="actions">
-
+                    <x-jet-button wire:click='confirmEmpleadoEdicion ({{ $empleado->id }})' wire:loading.attr='disabled'>{{ __('editar') }}</x-jet-button>
                 </x-slot>
             </x-jet-form-section>
         </div>
     </div>
+    {{-- Modal de creación de usuario --}}
+    <x-jet-dialog-modal wire:model='modalEdicionEmpleado'>
+        <x-slot name="title">
+            {{ _('Editar usuario') }}
+        </x-slot>
+        <x-slot name="content">
+            <form wire:submit.prevent='edit' class="space-y-4">
+                @csrf
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <x-jet-label for="us_username" value="{{ __('Usuario') }}" />
+                        <x-jet-input id="us_username" wire:model.lazy='us_username' type="text" placeholder="Username" class="mt-1 block w-full"/>
+                        <x-jet-input-error for="us_username" class="mt-2" />
+                    </div>
+                </div>
+            </form>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="cancelEditar" class="m-1">
+                {{ _('Cancelar') }}
+            </x-jet-secondary-button>
+            <x-jet-danger-button type='submit' wire:click='edit' class="m-1">
+                {{ _('Editar') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

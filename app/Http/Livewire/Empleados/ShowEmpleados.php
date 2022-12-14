@@ -8,15 +8,16 @@ use Livewire\Component;
 use Spatie\Permission\Models\Role;
 class ShowEmpleados extends Component
 {
-    public $us_username, $us_nombre, $us_apellido, $us_rut,
-        $us_telefono, $us_email, $password, $cargo;
-
     public $empleado, $roles;
+
+    public $us_username, $us_nombre, $us_apellido, $us_rut,
+        $us_telefono, $us_email, $password, $cargo, $edit_empleado;
+
+    public $modalEdicionEmpleado = false;
 
     public function mount(User $empleado)
     {
-        $this->empleado = $empleado;
-        $this->roles = Role::all()->pluck('name');
+
     }
 
     public function render()
@@ -24,7 +25,11 @@ class ShowEmpleados extends Component
         return view('livewire.empleados.show-empleados');
     }
 
-    public function formatRut()
+    public function confirmEmpleadoEdicion ($id){
+        $this->modalEdicionEmpleado = $id;
+    }
+
+    /* public function formatRut()
     {
         $us_rut = $this-> us_rut;
         $us_rut = preg_replace('/[^0-9]+/', '', $us_rut);
@@ -71,7 +76,9 @@ class ShowEmpleados extends Component
         'us_email.unique' => 'La dirección de correo ya esta en uso por otro usuario',
         'password.required' => 'El campo de Contraseña es obligatorio',
         'cargo.exists' => 'El cargo seleccionado no se encuentra en los registros'
-    ];
+    ]; */
+
+    public $edit_us_username;
 
     public function updateEmpleado(){
 

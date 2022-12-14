@@ -61,7 +61,7 @@
                             <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
                             <td class="py-3 px-6">
                                 @can('users_edit')
-                                    <a href="/empleados/{{ $empleado->id }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
+                                    <a href="{{ route('showEmpleados', ['empleado' => $empleado->id]) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 @endcan
                                 @if($empleado->us_estado == 'activo')
                                     @can('users_delete')
