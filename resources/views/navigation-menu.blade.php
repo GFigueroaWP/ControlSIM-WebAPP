@@ -25,6 +25,11 @@
                             {{ __('Clientes') }}
                         </x-jet-nav-link>
                     @endcan
+                    @can('cotizaciones_access')
+                        <x-jet-nav-link href="{{ route('cotizaciones') }}" :active="request()->routeIs('cotizaciones')">
+                            {{ __('Cotizaciones') }}
+                        </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 

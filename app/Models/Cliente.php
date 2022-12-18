@@ -32,5 +32,9 @@ class Cliente extends Model
         return $this->hasMany(Contacto::class, 'cli_id');
     }
 
+    public function cotizaciones()
+    {
+        return $this->hasMany(Cotizacion::class, 'cli_id');
+    }
 
 }

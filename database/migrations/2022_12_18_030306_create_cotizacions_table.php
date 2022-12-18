@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cotizacions', function (Blueprint $table) {
+        Schema::create('cotizaciones', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('cli_id');
+            $table->string('cot_directorio');
             $table->timestamps();
+
+            $table->foreign('cli_id')->references('id')->on('clientes')->onDelete('cascade');
         });
     }
 
