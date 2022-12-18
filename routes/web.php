@@ -4,6 +4,7 @@ use App\Http\Livewire\Empleados\Empleados;
 use App\Http\Livewire\Empleados\ShowEmpleados;
 use App\Http\Livewire\Clientes\Clientes;
 use App\Http\Livewire\Clientes\ShowClientes;
+use App\Http\Livewire\Cotizaciones\Cotizaciones;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,5 +34,6 @@ Route::middleware([
     Route::get('/empleados', Empleados::class)->name('empleados');
     Route::get('/empleados/{empleado}', ShowEmpleados::class)->name('showEmpleados');
     Route::get('/clientes', Clientes::class)->name('clientes');
-    Route::get('/clientes/{cliente}', ShowClientes::class);
+    Route::get('/clientes/{cliente}', ShowClientes::class)->name('showClientes');
+    Route::get('/cotizaciones', Cotizaciones::class)->name('cotizaciones');
 });

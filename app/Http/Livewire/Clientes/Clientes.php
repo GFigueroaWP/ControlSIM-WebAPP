@@ -74,7 +74,7 @@ class Clientes extends Component
         'cli_region'
     ];
 
-    public function submit()
+    public function submitCliente()
     {
         $this->validate();
         Cliente::create([

@@ -61,7 +61,7 @@
                             <td class="py-3 px-6">{{ $cliente->cli_ciudad }}</td>
                             <td class="py-3 px-6">
                                 @can('clientes_edit')
-                                    <a href="/clientes/{{ $cliente->id }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
+                                    <a href="{{ route('showClientes', ['cliente' => $cliente->id]) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 @endcan
                                 {{-- @if($cliente->cli_estado == 'activo')
                                     @can('users_delete')
@@ -144,7 +144,7 @@
             <x-jet-secondary-button wire:click="cancelCrear" class="m-1">
                 {{ _('Cancelar') }}
             </x-jet-secondary-button>
-            <x-jet-danger-button type='submit' wire:click='submit' class="m-1">
+            <x-jet-danger-button type='submit' wire:click='submitCliente' class="m-1">
                 {{ _('Crear') }}
             </x-jet-danger-button>
         </x-slot>
