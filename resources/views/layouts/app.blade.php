@@ -10,6 +10,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        <!-- Toast notifications -->
+        @toastScripts
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -17,6 +20,7 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
+        <livewire:toasts />
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">

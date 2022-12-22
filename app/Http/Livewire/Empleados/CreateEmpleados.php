@@ -6,9 +6,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Livewire\Component;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class CreateEmpleados extends Component
 {
+    use WireToast;
+
     public $modalCreacionEmpleado = false;
 
     protected $listeners = ['crearEmpleado'];
@@ -92,9 +95,11 @@ class CreateEmpleados extends Component
             'us_email' => $this->us_email,
             'password' => Hash::make($this->password)
         ])->assignRole($this->cargo);
-        session()->flash('flash.banner', 'Nuevo usuario añadido con éxito');
-        session()->flash('flash.bannerStyle', 'success');
+        /* session()->flash('flash.banner', 'Nuevo usuario añadido con éxito');
+        session()->flash('flash.bannerStyle', 'success'); */
+            toast()->success('You earned a cookie! 🍪')
+            ->push();
         $this->modalCreacionEmpleado = false;
-        return redirect()->to('/empleados');
+        return redirect()->back();
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "528a6c69012d6968f347b4684facaee7",
+    "content-hash": "861e54609f96d07f4ccd961978aceec0",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -6289,6 +6289,96 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.5"
             },
             "time": "2022-09-12T13:28:28+00:00"
+        },
+        {
+            "name": "usernotnull/tall-toasts",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/usernotnull/tall-toasts.git",
+                "reference": "9f1436ad615804f7c6762f004948187e7379cf82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/usernotnull/tall-toasts/zipball/9f1436ad615804f7c6762f004948187e7379cf82",
+                "reference": "9f1436ad615804f7c6762f004948187e7379cf82",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^v8.61|^9.0",
+                "livewire/livewire": "^v2.10",
+                "php": "^8.0.2",
+                "spatie/laravel-package-tools": "^1.12"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^v3.8",
+                "laravel/pint": "^1.1",
+                "nunomaduro/collision": "^6.2.1",
+                "nunomaduro/larastan": "^2.1",
+                "orchestra/testbench": "^7.6.1",
+                "pestphp/pest": "^v1.21",
+                "pestphp/pest-plugin-laravel": "^v1.2",
+                "pestphp/pest-plugin-parallel": "^1.2",
+                "phpmd/phpmd": "^2.12",
+                "squizlabs/php_codesniffer": "^3.7",
+                "vimeo/psalm": "^4.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Usernotnull\\Toast\\ToastServiceProvider"
+                    ],
+                    "aliases": {
+                        "Toast": "ToastManager"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Usernotnull\\Toast\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John F (@usernotnull)",
+                    "email": "15612814+usernotnull@users.noreply.github.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Toast notification library for the Laravel TALL stack. You can push notifications from the backend or frontend to render customizable toasts with almost zero footprint on the published CSS/JS!",
+            "homepage": "https://github.com/usernotnull/tall-toasts",
+            "keywords": [
+                "ToastManager",
+                "alpinejs",
+                "laravel",
+                "laravel-package",
+                "livewire",
+                "tailwindcss",
+                "tall-stack",
+                "tall-toasts",
+                "toast-notifications",
+                "ui-components",
+                "usernotnull"
+            ],
+            "support": {
+                "issues": "https://github.com/usernotnull/tall-toasts/issues",
+                "source": "https://github.com/usernotnull/tall-toasts/tree/v1.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/usernotnull",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-08-11T11:47:49+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
