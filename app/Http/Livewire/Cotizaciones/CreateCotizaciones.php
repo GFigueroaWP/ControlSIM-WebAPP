@@ -16,7 +16,11 @@ class CreateCotizaciones extends Component
         ]);
     }
 
-    public function fillcot(){
+    public function fillCliente(){
         $this->fill(['mostrar_id' => $this->cot_cliente]);
+    }
+
+    public function submitCotizacion(){
+
     }
 }
