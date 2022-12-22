@@ -1,4 +1,25 @@
-<x-jet-dialog-modal wire:model='modalCreacionCotizacion'>
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Crear nueva cotizacion') }}
+    </h2>
+</x-slot>
+
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-auto">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                <select name="cot_cliente" id="cot_cliente" wire:model='cot_cliente' wire:change='fillcot'>
+                    @foreach ($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">{{ $cliente->cli_nombre }}</option>
+                    @endforeach
+                </select>
+                <input type="text" wire:model='mostrar_id'>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <x-jet-dialog-modal wire:model='modalCreacionCotizacion'>
     <x-slot name="title">
         {{ _('Añadir nuevo usuario') }}
     </x-slot>
@@ -54,3 +75,4 @@
         </x-jet-danger-button>
     </x-slot>
 </x-jet-dialog-modal>
+--}}

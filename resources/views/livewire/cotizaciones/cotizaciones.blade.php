@@ -11,7 +11,7 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('users_create')
-                            <x-jet-button wire:click="$emit('crearCotizacion')">{{ __('Crear cotizacion') }}</x-jet-button>
+                            <a href="{{ route('createCotizaciones') }}"><x-jet-button>{{ __('Crear cotizacion') }}</x-jet-button></a>
                         @endcan
                     </div>
                     <label for="search_empleados" class="sr-only">Buscar</label>
@@ -81,5 +81,5 @@
             </div>
         </div>
     </div>
-    @livewire('cotizaciones.create-cotizaciones')
+    {{-- @livewire('cotizaciones.create-cotizaciones') --}}
 </div>
