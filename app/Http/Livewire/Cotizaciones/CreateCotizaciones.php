@@ -7,7 +7,9 @@ use Livewire\Component;
 
 class CreateCotizaciones extends Component
 {
-    public $cot_cliente, $mostrar_id;
+    public $cot_cliente, $select_id, $prueba_id;
+
+    public $listeners = ['fillCLiente'];
 
     public function render()
     {
@@ -17,7 +19,7 @@ class CreateCotizaciones extends Component
     }
 
     public function fillCliente(){
-        $this->fill(['mostrar_id' => $this->cot_cliente]);
+        $this->fill(['prueba_id' => $this->select_id]);
     }
 
     public function submitCotizacion(){

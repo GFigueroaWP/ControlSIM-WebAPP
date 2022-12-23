@@ -81,5 +81,4 @@
             </div>
         </div>
     </div>
-    {{-- @livewire('cotizaciones.create-cotizaciones') --}}
 </div>
