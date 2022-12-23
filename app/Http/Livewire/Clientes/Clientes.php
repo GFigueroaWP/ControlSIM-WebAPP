@@ -13,6 +13,8 @@ class Clientes extends Component
 
     public $filtro_cli;
 
+    public $listeners = ['clienteCreado' => '$refresh'];
+
     public function render()
     {
         $filtro_cli = '%'.$this->filtro_cli.'%';
@@ -23,5 +25,4 @@ class Clientes extends Component
                         ->paginate(10),
         ]);
     }
-
 }

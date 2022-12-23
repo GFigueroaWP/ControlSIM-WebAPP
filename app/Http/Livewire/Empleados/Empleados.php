@@ -16,6 +16,8 @@ class Empleados extends Component
     public $filtro_us;
     public $modalDeshabilitacionEmpleado = false;
 
+    public $listeners = ['empleadoCreado' => '$refresh'];
+
     public function render()
     {
         $filtro_us = '%'.$this->filtro_us .'%';

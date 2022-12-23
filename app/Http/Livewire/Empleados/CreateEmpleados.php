@@ -95,11 +95,9 @@ class CreateEmpleados extends Component
             'us_email' => $this->us_email,
             'password' => Hash::make($this->password)
         ])->assignRole($this->cargo);
-        /* session()->flash('flash.banner', 'Nuevo usuario añadido con éxito');
-        session()->flash('flash.bannerStyle', 'success'); */
-            toast()->success('You earned a cookie! 🍪')
-            ->push();
         $this->modalCreacionEmpleado = false;
+        toast()->success('Empleado añadido con éxito!')->push();
+        $this->emit('empleadoCreado');
         return redirect()->back();
     }
 }

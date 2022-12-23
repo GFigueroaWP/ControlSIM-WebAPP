@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Clientes;
 
 use App\Models\Cliente;
 use Livewire\Component;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class CreateClientes extends Component
 {
+    use WireToast;
+
     public $modalCreacionCliente = false;
 
     protected $listeners = ['crearCliente'];
@@ -80,9 +83,9 @@ class CreateClientes extends Component
             'cli_comuna' => $this->cli_comuna,
             'cli_region' => $this->cli_region
         ]);
-        session()->flash('flash.banner', 'Nuevo cliente añadido con éxito');
-        session()->flash('flash.bannerStyle', 'success');
         $this->modalCreacionCliente = false;
-        return redirect()->to('/clientes');
+        toast()->success('Cliente añadido con éxito!')->push();
+        $this->emit('clienteCreado');
+        return redirect()->back();
     }
 }
