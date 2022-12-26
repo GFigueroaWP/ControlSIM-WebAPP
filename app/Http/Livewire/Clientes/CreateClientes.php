@@ -27,7 +27,7 @@ class CreateClientes extends Component
         $this->modalCreacionCliente = false;
     }
 
-    public $cli_nombre, $cli_razonsocial, $cli_rut, $cli_email, $cli_telefono, $cli_direccion, $cli_comuna, $cli_region;
+    public $cli_nombre, $cli_razonsocial, $cli_giro, $cli_rut, $cli_email, $cli_telefono, $cli_direccion, $cli_comuna, $cli_region;
 
     public function formatRut()
     {
@@ -51,6 +51,7 @@ class CreateClientes extends Component
     protected $rules = [
         'cli_nombre' => 'required|alpha_num',
         'cli_razonsocial' => 'required|alpha_num',
+        'cli_giro' => 'required',
         'cli_rut' => 'required|size:10',
         'cli_email' => 'email',
         'cli_telefono' => 'numeric',
@@ -62,6 +63,7 @@ class CreateClientes extends Component
     protected $messages = [
         'cli_nombre',
         'cli_razonsocial',
+        'cli_giro',
         'cli_rut',
         'cli_email',
         'cli_telefono',
@@ -76,6 +78,7 @@ class CreateClientes extends Component
         Cliente::create([
             'cli_nombre' => $this->cli_nombre,
             'cli_razonsocial' => $this->cli_razonsocial,
+            'cli_giro' => $this->cli_giro,
             'cli_rut' => $this->cli_rut,
             'cli_email' => $this->cli_email,
             'cli_telefono' => $this->cli_telefono,

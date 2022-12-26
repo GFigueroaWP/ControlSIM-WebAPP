@@ -16,7 +16,7 @@
                                 <x-jet-label for="cot_cliente" value="{{ __('Seleccione Cliente') }}" />
                                 <select name="cot_cliente" id="cot_cliente" class="select2">
                                     @foreach ($clientes as $cliente)
-                                        <option value="{{ $cliente }}">{{ $cliente->cli_nombre }}</option>
+                                        <option value="{{ $cliente->id }}">{{ $cliente->cli_nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -25,22 +25,27 @@
                                 @livewire('clientes.create-clientes')
                             </div>
                             <div>
-                                <x-jet-label for="nombre_cli" value="{{ __('Nombre del Cliente') }}" />
-                                <x-jet-input type="" name="" id="" class=""></x-jet-input>
+                                <x-jet-label for="razon_cli" value="{{ __('Razon social') }}" />
+                                <x-jet-input type="text" name="razon_cli" id="razon_cli" wire:model="razon_cli" class=""></x-jet-input>
                             </div>
                             <div>
-                                <x-jet-label for="rut_cli" value="{{ __('Rut Cliente') }}" />
-                                <x-jet-input type="" name="" id="" class=""></x-jet-input>
+                                <x-jet-label for="giro_cli" value="{{ __('Giro') }}" />
+                                <x-jet-input type="text" name="giro_cli" id="giro_cli" wire:model="giro_cli" class=""></x-jet-input>
                             </div>
                             <div>
-                                <x-jet-label for="direccion_cli" value="{{ __('Direccion Cliente') }}" />
-                                <x-jet-input type="" name="" id="" class=""></x-jet-input>
+                                <x-jet-label for="rut_cli" value="{{ __('Rut') }}" />
+                                <x-jet-input type="text" name="rut_cli" id="rut_cli" wire:model="rut_cli" class=""></x-jet-input>
                             </div>
                             <div>
-                                <x-jet-label for="" value="" />
-                                <x-jet-input type="" name="" id="" class=""></x-jet-input>
+                                <x-jet-label for="direccion_cli" value="{{ __('Direccion') }}" />
+                                <x-jet-input type="text" name="direccion_cli" id="direccion_cli" wire:model="direccion_cli" class="" ></x-jet-input>
                             </div>
                         </div>
+                        @if ($showContinuacion)
+                            <div>
+                                continuacion
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>

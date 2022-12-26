@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('cli_nombre');
             $table->string('cli_razonsocial');
+            $table->string('cli_giro');
             $table->string('cli_rut')->unique();
             $table->string('cli_email');
             $table->string('cli_telefono');

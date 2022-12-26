@@ -13,7 +13,7 @@
                 </div>
                 <div>
                     <x-jet-label for="cli_nombre" value="{{ __('Nombre') }}" />
-                    <x-jet-input id="cli_nombre" wire:model.lazy='cli_nombre' type="text" placeholder='Empresa ejemplo' class="mt-1 block w-full"/>
+                    <x-jet-input id="cli_nombre" wire:model.lazy='cli_nombre' type="text" placeholder='Nombre empresa' class="mt-1 block w-full"/>
                     <x-jet-input-error for="cli_nombre" class="mt-2" />
                 </div>
                 <div>
@@ -22,8 +22,13 @@
                     <x-jet-input-error for="cli_razonsocial" class="mt-2" />
                 </div>
                 <div>
+                    <x-jet-label for="cli_giro" value="{{ __('Giro') }}" />
+                    <x-jet-input id="cli_giro" wire:model.lazy='cli_giro' type="text" placeholder='Giro' class="mt-1 block w-full"/>
+                    <x-jet-input-error for="cli_giro" class="mt-2" />
+                </div>
+                <div>
                     <x-jet-label for="cli_email" value="{{ __('Email') }}" />
-                    <x-jet-input id="cli_email" wire:model.lazy='cli_email' type="email" placeholder='Doe' class="mt-1 block w-full"/>
+                    <x-jet-input id="cli_email" wire:model.lazy='cli_email' type="email" placeholder='empresa@email.cl' class="mt-1 block w-full"/>
                     <x-jet-input-error for="cli_email" class="mt-2" />
                 </div>
                 <div>
@@ -33,17 +38,17 @@
                 </div>
                 <div>
                     <x-jet-label for="cli_direccion" value="{{ __('Direccion') }}" />
-                    <x-jet-input id="cli_direccion" wire:model.lazy='cli_direccion' type="text" placeholder='user@controlsim.cl' class="mt-1 block w-full"/>
+                    <x-jet-input id="cli_direccion" wire:model.lazy='cli_direccion' type="text" placeholder='calle 123' class="mt-1 block w-full"/>
                     <x-jet-input-error for="cli_direccion" class="mt-2" />
                 </div>
                 <div>
                     <x-jet-label for="cli_comuna" value="{{ __('Comuna') }}" />
-                    <x-jet-input id="cli_comuna" wire:model.lazy='cli_comuna' type="text" placeholder='********' class="mt-1 block w-full"/>
+                    <x-jet-input id="cli_comuna" wire:model.lazy='cli_comuna' type="text" placeholder='comuna' class="mt-1 block w-full"/>
                     <x-jet-input-error for="cli_comuna" class="mt-2" />
                 </div>
                 <div>
                     <x-jet-label for="cli_region" value="{{ __('Region') }}" />
-                    <x-jet-input id="cli_region" wire:model.lazy='cli_region' type="text" placeholder='********' class="mt-1 block w-full"/>
+                    <x-jet-input id="cli_region" wire:model.lazy='cli_region' type="text" placeholder='region' class="mt-1 block w-full"/>
                     <x-jet-input-error for="cli_region" class="mt-2" />
                 </div>
             </div>

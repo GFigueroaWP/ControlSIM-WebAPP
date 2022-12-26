@@ -4,6 +4,8 @@ use App\Http\Livewire\Empleados\Empleados;
 use App\Http\Livewire\Empleados\ShowEmpleados;
 use App\Http\Livewire\Clientes\Clientes;
 use App\Http\Livewire\Clientes\ShowClientes;
+use App\Http\Livewire\Productos\Productos;
+use App\Http\Livewire\Productos\ShowProductos;
 use App\Http\Livewire\Cotizaciones\Cotizaciones;
 use App\Http\Livewire\Cotizaciones\CreateCotizaciones;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,8 @@ Route::middleware([
     Route::get('/empleados/{empleado}', ShowEmpleados::class)->name('showEmpleados');
     Route::get('/clientes', Clientes::class)->name('clientes');
     Route::get('/clientes/{cliente}', ShowClientes::class)->name('showClientes');
+    Route::get('/productos', Productos::class)->name('productos');
+    Route::get('/productos/{producto}',ShowProductos::class)->name('showProductos');
     Route::get('/cotizaciones', Cotizaciones::class)->name('cotizaciones');
     Route::get('/cotizaciones/create', CreateCotizaciones::class)->name('createCotizaciones');
 });
