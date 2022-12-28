@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Clientes;
 
 use Livewire\Component;
 use App\Models\Contacto;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class CreateContactos extends Component
 {
+    use WireToast;
+
     public $modalCreacionContacto = false;
 
     public $con_nombre, $con_email, $con_telefono, $cli_id;
@@ -42,14 +45,14 @@ class CreateContactos extends Component
     {
         $this->validate();
         Contacto::create([
-            'cli_id' => $this->cliente->id,
+            'cli_id' => $this->cli_id,
             'con_nombre' => $this->con_nombre,
             'con_telefono' => $this->con_telefono,
             'con_email' => $this->con_email
         ]);
-        session()->flash('flash.banner', 'Nuevo contacto añadido con éxito');
-        session()->flash('flash.bannerStyle', 'success');
         $this->modalCreacionContacto = false;
-        return redirect()->route('showClientes',[$this->cliente->id]);
+        toast()->success('Contacto añadido con éxito!')->push();
+        $this->emit('contactoCreado');
+        return redirect()->back();
     }
 }

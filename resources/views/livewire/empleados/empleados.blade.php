@@ -105,6 +105,5 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
-
     @livewire('empleados.create-empleados')
 </div>
