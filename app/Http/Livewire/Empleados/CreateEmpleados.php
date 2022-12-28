@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Empleados;
 
 use App\Models\User;
+use App\Rules\rutValido;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Livewire\Component;
@@ -29,6 +30,8 @@ class CreateEmpleados extends Component
 
     public function cancelCrear (){
         $this->modalCreacionEmpleado = false;
+        $this->reset(['us_username', 'us_nombre', 'us_apellido', 'us_rut',
+        'us_telefono', 'us_email', 'password', 'cargo']);
     }
 
     public $us_username, $us_nombre, $us_apellido, $us_rut,
@@ -36,24 +39,18 @@ class CreateEmpleados extends Component
 
     public function formatRut()
     {
-        $us_rut = $this-> us_rut;
-        $us_rut = preg_replace('/[^0-9]+/', '', $us_rut);
-        $us_rut = substr($us_rut, 0, 9);
+        $us_rut = $this->us_rut;
         $length = strlen($us_rut);
-        $formatted = "";
-        for ($i = 0; $i < $length; $i++) {
-            $formatted .= $us_rut[$i];
-            if($length == 8 && $i == 6){
-                $formatted .= "-";
-            }
-            if($length == 9 && $i == 7){
-                $formatted .= "-";
-            }
+        $us_rut = strtoupper($us_rut);
+        if($length == 8 || $length == 9){
+            $formateado = substr_replace($us_rut, '.', -7, 0);
+            $formateado = substr_replace($formateado, '.', -4, 0);
+            $formateado = substr_replace($formateado, '-', -1, 0);
         }
-        $this->us_rut = $formatted;
+        $this->us_rut = $formateado;
     }
 
-    protected $rules = [
+    /* protected $rules = [
         'us_username' => 'required|alpha_num|unique:users',
         'us_nombre' => 'required|alpha',
         'us_apellido' => 'required|alpha',
@@ -62,7 +59,21 @@ class CreateEmpleados extends Component
         'us_email' => 'required|email|unique:users',
         'password' => 'required',
         'cargo' =>  'exists:roles,name'
-    ];
+    ]; */
+
+    protected function rules()
+    {
+        return [
+            'us_username' => 'required|alpha_num|unique:users',
+            'us_nombre' => 'required|alpha',
+            'us_apellido' => 'required|alpha',
+            'us_rut' => ['required',new rutValido],
+            'us_telefono' => 'required|numeric',
+            'us_email' => 'required|email|unique:users',
+            'password' => 'required',
+            'cargo' =>  'exists:roles,name'
+        ];
+    }
 
     protected $messages = [
         'us_username.required' => 'El campo de Usuario es obligatorio',
@@ -96,6 +107,8 @@ class CreateEmpleados extends Component
             'password' => Hash::make($this->password)
         ])->assignRole($this->cargo);
         $this->modalCreacionEmpleado = false;
+        $this->reset(['us_username', 'us_nombre', 'us_apellido', 'us_rut',
+        'us_telefono', 'us_email', 'password', 'cargo']);
         toast()->success('Empleado añadido con éxito!')->push();
         $this->emit('empleadoCreado');
         return redirect()->back();

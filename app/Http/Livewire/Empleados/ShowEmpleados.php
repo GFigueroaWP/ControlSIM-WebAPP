@@ -40,6 +40,12 @@ class ShowEmpleados extends Component
     public function formatRut()
     {
         $us_rut = $this->us_rut;
+        $dv = substr($us_rut, -1);
+        $length = strlen($us_rut);
+        if($length == 8 || $length == 9){
+            $formateado = substr_replace($us_rut, '-', -1, 0);
+        }
+        /* $us_rut = $this->us_rut;
         $us_rut = preg_replace('/[^0-9]+/', '', $us_rut);
         $us_rut = substr($us_rut, 0, 9);
         $length = strlen($us_rut);
@@ -52,8 +58,8 @@ class ShowEmpleados extends Component
             if ($length == 9 && $i == 7) {
                 $formatted .= "-";
             }
-        }
-        $this->us_rut = $formatted;
+        } */
+        $this->us_rut = $formateado;
     }
 
     protected $rules = [

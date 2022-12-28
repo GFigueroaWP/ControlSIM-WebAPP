@@ -13,7 +13,7 @@
                 </div>
                 <div>
                     <x-jet-label for="us_rut" value="{{ __('Rut') }}" />
-                    <x-jet-input id="us_rut" wire:model='us_rut' wire:change="formatRut" wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full"/>
+                    <x-jet-input id="us_rut" wire:model.lazy='us_rut' wire:change="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full"/>
                     <x-jet-input-error for="us_rut" class="mt-2" />
                 </div>
                 <div>
