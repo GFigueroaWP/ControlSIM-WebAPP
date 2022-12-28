@@ -17,53 +17,53 @@
                 </x-slot>
                 <x-slot name="form">
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_rut" value="{{ __('Rut') }}" />
-                        <x-jet-input id="cli_rut" wire:model='cli_rut' wire:change="formatRut" wire:keyup="formatRut" type="text" placeholder="11222333-4" class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_rut" class="mt-2" />
+                        <x-jet-label for="show_cli_rut" value="{{ __('Rut') }}" />
+                        <x-jet-input id="show_cli_rut" wire:model='show_cli_rut' wire:change="formatRut" type="text" placeholder="11222333-4" class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_rut" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_nombre" value="{{ __('Nombre') }}" />
-                        <x-jet-input id="cli_nombre" wire:model.lazy='cli_nombre' type="text" placeholder='Nombre empresa' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_nombre" class="mt-2" />
+                        <x-jet-label for="show_cli_nombre" value="{{ __('Nombre') }}" />
+                        <x-jet-input id="show_cli_nombre" wire:model='show_cli_nombre' type="text" placeholder='Nombre empresa' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_nombre" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_razonsocial" value="{{ __('Razón social') }}" />
-                        <x-jet-input id="cli_razonsocial" wire:model.lazy='cli_razonsocial' type="text" placeholder='Empresa ejemplo SA' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_razonsocial" class="mt-2" />
+                        <x-jet-label for="show_cli_razonsocial" value="{{ __('Razón social') }}" />
+                        <x-jet-input id="show_cli_razonsocial" wire:model='show_cli_razonsocial' type="text" placeholder='Empresa ejemplo SA' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_razonsocial" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_giro" value="{{ __('Giro') }}" />
-                        <x-jet-input id="cli_giro" wire:model.lazy='cli_giro' type="text" placeholder='Giro' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_giro" class="mt-2" />
+                        <x-jet-label for="show_cli_giro" value="{{ __('Giro') }}" />
+                        <x-jet-input id="show_cli_giro" wire:model='show_cli_giro' type="text" placeholder='Giro' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_giro" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_email" value="{{ __('Email') }}" />
-                        <x-jet-input id="cli_email" wire:model.lazy='cli_email' type="email" placeholder='empresa@email.cl' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_email" class="mt-2" />
+                        <x-jet-label for="show_cli_email" value="{{ __('Email') }}" />
+                        <x-jet-input id="show_cli_email" wire:model='show_cli_email' type="email" placeholder='empresa@email.cl' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_email" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_telefono" value="{{ __('Telefono') }}" />
-                        <x-jet-input id="cli_telefono" wire:model.lazy='cli_telefono' type="text" placeholder='912344678' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_telefono" class="mt-2" />
+                        <x-jet-label for="show_cli_telefono" value="{{ __('Telefono') }}" />
+                        <x-jet-input id="show_cli_telefono" wire:model='show_cli_telefono' type="text" placeholder='912344678' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_telefono" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_direccion" value="{{ __('Direccion') }}" />
-                        <x-jet-input id="cli_direccion" wire:model.lazy='cli_direccion' type="text" placeholder='calle 123' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_direccion" class="mt-2" />
+                        <x-jet-label for="show_cli_direccion" value="{{ __('Direccion') }}" />
+                        <x-jet-input id="show_cli_direccion" wire:model='show_cli_direccion' type="text" placeholder='calle 123' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_direccion" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_comuna" value="{{ __('Comuna') }}" />
-                        <x-jet-input id="cli_comuna" wire:model.lazy='cli_comuna' type="text" placeholder='comuna' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_comuna" class="mt-2" />
+                        <x-jet-label for="show_cli_comuna" value="{{ __('Comuna') }}" />
+                        <x-jet-input id="show_cli_comuna" wire:model='show_cli_comuna' type="text" placeholder='comuna' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_comuna" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="cli_region" value="{{ __('Region') }}" />
-                        <x-jet-input id="cli_region" wire:model.lazy='cli_region' type="text" placeholder='region' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="cli_region" class="mt-2" />
+                        <x-jet-label for="show_cli_region" value="{{ __('Region') }}" />
+                        <x-jet-input id="show_cli_region" wire:model='show_cli_region' type="text" placeholder='region' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_region" class="mt-2" />
                     </div>
                 </x-slot>
                 <x-slot name="actions">
-
+                    <x-jet-button type="submit">{{ __('editar') }}</x-jet-button>
                 </x-slot>
             </x-jet-form-section>
 

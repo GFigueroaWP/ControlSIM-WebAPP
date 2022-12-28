@@ -8,7 +8,7 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <x-jet-label for="cli_rut" value="{{ __('Rut') }}" />
-                    <x-jet-input id="cli_rut" wire:model='cli_rut' wire:change="formatRut" wire:keyup="formatRut" type="text" placeholder="11222333-4" class="mt-1 block w-full"/>
+                    <x-jet-input id="cli_rut" wire:model='cli_rut' wire:change="formatRut" type="text" placeholder="11222333-4" class="mt-1 block w-full"/>
                     <x-jet-input-error for="cli_rut" class="mt-2" />
                 </div>
                 <div>

@@ -15,6 +15,7 @@
                             <div wire:ignore>
                                 <x-jet-label for="cot_cliente" value="{{ __('Seleccione Cliente') }}" />
                                 <select name="cot_cliente" id="cot_cliente" class="select2">
+                                    <option>Seleccione un cliente</option>
                                     @foreach ($clientes as $cliente)
                                         <option value="{{ $cliente->id }}">{{ $cliente->cli_nombre }}</option>
                                     @endforeach

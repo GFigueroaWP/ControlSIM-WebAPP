@@ -37,36 +37,11 @@ class ShowEmpleados extends Component
         ]);
     }
 
-    public function formatRut()
-    {
-        $us_rut = $this->us_rut;
-        $dv = substr($us_rut, -1);
-        $length = strlen($us_rut);
-        if($length == 8 || $length == 9){
-            $formateado = substr_replace($us_rut, '-', -1, 0);
-        }
-        /* $us_rut = $this->us_rut;
-        $us_rut = preg_replace('/[^0-9]+/', '', $us_rut);
-        $us_rut = substr($us_rut, 0, 9);
-        $length = strlen($us_rut);
-        $formatted = "";
-        for ($i = 0; $i < $length; $i++) {
-            $formatted .= $us_rut[$i];
-            if ($length == 8 && $i == 6) {
-                $formatted .= "-";
-            }
-            if ($length == 9 && $i == 7) {
-                $formatted .= "-";
-            }
-        } */
-        $this->us_rut = $formateado;
-    }
-
     protected $rules = [
         'show_us_username' => 'required|alpha_num|unique:users',
         'show_us_nombre' => 'required|alpha',
         'show_us_apellido' => 'required|alpha',
-        'show_us_rut' => 'required|size:10',
+        'show_us_rut' => 'required',
         'show_us_telefono' => 'required|numeric',
         'show_us_email' => 'required|email|unique:users'
     ];

@@ -47,19 +47,11 @@ class CreateEmpleados extends Component
             $formateado = substr_replace($formateado, '.', -4, 0);
             $formateado = substr_replace($formateado, '-', -1, 0);
         }
+        else{
+            return;
+        }
         $this->us_rut = $formateado;
     }
-
-    /* protected $rules = [
-        'us_username' => 'required|alpha_num|unique:users',
-        'us_nombre' => 'required|alpha',
-        'us_apellido' => 'required|alpha',
-        'us_rut' => 'required|size:10',
-        'us_telefono' => 'required|numeric',
-        'us_email' => 'required|email|unique:users',
-        'password' => 'required',
-        'cargo' =>  'exists:roles,name'
-    ]; */
 
     protected function rules()
     {

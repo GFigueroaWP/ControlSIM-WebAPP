@@ -56,7 +56,7 @@
                     </div>
                 </x-slot>
                 <x-slot name="actions">
-                    <x-jet-button type="submit" wire:click='updateEmpleado'>{{ __('editar') }}</x-jet-button>
+                    <x-jet-button type="submit">{{ __('editar') }}</x-jet-button>
                 </x-slot>
             </x-jet-form-section>
         </div>
