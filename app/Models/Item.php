@@ -13,4 +13,9 @@ class Item extends Model
         'it_nombre',
         'it_valor'
     ];
+
+    public function cotizaciones()
+    {
+        $this->belongsToMany(Cotizacion::class, 'contiene', 'item_id', 'cotizacion_id')->withTimestamps();
+    }
 }
