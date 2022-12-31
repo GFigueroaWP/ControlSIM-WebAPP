@@ -13,6 +13,7 @@ class CreateCotizaciones extends Component
     use WireToast;
 
     public $showContinuacion = false;
+    public $clientes;
     public $cot_cliente, $select_id, $seleccionado, $rut_cli, $razon_cli, $giro_cli, $direccion_cli, $item_id2;
     public $cotizacionItems = [];
     public $allItems;
@@ -22,16 +23,12 @@ class CreateCotizaciones extends Component
 
     public function mount(){
         $this->allItems = Item::all();
+        $this->clientes = Cliente::all();
     }
 
     public function render()
     {
-        $total = 0;
-        $subtotal = 0;
-
-        return view('livewire.cotizaciones.create-cotizaciones',[
-            'clientes' => Cliente::all()
-        ]);
+        return view('livewire.cotizaciones.create-cotizaciones');
     }
 
     public function fillCliente(){
@@ -74,6 +71,7 @@ class CreateCotizaciones extends Component
     public function saveProduct($index){
         $this->resetErrorBag();
         $this->cotizacionItems[$index]['item_id'] = $this->item_id2;
+
         $producto = $this->allItems->find($this->cotizacionItems[$index]['item_id']);
         $this->cotizacionItems[$index]['item_nombre'] = $producto->it_nombre;
         $this->cotizacionItems[$index]['item_precio'] = $producto->it_valor;
