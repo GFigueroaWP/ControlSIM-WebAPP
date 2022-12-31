@@ -6,11 +6,14 @@ use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Item;
 use Livewire\Component;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class CreateCotizaciones extends Component
 {
+    use WireToast;
+
     public $showContinuacion = false;
-    public $cot_cliente, $select_id, $seleccionado, $rut_cli, $razon_cli, $giro_cli, $direccion_cli;
+    public $cot_cliente, $select_id, $seleccionado, $rut_cli, $razon_cli, $giro_cli, $direccion_cli, $item_id2;
     public $cotizacionItems = [];
     public $allItems;
     public $total, $subtotal;
@@ -54,6 +57,8 @@ class CreateCotizaciones extends Component
             'item_nombre' => '',
             'item_precio' => 0
         ];
+
+        $this->dispatchBrowserEvent('reApplySelect2');
     }
 
     public function editProduct($index){
@@ -68,6 +73,7 @@ class CreateCotizaciones extends Component
 
     public function saveProduct($index){
         $this->resetErrorBag();
+        $this->cotizacionItems[$index]['item_id'] = $this->item_id2;
         $producto = $this->allItems->find($this->cotizacionItems[$index]['item_id']);
         $this->cotizacionItems[$index]['item_nombre'] = $producto->it_nombre;
         $this->cotizacionItems[$index]['item_precio'] = $producto->it_valor;
@@ -83,22 +89,22 @@ class CreateCotizaciones extends Component
     public function submitCotizacion(){
         $this->validate();
 
-        $cotizacion = Cotizacion::create([
-            'cli_id' => $this->seleccionado->id
-        ]);
-
         $items = [];
 
         foreach ($this->cotizacionItems as $item){
             $items[$item['item_id']] = ['cantidad' => $item['cantidad']];
         }
 
-        $this->cotizacion->productos()->sync($items);
+        Cotizacion::create([
+            'cli_id' => $this->seleccionado->id,
+            'cot_directorio' => 'prueba'
+        ])->productos()->sync($items);
 
+        toast()->success('cotizacion añadida con éxito!')->push();
         return redirect()->route('cotizaciones');
     }
 
     protected $rules = [
-
+        'seleccionado.id' => 'required'
     ];
 }
