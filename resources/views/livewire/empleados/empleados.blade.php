@@ -44,9 +44,6 @@
                                 Cargo
                             </th>
                             <th scope="col" class="py-2 px-6">
-                                Estado
-                            </th>
-                            <th scope="col" class="py-2 px-6">
                                 Acciones
                             </th>
                         </tr>
@@ -58,18 +55,13 @@
                             <td class="py-3 px-6">{{ $empleado->us_username }}</td>
                             <td class="py-3 px-6">{{ $empleado->us_nombre }} {{ $empleado->us_apellido}}</td>
                             <td class="py-3 px-6">{{ $empleado->getRoleNames()->first() }}</td>
-                            <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
                             <td class="py-3 px-6">
                                 @can('users_edit')
                                     <a href="{{ route('showEmpleados', ['empleado' => $empleado->id]) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 @endcan
-                                @if($empleado->us_estado == 'activo')
-                                    @can('users_delete')
-                                        <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}</x-jet-danger-button>
-                                    @endcan
-                                @else
-                                    <x-jet-danger-button class="m-1">{{ _('Habilitar') }}</x-jet-danger-button>
-                                @endif
+                                @can('users_delete')
+                                    <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}</x-jet-danger-button>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

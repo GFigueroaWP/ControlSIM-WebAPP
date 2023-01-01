@@ -10,7 +10,7 @@
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
-                        @can('users_create')
+                        @can('cotizaciones_create')
                             <a href="{{ route('createCotizaciones') }}"><x-jet-button>{{ __('Crear cotizacion') }}</x-jet-button></a>
                         @endcan
                     </div>
@@ -43,35 +43,29 @@
                             <th scope="col" class="py-2 px-6">
                                 Estado
                             </th>
+                            <th scope="col" class="py-2 px-6">
+                                Acciones
+                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($empleados as $empleado)
+                        @foreach ($cotizaciones as $cotizacion)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $empleado->us_rut }}</td>
-                            <td class="py-3 px-6">{{ $empleado->us_username }}</td>
-                            <td class="py-3 px-6">{{ $empleado->us_nombre }} {{ $empleado->us_apellido}}</td>
-                            <td class="py-3 px-6">{{ $empleado->getRoleNames()->first() }}</td>
-                            <td class="py-3 px-6">{{ $empleado->us_estado }}</td>
+                            <td class="py-3 px-6">{{ $cotizacion->id }}</td>
+                            <td class="py-3 px-6">{{ $cotizacion->cliente->cli_nombre }}</td>
+                            <td class="py-3 px-6">{{ \Carbon\Carbon::parse($cotizacion->created_at)->format('d-m-Y') }}</td>
+                            <td class="py-3 px-6"></td>
                             <td class="py-3 px-6">
-                                @can('users_edit')
-                                    <a href="{{ route('showEmpleados', ['empleado' => $empleado->id]) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
-                                @endcan
-                                @if($empleado->us_estado == 'activo')
-                                    @can('users_delete')
-                                        <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}</x-jet-danger-button>
-                                    @endcan
-                                @else
-                                    <x-jet-danger-button class="m-1">{{ _('Habilitar') }}</x-jet-danger-button>
-                                @endif
+
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
-                {{-- </table>
-                @if ($empleados->count())
+                </table>
+                {{-- @if ($cotizaciones->count())
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    {{ $empleados->links() }}
+                    {{ $cotizaciones->links() }}
                 </div>
                 @else
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">

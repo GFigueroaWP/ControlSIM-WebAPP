@@ -40,8 +40,8 @@ class Empleados extends Component
         $this->modalDeshabilitacionEmpleado = false;
     }
 
-    public function deshabilitarEmpleado (User $empleado){
-        $empleado->us_estado->transitionTo(Deshabilitado::class);
+    public function deshabilitarEmpleado (User $seleccionado){
+        $seleccionado->delete();
         $this->modalDeshabilitacionEmpleado = false;
     }
 }

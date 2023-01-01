@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\States\User\UserState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -20,7 +21,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles; //Spatie-Permissions
-    use HasStates; //Spatie-Laravel-model-states
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -45,15 +46,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token'
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'us_estado' => UserState::class
     ];
 
     /**

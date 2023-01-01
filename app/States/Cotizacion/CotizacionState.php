@@ -1,12 +1,12 @@
 <?php
 
-namespace App\States\Cliente;
+namespace App\States\Cotizacion;
 
 use Spatie\ModelStates\Exceptions\InvalidConfig;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
-abstract class UserState extends State
+abstract class CotizacionState extends State
 {
 
     abstract public function color(): string;
@@ -17,6 +17,7 @@ abstract class UserState extends State
      */
     public static function config(): StateConfig
     {
-        return parent::config();
+        return parent::config()
+            ->default(Emitida::class);
     }
 }

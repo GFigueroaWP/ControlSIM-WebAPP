@@ -5,12 +5,12 @@ namespace App\Models;
 /* use App\States\Cliente\ClienteState; */
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\ModelStates\HasStates;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
 {
     use HasFactory;
-    use HasStates;
+    use SoftDeletes;
 
     protected $fillable = [
         'cli_nombre',
@@ -21,11 +21,7 @@ class Cliente extends Model
         'cli_telefono',
         'cli_direccion',
         'cli_comuna',
-        'cli_region'
-    ];
-
-    protected $casts = [
-        /* 'cli_estado' => ClienteState::class */
+        'cli_ciudad'
     ];
 
     public function contactos()

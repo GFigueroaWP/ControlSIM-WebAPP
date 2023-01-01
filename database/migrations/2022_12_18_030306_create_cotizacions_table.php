@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cli_id');
             $table->string('cot_directorio');
+            $table->string('cot_estado');
             $table->timestamps();
 
             $table->foreign('cli_id')->references('id')->on('clientes')->onDelete('cascade');
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cotizacions');
+        Schema::dropIfExists('cotizaciones');
     }
 };

@@ -23,8 +23,9 @@ return new class extends Migration
             $table->string('cli_telefono');
             $table->string('cli_direccion');
             $table->string('cli_comuna');
-            $table->string('cli_region');
+            $table->string('cli_ciudad');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
