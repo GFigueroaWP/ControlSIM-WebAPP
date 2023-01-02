@@ -17,10 +17,10 @@ class Proyecto extends Model
     ];
 
     public function cotizacion(){
-        return $this->hasOne(Cotizacion::class);
+        return $this->hasOne(Cotizacion::class, 'pr_id');
     }
 
     public function orden(){
-        return $this->hasOne(OrTrabajo::class);
+        return $this->hasOne(OrTrabajo::class, 'pr_id');
     }
 }

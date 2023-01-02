@@ -10,11 +10,11 @@
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
-                        @can('items_create')
-                        <x-jet-button wire:click="">{{ __('Añadir') }}</x-jet-button>
+                        @can('cotizaciones_create')
+                            <a href="{{ route('createCotizaciones') }}"><x-jet-button>{{ __('Crear cotizacion') }}</x-jet-button></a>
                         @endcan
                     </div>
-                    <label for="search_items" class="sr-only">Buscar</label>
+                    <label for="search_proyecto" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -28,17 +28,17 @@
                             name="search_proyecto" id="search_items" placeholder="Buscar proyecto">
                     </div>
                 </div>
-{{--                 <table class=" w-full text-base text-left">
+                <table class=" w-full text-base text-left">
                     <thead class="uppercase">
                         <tr>
                             <th scope="col" class="py-2 px-6">
                                 ID
                             </th>
                             <th scope="col" class="py-2 px-6">
-                                Nombre
+                                Cotizacion
                             </th>
                             <th scope="col" class="py-2 px-6">
-                                Valor
+                                Orden de trabajo
                             </th>
                             <th scope="col" class="py-2 px-6">
                                 Acciones
@@ -46,24 +46,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($items as $item)
+                        @foreach ($proyectos as $proyecto)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $item->id }}</td>
-                            <td class="py-3 px-6">{{ $item->it_nombre }}</td>
-                            <td class="py-3 px-6">{{ $item->it_valor }}</td>
+                            <td class="py-3 px-6">{{ $proyecto->id }}</td>
+                            @if ($proyecto->cotizacion)
+                                <td class="py-3 px-6">{{ $proyecto->cotizacion->id }}</td>
+                            @else
+                                <td class="py-3 px-6">No hay cotizacion asociada</td>
+                            @endif
+                            @if ($proyecto->orden)
+                                <td class="py-3 px-6">{{ $proyecto->cotizacion->id }}</td>
+                            @else
+                                <td class="py-3 px-6">No hay orden asociada</td>
+                            @endif
+                            <td class="py-3 px-6">
+                                <x-jet-button>Ver</x-jet-button>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @if ($items->count())
+                @if ($proyectos->count())
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    {{ $items->links() }}
+                    {{ $proyectos->links() }}
                 </div>
                 @else
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    No hay resultados para la búsqueda "{{ $filtro_it }}"
+                    No hay resultados para la búsqueda "{{ $filtro_pr }}"
                 </div>
-                @endif --}}
+                @endif
             </div>
         </div>
     </div>

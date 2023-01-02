@@ -56,4 +56,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function trabajos(){
+        $this->belongsToMany(OrTrabajo::class, 'asignado', 'tecnico_id', 'trabajo_id')->withTimestamps();
+    }
 }

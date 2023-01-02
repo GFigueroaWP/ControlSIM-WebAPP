@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('or_trabajos', function (Blueprint $table) {
+        Schema::create('asignado', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pr_id')->nullable();
-            $table->string('ot_estado');
-            $table->date('ot_inicio');
-            $table->date('ot_limite')->nullable();
-            $table->date('ot_completada')->nullable();
+            $table->unsignedBigInteger('trabajo_id');
+            $table->unsignedBigInteger('tecnico_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('pr_id')->references('id')->on('proyectos')->onDelete('cascade');
+            $table->foreign('trabajo_id')->references('id')->on('or_trabajos')->onDelete('cascade');
+            $table->foreign('tecnico_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('or_trabajos');
+        Schema::dropIfExists('asignado');
     }
 };
