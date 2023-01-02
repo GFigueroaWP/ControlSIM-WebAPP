@@ -39,6 +39,6 @@ class Cotizacion extends Model
     }
 
     public function productos(){
-        return $this->belongsToMany(Item::class, 'contiene', 'cotizacion_id', 'item_id')->withPivot(['cantidad'])->withTimestamps();
+        return $this->belongsToMany(Producto::class, 'contiene', 'cotizacion_id', 'producto_id')->withPivot(['cantidad'])->withTimestamps();
     }
 }

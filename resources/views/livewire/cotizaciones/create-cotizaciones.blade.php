@@ -67,25 +67,25 @@
                                             <tr>
                                                 <td class="py-3 px-6">
                                                     @if ($cotizacionItem['is_saved'])
-                                                    <input type="hidden" name="cotizacionItems[{{ $index }}][item_id]"
-                                                        wire:model="cotizacionItems.{{ $index }}.item_id">
-                                                    @if ($cotizacionItem['item_nombre'] && $cotizacionItem['item_precio'])
-                                                    {{ $cotizacionItem['item_nombre'] }} (${{ $cotizacionItem['item_precio'] }})
+                                                    <input type="hidden" name="cotizacionItems[{{ $index }}][producto_id]"
+                                                        wire:model="cotizacionItems.{{ $index }}.producto_id">
+                                                    @if ($cotizacionItem['prod_nombre'] && $cotizacionItem['prod_valor'])
+                                                    {{ $cotizacionItem['prod_nombre'] }} (${{ $cotizacionItem['prod_valor'] }})
                                                     @endif
                                                     @else
                                                     <div wire:ignore>
-                                                        <select name="cotizacionItems[{{ $index }}][item_id]"
+                                                        <select name="cotizacionItems[{{ $index }}][producto_id]"
                                                             class="selectItem select2"
-                                                            wire:model="cotizacionItems.{{ $index }}.item_id">
+                                                            wire:model="cotizacionItems.{{ $index }}.producto_id">
                                                             <option value="">Elija un producto</option>
-                                                            @foreach ($allItems as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->it_nombre }} (${{
-                                                                $item->it_valor }})</option>
+                                                            @foreach ($allProductos as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->prod_nombre }} (${{
+                                                                $item->prod_valor }})</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     @if ($errors->has('cotizacionItems.' . $index))
-                                                    <x-jet-input-error for="cotizacionItems[{{ $index }}][item_id]"
+                                                    <x-jet-input-error for="cotizacionItems[{{ $index }}][producto_id]"
                                                         class="mt-2" />
                                                     @endif
                                                     @endif
@@ -105,7 +105,7 @@
                                                     <x-jet-secondary-button class="m-1"
                                                         wire:click.prevent="editProduct({{ $index }})">Editar
                                                     </x-jet-secondary-button>
-                                                    @elseif($this->item_id2)
+                                                    @elseif($this->producto_id2)
                                                     <x-jet-button class="m-1" wire:click.prevent="saveProduct({{ $index }})">
                                                         Guardar</x-jet-button>
                                                     @endif
@@ -189,7 +189,7 @@
                 }
             }
         }).on("select2:select", function(e) {
-            @this.set('item_id2', $(this).val());
+            @this.set('producto_id2', $(this).val());
         });
         });
     });

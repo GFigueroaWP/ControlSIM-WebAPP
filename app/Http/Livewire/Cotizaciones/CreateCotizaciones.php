@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Cotizaciones;
 
 use App\Models\Cliente;
 use App\Models\Cotizacion;
-use App\Models\Item;
+use App\Models\Producto;
 use App\Models\Proyecto;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
@@ -13,17 +13,16 @@ class CreateCotizaciones extends Component
 {
     use WireToast;
 
-    public $showContinuacion = false;
     public $clientes;
-    public $cot_cliente, $select_id, $seleccionado, $rut_cli, $razon_cli, $giro_cli, $direccion_cli, $item_id2;
+    public $cot_cliente, $select_id, $seleccionado, $rut_cli, $razon_cli, $giro_cli, $direccion_cli, $producto_id2;
     public $cotizacionItems = [];
-    public $allItems;
+    public $allProductos;
     public $total, $subtotal, $iva;
 
     public $listeners = ['fillCLiente'];
 
     public function mount(){
-        $this->allItems = Item::all();
+        $this->allProductos = Producto::all();
         $this->clientes = Cliente::all();
         $this->subtotal = 0;
         $this->total = 0;
@@ -44,7 +43,6 @@ class CreateCotizaciones extends Component
         'razon_cli'=> $this->seleccionado->cli_razonsocial,
         'giro_cli'=> $this->seleccionado->cli_giro,
         'direccion_cli'=> $this->seleccionado->cli_direccion]);
-        $this->showContinuacion = true;
     }
 
     public function addProduct(){
@@ -55,11 +53,11 @@ class CreateCotizaciones extends Component
             }
         }
         $this->cotizacionItems[] = [
-            'item_id' => '',
+            'producto_id' => '',
             'cantidad' => 1,
             'is_saved' => false,
-            'item_nombre' => '',
-            'item_precio' => 0
+            'prod_nombre' => '',
+            'prod_valor' => 0
         ];
 
         $this->dispatchBrowserEvent('reApplySelect2');
@@ -77,21 +75,21 @@ class CreateCotizaciones extends Component
 
     public function saveProduct($index){
         $this->resetErrorBag();
-        $this->cotizacionItems[$index]['item_id'] = $this->item_id2;
+        $this->cotizacionItems[$index]['producto_id'] = $this->producto_id2;
 
-        $producto = $this->allItems->find($this->cotizacionItems[$index]['item_id']);
-        $this->cotizacionItems[$index]['item_nombre'] = $producto->it_nombre;
-        $this->cotizacionItems[$index]['item_precio'] = $producto->it_valor;
+        $producto = $this->allProductos->find($this->cotizacionItems[$index]['producto_id']);
+        $this->cotizacionItems[$index]['prod_nombre'] = $producto->prod_nombre;
+        $this->cotizacionItems[$index]['prod_valor'] = $producto->prod_valor;
         $this->cotizacionItems[$index]['is_saved'] = true;
 
-        $this->subtotal += $producto->it_valor * $this->cotizacionItems[$index]['cantidad'];
+        $this->subtotal += $producto->prod_valor * $this->cotizacionItems[$index]['cantidad'];
         $this->iva = $this->subtotal * 0.19;
         $this->total = $this->iva + $this->subtotal;
 
     }
 
     public function removeProduct($index){
-        $this->subtotal -= $this->cotizacionItems[$index]['item_precio'] * $this->cotizacionItems[$index]['cantidad'];
+        $this->subtotal -= $this->cotizacionItems[$index]['prod_valor'] * $this->cotizacionItems[$index]['cantidad'];
         $this->iva = $this->subtotal * 0.19;
         $this->total = $this->iva + $this->subtotal;
 
@@ -106,7 +104,7 @@ class CreateCotizaciones extends Component
         $items = [];
 
         foreach ($this->cotizacionItems as $item){
-            $items[$item['item_id']] = ['cantidad' => $item['cantidad']];
+            $items[$item['producto_id']] = ['cantidad' => $item['cantidad']];
         }
 
         $pr_creado = Proyecto::create();

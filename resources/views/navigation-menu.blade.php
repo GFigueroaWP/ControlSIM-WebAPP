@@ -26,7 +26,7 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('productos_access')
-                        <x-jet-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
+                        <x-jet-nav-link href="{{ route('productos') }}" :active="request()->routeIs('productos')">
                             {{ __('Productos') }}
                         </x-jet-nav-link>
                     @endcan

@@ -11,10 +11,10 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('productos_create')
-                        <x-jet-button wire:click="$emit('crearItem')">{{ __('Añadir nuevo item') }}</x-jet-button>
+                        <x-jet-button wire:click="$emit('crearProducto')">{{ __('Añadir nuevo producto/servicio') }}</x-jet-button>
                         @endcan
                     </div>
-                    <label for="search_items" class="sr-only">Buscar</label>
+                    <label for="search_productos" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -24,8 +24,8 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input wire:model='filtro_it' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
-                            name="search_items" id="search_items" placeholder="Buscar producto o servicio">
+                        <input wire:model='filtro_prod' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
+                            name="search_productos" id="search_productos" placeholder="Buscar producto o servicio">
                     </div>
                 </div>
                 <table class=" w-full text-base text-left">
@@ -46,27 +46,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($items as $item)
+                        @foreach ($productos as $producto)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $item->id }}</td>
-                            <td class="py-3 px-6">{{ $item->it_nombre }}</td>
-                            <td class="py-3 px-6">{{ $item->it_valor }}</td>
+                            <td class="py-3 px-6">{{ $producto->id }}</td>
+                            <td class="py-3 px-6">{{ $producto->prod_nombre }}</td>
+                            <td class="py-3 px-6">{{ $producto->prod_valor }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @if ($items->count())
+                @if ($productos->count())
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    {{ $items->links() }}
+                    {{ $productos->links() }}
                 </div>
                 @else
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    No hay resultados para la búsqueda "{{ $filtro_it }}"
+                    No hay resultados para la búsqueda "{{ $filtro_prod }}"
                 </div>
                 @endif
             </div>
         </div>
     </div>
 
-    @livewire('items.create-items')
+    @livewire('productos.create-productos')
 </div>
