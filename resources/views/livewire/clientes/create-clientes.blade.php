@@ -47,9 +47,9 @@
                     <x-jet-input-error for="cli_comuna" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label for="cli_region" value="{{ __('Region') }}" />
-                    <x-jet-input id="cli_region" wire:model.lazy='cli_region' type="text" placeholder='region' class="mt-1 block w-full"/>
-                    <x-jet-input-error for="cli_region" class="mt-2" />
+                    <x-jet-label for="cli_ciudad" value="{{ __('ciudad') }}" />
+                    <x-jet-input id="cli_ciudad" wire:model.lazy='cli_ciudad' type="text" placeholder='ciudad' class="mt-1 block w-full"/>
+                    <x-jet-input-error for="cli_ciudad" class="mt-2" />
                 </div>
             </div>
         </form>

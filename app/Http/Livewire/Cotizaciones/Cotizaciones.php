@@ -17,7 +17,9 @@ class Cotizaciones extends Component
         $filtro_cot = '%'.$this->filtro_cot .'%';
 
         return view('livewire.cotizaciones.cotizaciones',[
-            'cotizaciones' => Cotizacion::all()
+            'cotizaciones' => Cotizacion::latest()
+                            ->Where('cot_id','LIKE',$filtro_cot)
+                            ->paginate(10)
         ]);
     }
 }

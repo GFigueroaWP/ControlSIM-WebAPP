@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cli_id');
             $table->string('cot_directorio');
+            $table->integer('cot_subtotal');
+            $table->integer('cot_total');
             $table->string('cot_estado');
             $table->timestamps();
 

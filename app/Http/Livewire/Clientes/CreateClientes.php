@@ -26,10 +26,10 @@ class CreateClientes extends Component
 
     public function cancelCrear (){
         $this->modalCreacionCliente = false;
-        $this->reset(['cli_nombre', 'cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_region']);
+        $this->reset(['cli_nombre', 'cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
     }
 
-    public $cli_nombre, $cli_razonsocial, $cli_giro, $cli_rut, $cli_email, $cli_telefono, $cli_direccion, $cli_comuna, $cli_region;
+    public $cli_nombre, $cli_razonsocial, $cli_giro, $cli_rut, $cli_email, $cli_telefono, $cli_direccion, $cli_comuna, $cli_ciudad;
 
     public function formatRut()
     {
@@ -56,7 +56,7 @@ class CreateClientes extends Component
         'cli_telefono' => 'numeric',
         'cli_direccion' => 'alpha_num',
         'cli_comuna' => 'alpha_num',
-        'cli_region' => 'alpha_num'
+        'cli_ciudad' => 'alpha_num'
     ];
 
     protected function rules(){
@@ -69,7 +69,7 @@ class CreateClientes extends Component
             'cli_telefono' => 'numeric',
             'cli_direccion' => 'alpha_num',
             'cli_comuna' => 'alpha_num',
-            'cli_region' => 'alpha_num'
+            'cli_ciudad' => 'alpha_num'
         ];
     }
 
@@ -82,7 +82,7 @@ class CreateClientes extends Component
         'cli_telefono',
         'cli_direccion',
         'cli_comuna',
-        'cli_region'
+        'cli_ciudad'
     ];
 
     public function submitCliente()
@@ -97,10 +97,10 @@ class CreateClientes extends Component
             'cli_telefono' => $this->cli_telefono,
             'cli_direccion' => $this->cli_direccion,
             'cli_comuna' => $this->cli_comuna,
-            'cli_region' => $this->cli_region
+            'cli_ciudad' => $this->cli_ciudad
         ]);
         $this->modalCreacionCliente = false;
-        $this->reset(['cli_nombre', 'cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_region']);
+        $this->reset(['cli_nombre', 'cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
         toast()->success('Cliente añadido con éxito!')->push();
         $this->emit('clienteCreado');
         return redirect()->back();

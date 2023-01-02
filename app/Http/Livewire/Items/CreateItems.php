@@ -25,6 +25,7 @@ class CreateItems extends Component
 
     public function cancelCrearItem(){
         $this->modalCreacionItem = false;
+        $this->reset(['it_nombre', 'it_valor']);
     }
 
     protected $rules = [
@@ -44,6 +45,7 @@ class CreateItems extends Component
         ]);
         $this->modalCreacionItem = false;
         toast()->success('Item añadido con éxito!')->push();
+        $this->reset(['it_nombre', 'it_valor']);
         $this->emit('itemCreado');
         return redirect()->back();
     }

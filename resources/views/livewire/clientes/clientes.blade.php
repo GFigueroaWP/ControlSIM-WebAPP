@@ -35,16 +35,10 @@
                                 Rut
                             </th>
                             <th scope="col" class="py-2 px-6">
-                                Nombre
-                            </th>
-                            <th scope="col" class="py-2 px-6">
                                 Razón Social
                             </th>
                             <th scope="col" class="py-2 px-6">
-                                Cargo
-                            </th>
-                            <th scope="col" class="py-2 px-6">
-                                Estado
+                                Giro
                             </th>
                             <th scope="col" class="py-2 px-6">
                                 Acciones
@@ -55,21 +49,12 @@
                         @foreach ($clientes as $cliente)
                         <tr class="bg-white border-b hover:bg-gray-300">
                             <td class="py-3 px-6">{{ $cliente->cli_rut }}</td>
-                            <td class="py-3 px-6">{{ $cliente->cli_nombre }}</td>
                             <td class="py-3 px-6">{{ $cliente->cli_razonsocial }}</td>
-                            <td class="py-3 px-6">{{ $cliente->cli_email }}</td>
-                            <td class="py-3 px-6">{{ $cliente->cli_ciudad }}</td>
+                            <td class="py-3 px-6">{{ $cliente->cli_giro }}</td>
                             <td class="py-3 px-6">
                                 @can('clientes_edit')
                                     <a href="{{ route('showClientes', ['cliente' => $cliente->id]) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 @endcan
-                                {{-- @if($cliente->cli_estado == 'activo')
-                                    @can('users_delete')
-                                        <x-jet-danger-button wire:click='confirmclienteDeshabilitacion ({{ $cliente->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}</x-jet-danger-button>
-                                    @endcan
-                                @else
-                                    <x-jet-danger-button class="m-1">{{ _('Habilitar') }}</x-jet-danger-button>
-                                @endif --}}
                             </td>
                         </tr>
                         @endforeach
@@ -88,6 +73,6 @@
         </div>
     </div>
 
-    {{-- Modal de creación de usuario --}}
+    {{-- Modal de creación de cliente --}}
     @livewire('clientes.create-clientes')
 </div>

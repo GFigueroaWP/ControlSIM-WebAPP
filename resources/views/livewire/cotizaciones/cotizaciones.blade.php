@@ -46,7 +46,6 @@
                             <th scope="col" class="py-2 px-6">
                                 Acciones
                             </th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +54,7 @@
                             <td class="py-3 px-6">{{ $cotizacion->id }}</td>
                             <td class="py-3 px-6">{{ $cotizacion->cliente->cli_nombre }}</td>
                             <td class="py-3 px-6">{{ \Carbon\Carbon::parse($cotizacion->created_at)->format('d-m-Y') }}</td>
-                            <td class="py-3 px-6"></td>
+                            <td class="py-3 px-6">{{ $cotizacion->cot_estado }}</td>
                             <td class="py-3 px-6">
 
                             </td>
@@ -63,7 +62,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{-- @if ($cotizaciones->count())
+                @if ($cotizaciones->count())
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                     {{ $cotizaciones->links() }}
                 </div>
@@ -71,7 +70,7 @@
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                     No hay resultados para la búsqueda "{{ $filtro_cot }}"
                 </div>
-                @endif --}}
+                @endif
             </div>
         </div>
     </div>

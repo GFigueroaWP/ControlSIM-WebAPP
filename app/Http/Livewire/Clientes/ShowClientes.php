@@ -19,7 +19,7 @@ class ShowClientes extends Component
     $show_cli_telefono,
     $show_cli_direccion,
     $show_cli_comuna,
-    $show_cli_region;
+    $show_cli_ciudad;
 
     public $listeners = ['contactoCreado' => '$refresh'];
 
@@ -45,7 +45,7 @@ class ShowClientes extends Component
             'show_cli_telefono' => $this->cliente->cli_telefono,
             'show_cli_direccion' => $this->cliente->cli_direccion,
             'show_cli_comuna' => $this->cliente->cli_comuna,
-            'show_cli_region' => $this->cliente->cli_region
+            'show_cli_ciudad' => $this->cliente->cli_ciudad
         ]);
     }
 
@@ -59,7 +59,7 @@ class ShowClientes extends Component
             'show_cli_telefono' => 'numeric',
             'show_cli_direccion' => 'alpha_num',
             'show_cli_comuna' => 'alpha_num',
-            'show_cli_region' => 'alpha_num'
+            'show_cli_ciudad' => 'alpha_num'
         ];
     }
 
@@ -72,7 +72,7 @@ class ShowClientes extends Component
         'show_cli_telefono',
         'show_cli_direccion',
         'show_cli_comuna',
-        'show_cli_region'
+        'show_cli_ciudad'
     ];
 
     public function updateCliente(){
@@ -87,7 +87,7 @@ class ShowClientes extends Component
         $this->cliente->cli_telefono = $this->show_cli_telefono;
         $this->cliente->cli_direccion = $this->show_cli_direccion;
         $this->cliente->cli_comuna = $this->show_cli_comuna;
-        $this->cliente->cli_region = $this->show_cli_region;
+        $this->cliente->cli_ciudad = $this->show_cli_ciudad;
 
         $this->cliente->save();
 

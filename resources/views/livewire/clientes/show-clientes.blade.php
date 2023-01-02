@@ -57,9 +57,9 @@
                         <x-jet-input-error for="show_cli_comuna" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_cli_region" value="{{ __('Region') }}" />
-                        <x-jet-input id="show_cli_region" wire:model='show_cli_region' type="text" placeholder='region' class="mt-1 block w-full"/>
-                        <x-jet-input-error for="show_cli_region" class="mt-2" />
+                        <x-jet-label for="show_cli_ciudad" value="{{ __('Ciudad') }}" />
+                        <x-jet-input id="show_cli_ciudad" wire:model='show_cli_ciudad' type="text" placeholder='ciudad' class="mt-1 block w-full"/>
+                        <x-jet-input-error for="show_cli_ciudad" class="mt-2" />
                     </div>
                 </x-slot>
                 <x-slot name="actions">

@@ -4,7 +4,7 @@ namespace App\States\Cotizacion;
 
 class Emitida extends CotizacionState
 {
-    protected static $name = 'emitida';
+    protected static $name = 'Emitida';
 
     public function color(): string
     {
