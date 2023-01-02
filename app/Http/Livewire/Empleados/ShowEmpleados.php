@@ -28,13 +28,35 @@ class ShowEmpleados extends Component
     public function fillEmpleado()
     {
         $this->fill([
-            'show_us_username'=> $this->empleado->us_username,
+            'show_us_username' => $this->empleado->us_username,
             'show_us_nombre' => $this->empleado->us_nombre,
             'show_us_apellido' => $this->empleado->us_apellido,
             'show_us_rut' => $this->empleado->us_rut,
             'show_us_telefono' => $this->empleado->us_telefono,
             'show_us_email' => $this->empleado->us_email
         ]);
+    }
+
+    public function updateEmpleado()
+    {
+        $this->validate();
+
+        $this->empleado->us_username = $this->show_us_username;
+        $this->empleado->us_nombre = $this->show_us_nombre;
+        $this->empleado->us_apellido = $this->show_us_apellido;
+        $this->empleado->us_rut = $this->show_us_rut;
+        $this->empleado->us_telefono = $this->show_us_telefono;
+        $this->empleado->us_email = $this->show_us_email;
+
+        $this->empleado->save();
+
+        activity('empleados')
+            ->performedOn($this->empleado)
+            ->log('Usuario actualizado');
+
+        toast()->info('Empleado actualizado con éxito!')->push();
+
+        return redirect()->back();
     }
 
     protected $rules = [
@@ -62,21 +84,4 @@ class ShowEmpleados extends Component
         'show_us_email.email' => 'El campo de Email debe tener formato email@email.xx',
         'show_us_email.unique' => 'La dirección de correo ya esta en uso por otro usuario'
     ];
-
-    public function updateEmpleado()
-    {
-        $this->validate();
-
-        $this->empleado->us_username = $this->show_us_username;
-        $this->empleado->us_nombre = $this->show_us_nombre;
-        $this->empleado->us_apellido = $this->show_us_apellido;
-        $this->empleado->us_rut = $this->show_us_rut;
-        $this->empleado->us_telefono = $this->show_us_telefono;
-        $this->empleado->us_email = $this->show_us_email;
-
-        $this->empleado->save();
-        toast()->info('Empleado actualizado con éxito!')->push();
-        return redirect()->back();
-
-    }
 }

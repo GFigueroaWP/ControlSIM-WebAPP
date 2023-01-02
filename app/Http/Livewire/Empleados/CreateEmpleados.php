@@ -15,42 +15,77 @@ class CreateEmpleados extends Component
 
     public $modalCreacionEmpleado = false;
 
+    public $us_username, $us_nombre, $us_apellido, $us_rut,
+        $us_telefono, $us_email, $password, $cargo;
+
     protected $listeners = ['crearEmpleado'];
 
     public function render()
     {
-        return view('livewire.empleados.create-empleados',[
+        return view('livewire.empleados.create-empleados', [
             'roles' => Role::all()->pluck('name')
         ]);
     }
 
-    public function crearEmpleado(){
+    public function crearEmpleado()
+    {
         $this->modalCreacionEmpleado = true;
     }
 
-    public function cancelCrear (){
+    public function cancelCrear()
+    {
         $this->modalCreacionEmpleado = false;
-        $this->reset(['us_username', 'us_nombre', 'us_apellido', 'us_rut',
-        'us_telefono', 'us_email', 'password', 'cargo']);
+        $this->reset([
+            'us_username', 'us_nombre', 'us_apellido', 'us_rut',
+            'us_telefono', 'us_email', 'password', 'cargo'
+        ]);
     }
-
-    public $us_username, $us_nombre, $us_apellido, $us_rut,
-        $us_telefono, $us_email, $password, $cargo;
 
     public function formatRut()
     {
         $us_rut = $this->us_rut;
         $length = strlen($us_rut);
         $us_rut = strtoupper($us_rut);
-        if($length == 8 || $length == 9){
+        if ($length == 8 || $length == 9) {
             $formateado = substr_replace($us_rut, '.', -7, 0);
             $formateado = substr_replace($formateado, '.', -4, 0);
             $formateado = substr_replace($formateado, '-', -1, 0);
-        }
-        else{
+        } else {
             return;
         }
         $this->us_rut = $formateado;
+    }
+
+    public function submitEmpleado()
+    {
+        $this->validate();
+
+        $creado = User::create([
+            'us_username' => $this->us_username,
+            'us_nombre' => $this->us_nombre,
+            'us_apellido' => $this->us_apellido,
+            'us_rut' => $this->us_rut,
+            'us_telefono' => $this->us_telefono,
+            'us_email' => $this->us_email,
+            'password' => Hash::make($this->password)
+        ])->assignRole($this->cargo);
+
+        $this->modalCreacionEmpleado = false;
+
+        $this->reset([
+            'us_username', 'us_nombre', 'us_apellido', 'us_rut',
+            'us_telefono', 'us_email', 'password', 'cargo'
+        ]);
+
+        toast()->success('Empleado añadido con éxito!')->push();
+
+        activity('empleados')
+            ->performedOn($creado)
+            ->log('Usuario Creado');
+
+        $this->emit('empleadoCreado');
+
+        return redirect()->back();
     }
 
     protected function rules()
@@ -59,7 +94,7 @@ class CreateEmpleados extends Component
             'us_username' => 'required|alpha_num|unique:users',
             'us_nombre' => 'required|alpha',
             'us_apellido' => 'required|alpha',
-            'us_rut' => ['required',new rutValido],
+            'us_rut' => ['required', new rutValido],
             'us_telefono' => 'required|numeric',
             'us_email' => 'required|email|unique:users',
             'password' => 'required',
@@ -85,24 +120,4 @@ class CreateEmpleados extends Component
         'password.required' => 'El campo de Contraseña es obligatorio',
         'cargo.exists' => 'El cargo seleccionado no se encuentra en los registros'
     ];
-
-    public function submitEmpleado()
-    {
-        $this->validate();
-        User::create([
-            'us_username' => $this->us_username,
-            'us_nombre' => $this->us_nombre,
-            'us_apellido' => $this->us_apellido,
-            'us_rut' => $this->us_rut,
-            'us_telefono' => $this->us_telefono,
-            'us_email' => $this->us_email,
-            'password' => Hash::make($this->password)
-        ])->assignRole($this->cargo);
-        $this->modalCreacionEmpleado = false;
-        $this->reset(['us_username', 'us_nombre', 'us_apellido', 'us_rut',
-        'us_telefono', 'us_email', 'password', 'cargo']);
-        toast()->success('Empleado añadido con éxito!')->push();
-        $this->emit('empleadoCreado');
-        return redirect()->back();
-    }
 }

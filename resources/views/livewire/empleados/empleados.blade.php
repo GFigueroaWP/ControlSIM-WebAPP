@@ -11,7 +11,7 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('users_create')
-                            <x-jet-button wire:click="$emit('crearEmpleado')">{{ __('Crear') }}</x-jet-button>
+                        <x-jet-button wire:click="$emit('crearEmpleado')">{{ __('Crear') }}</x-jet-button>
                         @endcan
                     </div>
                     <label for="search_empleados" class="sr-only">Buscar</label>
@@ -57,10 +57,14 @@
                             <td class="py-3 px-6">{{ $empleado->getRoleNames()->first() }}</td>
                             <td class="py-3 px-6">
                                 @can('users_edit')
-                                    <a href="{{ route('showEmpleados', ['empleado' => $empleado->id]) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
+                                <a href="{{ route('showEmpleados', ['empleado' => $empleado->id]) }}">
+                                    <x-jet-button>{{ __('Ver') }}</x-jet-button>
+                                </a>
                                 @endcan
                                 @can('users_delete')
-                                    <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})' wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}</x-jet-danger-button>
+                                <x-jet-danger-button wire:click='confirmEmpleadoDeshabilitacion ({{ $empleado->id }})'
+                                    wire:loading.attr='disabled' class="m-1">{{ __('Deshabilitar') }}
+                                </x-jet-danger-button>
                                 @endcan
                             </td>
                         </tr>
@@ -86,7 +90,8 @@
             {{ _('Deshabilitar usuario') }}
         </x-slot>
         <x-slot name="content">
-            {{ _('Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser deshecha') }}
+            {{ _('Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser
+            deshecha') }}
         </x-slot>
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="cancelDeshabilitar" class="m-1">
@@ -97,5 +102,7 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
+
+    {{-- Modal de creación de usuario --}}
     @livewire('empleados.create-empleados')
 </div>

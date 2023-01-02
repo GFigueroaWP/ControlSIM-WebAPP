@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 use App\Models\User;
-use App\States\User\Deshabilitado;
 use Spatie\Permission\Models\Role;
 
 class Empleados extends Component
@@ -20,28 +19,34 @@ class Empleados extends Component
 
     public function render()
     {
-        $filtro_us = '%'.$this->filtro_us .'%';
+        $filtro_us = '%' . $this->filtro_us . '%';
 
         return view('livewire.empleados.empleados', [
             'empleados' => User::latest()
-                        ->orWhere('us_nombre','LIKE',$filtro_us)
-                        ->orWhere('us_apellido','LIKE',$filtro_us)
-                        ->orWhere('us_username','LIKE',$filtro_us)
-                        ->paginate(10),
+                ->orWhere('us_nombre', 'LIKE', $filtro_us)
+                ->orWhere('us_apellido', 'LIKE', $filtro_us)
+                ->orWhere('us_username', 'LIKE', $filtro_us)
+                ->paginate(10),
             'roles' => Role::all()->pluck('name')
         ]);
     }
 
-    public function confirmEmpleadoDeshabilitacion ($id){
+    public function confirmEmpleadoDeshabilitacion($id)
+    {
         $this->modalDeshabilitacionEmpleado = $id;
     }
 
-    public function cancelDeshabilitar (){
+    public function cancelDeshabilitar()
+    {
         $this->modalDeshabilitacionEmpleado = false;
     }
 
-    public function deshabilitarEmpleado (User $seleccionado){
+    public function deshabilitarEmpleado(User $seleccionado)
+    {
         $seleccionado->delete();
+        activity('empleados')
+            ->performedOn($seleccionado)
+            ->log('Usuario deshabilitado');
         $this->modalDeshabilitacionEmpleado = false;
     }
 }

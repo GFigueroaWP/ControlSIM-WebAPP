@@ -17,7 +17,6 @@
                 </x-slot>
 
                 <x-slot name="form">
-
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_us_username" value="{{ __('Usuario') }}" />
                         <x-jet-input id="show_us_username" wire:model='show_us_username' type="text"
@@ -27,7 +26,8 @@
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_us_rut" value="{{ __('Rut') }}" />
                         <x-jet-input id="show_us_rut" wire:model='show_us_rut' wire:change="formatRut"
-                            wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full" disabled/>
+                            wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full"
+                            disabled />
                         <x-jet-input-error for="show_us_rut" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
