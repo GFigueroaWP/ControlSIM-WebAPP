@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('pr_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('pr_id')->references('id')->on('proyectos')->onDelete('cascade');
         });

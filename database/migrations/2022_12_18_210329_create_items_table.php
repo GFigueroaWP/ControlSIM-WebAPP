@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('it_nombre');
             $table->string('it_valor');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

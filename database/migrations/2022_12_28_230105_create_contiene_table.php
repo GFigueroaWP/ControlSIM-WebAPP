@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('item_id');
             $table->integer('cantidad');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('cotizacion_id')->references('id')->on('cotizaciones')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');

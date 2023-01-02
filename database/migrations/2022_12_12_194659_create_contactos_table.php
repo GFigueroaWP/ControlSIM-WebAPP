@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('con_email');
             $table->string('con_telefono');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('cli_id')->references('id')->on('clientes')->onDelete('cascade');
         });

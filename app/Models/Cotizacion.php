@@ -5,12 +5,14 @@ namespace App\Models;
 use App\States\Cotizacion\CotizacionState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\ModelStates\HasStates;
 
 class Cotizacion extends Model
 {
     use HasFactory;
     use HasStates;
+    use SoftDeletes;
 
     protected $table = 'cotizaciones';
 

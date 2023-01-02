@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('cot_total');
             $table->string('cot_estado');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('cli_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->foreign('pr_id')->references('id')->on('proyectos')->onDelete('cascade');
