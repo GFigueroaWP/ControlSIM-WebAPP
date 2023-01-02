@@ -1,6 +1,6 @@
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Productos y Servicios') }}
+        {{ __('Proyectos') }}
     </h2>
 </x-slot>
 
@@ -10,8 +10,8 @@
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
-                        @can('productos_create')
-                        <x-jet-button wire:click="$emit('crearItem')">{{ __('Añadir nuevo item') }}</x-jet-button>
+                        @can('items_create')
+                        <x-jet-button wire:click="">{{ __('Añadir') }}</x-jet-button>
                         @endcan
                     </div>
                     <label for="search_items" class="sr-only">Buscar</label>
@@ -24,11 +24,11 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input wire:model='filtro_it' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
-                            name="search_items" id="search_items" placeholder="Buscar producto o servicio">
+                        <input wire:model='filtro_pr' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
+                            name="search_proyecto" id="search_items" placeholder="Buscar proyecto">
                     </div>
                 </div>
-                <table class=" w-full text-base text-left">
+{{--                 <table class=" w-full text-base text-left">
                     <thead class="uppercase">
                         <tr>
                             <th scope="col" class="py-2 px-6">
@@ -63,10 +63,8 @@
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                     No hay resultados para la búsqueda "{{ $filtro_it }}"
                 </div>
-                @endif
+                @endif --}}
             </div>
         </div>
     </div>
-
-    @livewire('items.create-items')
 </div>

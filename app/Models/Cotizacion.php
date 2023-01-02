@@ -16,6 +16,7 @@ class Cotizacion extends Model
 
     protected $fillable = [
         'cli_id',
+        'pr_id',
         'cot_directorio',
         'cot_subtotal',
         'cot_total'
@@ -24,6 +25,11 @@ class Cotizacion extends Model
     protected $casts = [
         'cot_estado' => CotizacionState::class
     ];
+
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class, 'pr_id');
+    }
 
     public function cliente()
     {

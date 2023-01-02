@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('cotizaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cli_id');
+            $table->unsignedBigInteger('pr_id')->nullable();
             $table->string('cot_directorio');
             $table->integer('cot_subtotal');
             $table->integer('cot_total');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('cli_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('pr_id')->references('id')->on('proyectos')->onDelete('cascade');
         });
     }
 

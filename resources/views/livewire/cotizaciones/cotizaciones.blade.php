@@ -56,7 +56,11 @@
                             <td class="py-3 px-6">{{ \Carbon\Carbon::parse($cotizacion->created_at)->format('d-m-Y') }}</td>
                             <td class="py-3 px-6">{{ $cotizacion->cot_estado }}</td>
                             <td class="py-3 px-6">
-                                <a href="{{ route('documentoPrueba', $cotizacion->id) }}"><x-jet-button>Generar</x-jet-button></a>
+                                <a href="{{ route('generarCotizacion', $cotizacion->id) }}"><x-jet-button>Generar</x-jet-button></a>
+                                <x-jet-secondary-button>Actualizar estado</x-jet-secondary-button>
+                                @if ($cotizacion->estado == 'Rechazada')
+                                    <x-jet-danger-button>Eliminar</x-jet-danger-button>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

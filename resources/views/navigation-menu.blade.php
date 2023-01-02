@@ -25,7 +25,7 @@
                             {{ __('Clientes') }}
                         </x-jet-nav-link>
                     @endcan
-                    @can('items_access')
+                    @can('productos_access')
                         <x-jet-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
                             {{ __('Productos') }}
                         </x-jet-nav-link>
@@ -35,6 +35,16 @@
                             {{ __('Cotizaciones') }}
                         </x-jet-nav-link>
                     @endcan
+                    @can('cotizaciones_access')
+                    <x-jet-nav-link href="{{ route('proyectos') }}" :active="request()->routeIs('proyectos')">
+                        {{ __('Proyectos') }}
+                    </x-jet-nav-link>
+                    @endcan
+                    @role('tecnico')
+                    <x-jet-nav-link href="{{ route('trabajos') }}" :active="request()->routeIs('trabajos')">
+                        {{ __('Trabajos') }}
+                    </x-jet-nav-link>
+                    @endrole
                 </div>
             </div>
 

@@ -56,12 +56,18 @@ class PermissionSeeder extends Seeder
             'contactos_show',
             'contactos_delete',
             'contactos_access',
-            //Permisos de manejo de "Items"
-            'items_create',
-            'items_edit',
-            'items_show',
-            'items_delete',
-            'items_access',
+            //Permisos de manejo de "Productos"
+            'productos_create',
+            'productos_edit',
+            'productos_show',
+            'productos_delete',
+            'productos_access',
+            //Permisos de manejo de "Proyectos"
+            'proyectos_create',
+            'proyectos_edit',
+            'proyectos_show',
+            'proyectos_delete',
+            'proyectos_access',
             //Permisos de manejo de "Cotizaciones"
             'cotizaciones_create',
             'cotizaciones_edit',
@@ -74,6 +80,12 @@ class PermissionSeeder extends Seeder
             'ordenes_show',
             'ordenes_delete',
             'ordenes_access',
+            //Permisos de manejo de "Trabajos propios"
+            'trabajos_create',
+            'trabajos_edit',
+            'trabajos_show',
+            'trabajos_delete',
+            'trabajos_access',
             //Permisos de manejo de "Comentarios"
             'comentarios_create',
             'comentarios_edit',
@@ -112,10 +124,8 @@ class PermissionSeeder extends Seeder
 
         // crear Roles y asignarles Permisos
         $role = Role::create(['name' => 'super-admin'])->givePermissionTo(Permission::all());
-        $role = Role::create(['name' => 'soporte'])->givePermissionTo(['users_create', 'users_edit', 'users_show', 'users_delete', 'users_access', 'permisos_create', 'permisos_edit', 'permisos_show', 'permisos_delete', 'permisos_access', 'roles_create', 'roles_edit', 'roles_show', 'roles_delete', 'roles_access']);
-        $role = Role::create(['name' => 'administrativo'])->givePermissionTo(['clientes_create', 'clientes_edit', 'clientes_show', 'clientes_delete', 'clientes_access', 'contactos_create', 'contactos_edit', 'contactos_show', 'contactos_delete', 'contactos_access', 'cotizaciones_create', 'cotizaciones_edit', 'cotizaciones_show', 'cotizaciones_delete', 'cotizaciones_access', 'items_create', 'items_edit', 'items_show', 'items_delete', 'items_access']);
-        $role = Role::create(['name' => 'gestor'])->givePermissionTo(['ordenes_create', 'ordenes_edit', 'ordenes_show', 'ordenes_delete', 'ordenes_access', 'tareas_create', 'tareas_edit', 'tareas_show', 'tareas_delete', 'tareas_access', 'comentarios_create', 'comentarios_edit', 'comentarios_show', 'comentarios_delete', 'comentarios_access', 'informes_create', 'informes_edit', 'informes_show', 'informes_delete', 'informes_access', 'viaticos_create', 'viaticos_edit', 'viaticos_show', 'viaticos_delete', 'viaticos_access', 'boletas_create', 'boletas_edit', 'boletas_show', 'boletas_delete', 'boletas_access']);
-        $role = Role::create(['name' => 'empleado'])->givePermissionTo(['ordenes_access', 'ordenes_show', 'comentarios_create', 'comentarios_edit', 'comentarios_show', 'comentarios_delete', 'comentarios_access', 'informes_create', 'informes_edit', 'informes_show', 'informes_delete', 'informes_access', 'viaticos_create', 'viaticos_edit', 'viaticos_show', 'viaticos_delete', 'viaticos_access', 'boletas_create', 'boletas_edit', 'boletas_show', 'boletas_delete', 'boletas_access']);
+        $role = Role::create(['name' => 'administrativo'])->givePermissionTo(['users_create', 'users_edit', 'users_show', 'users_delete', 'users_access', 'clientes_create', 'clientes_edit', 'clientes_show', 'clientes_delete', 'clientes_access', 'contactos_create', 'contactos_edit', 'contactos_show', 'contactos_delete', 'contactos_access', 'cotizaciones_create', 'cotizaciones_edit', 'cotizaciones_show', 'cotizaciones_delete', 'cotizaciones_access', 'productos_create', 'productos_edit', 'productos_show', 'productos_delete', 'productos_access', 'proyectos_create', 'proyectos_edit', 'proyectos_show', 'proyectos_delete', 'proyectos_access', 'ordenes_create', 'ordenes_edit', 'ordenes_show', 'ordenes_delete', 'ordenes_access']);
+        $role = Role::create(['name' => 'tecnico'])->givePermissionTo(['trabajos_create', 'trabajos_edit', 'trabajos_show', 'trabajos_delete', 'trabajos_access', 'comentarios_create', 'comentarios_edit', 'comentarios_show', 'comentarios_delete', 'comentarios_access', 'informes_create', 'informes_edit', 'informes_show', 'informes_delete', 'informes_access', 'viaticos_create', 'viaticos_edit', 'viaticos_show', 'viaticos_delete', 'viaticos_access', 'boletas_create', 'boletas_edit', 'boletas_show', 'boletas_delete', 'boletas_access']);
 
         $super = User::create([
             'us_username' => 'Test',
