@@ -17,12 +17,12 @@ class Clientes extends Component
 
     public function render()
     {
-        $filtro_cli = '%'.$this->filtro_cli.'%';
+        $filtro_cli = '%' . $this->filtro_cli . '%';
 
         return view('livewire.clientes.clientes', [
             'clientes' => Cliente::latest()
-                        ->orWhere('cli_nombre','LIKE',$filtro_cli)
-                        ->paginate(10),
+                ->orWhere('cli_nombre', 'LIKE', $filtro_cli)
+                ->paginate(10),
         ]);
     }
 }

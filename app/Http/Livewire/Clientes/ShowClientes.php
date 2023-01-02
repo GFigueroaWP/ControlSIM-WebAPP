@@ -11,15 +11,15 @@ class ShowClientes extends Component
     use WireToast;
 
     public $cliente,
-    $show_cli_nombre,
-    $show_cli_razonsocial,
-    $show_cli_giro,
-    $show_cli_rut,
-    $show_cli_email,
-    $show_cli_telefono,
-    $show_cli_direccion,
-    $show_cli_comuna,
-    $show_cli_ciudad;
+        $show_cli_nombre,
+        $show_cli_razonsocial,
+        $show_cli_giro,
+        $show_cli_rut,
+        $show_cli_email,
+        $show_cli_telefono,
+        $show_cli_direccion,
+        $show_cli_comuna,
+        $show_cli_ciudad;
 
     public $listeners = ['contactoCreado' => '$refresh'];
 
@@ -30,12 +30,13 @@ class ShowClientes extends Component
 
     public function render()
     {
-        return view('livewire.clientes.show-clientes',[
+        return view('livewire.clientes.show-clientes', [
             'contactos' => Cliente::find($this->cliente->id)->contactos()->where('cli_id', $this->cliente->id)->get()
         ]);
     }
 
-    public function fillCliente(){
+    public function fillCliente()
+    {
         $this->fill([
             'show_cli_nombre' => $this->cliente->cli_nombre,
             'show_cli_razonsocial' => $this->cliente->cli_razonsocial,
@@ -49,7 +50,34 @@ class ShowClientes extends Component
         ]);
     }
 
-    protected function rules(){
+    public function updateCliente()
+    {
+
+        $this->validate();
+
+        $this->cliente->cli_nombre = $this->show_cli_nombre;
+        $this->cliente->cli_razonsocial = $this->show_cli_razonsocial;
+        $this->cliente->cli_giro = $this->show_cli_giro;
+        $this->cliente->cli_rut = $this->show_cli_rut;
+        $this->cliente->cli_email = $this->show_cli_email;
+        $this->cliente->cli_telefono = $this->show_cli_telefono;
+        $this->cliente->cli_direccion = $this->show_cli_direccion;
+        $this->cliente->cli_comuna = $this->show_cli_comuna;
+        $this->cliente->cli_ciudad = $this->show_cli_ciudad;
+
+        $this->cliente->save();
+
+        activity('Clientes')
+            ->performedOn($this->cliente)
+            ->log('Actualizado');
+
+        toast()->info('Cliente actualizado con éxito!')->push();
+
+        return redirect()->back();
+    }
+
+    protected function rules()
+    {
         return [
             'show_cli_nombre' => 'required|alpha_num',
             'show_cli_razonsocial' => 'required|alpha_num',
@@ -74,24 +102,4 @@ class ShowClientes extends Component
         'show_cli_comuna',
         'show_cli_ciudad'
     ];
-
-    public function updateCliente(){
-
-        $this->validate();
-
-        $this->cliente->cli_nombre = $this->show_cli_nombre;
-        $this->cliente->cli_razonsocial = $this->show_cli_razonsocial;
-        $this->cliente->cli_giro = $this->show_cli_giro;
-        $this->cliente->cli_rut = $this->show_cli_rut;
-        $this->cliente->cli_email = $this->show_cli_email;
-        $this->cliente->cli_telefono = $this->show_cli_telefono;
-        $this->cliente->cli_direccion = $this->show_cli_direccion;
-        $this->cliente->cli_comuna = $this->show_cli_comuna;
-        $this->cliente->cli_ciudad = $this->show_cli_ciudad;
-
-        $this->cliente->save();
-
-        toast()->info('Cliente actualizado con éxito!')->push();
-        return redirect()->back();
-    }
 }

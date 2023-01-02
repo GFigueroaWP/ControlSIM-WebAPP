@@ -21,12 +21,38 @@ class CreateContactos extends Component
         return view('livewire.clientes.create-contactos');
     }
 
-    public function crearContacto(){
+    public function crearContacto()
+    {
         $this->modalCreacionContacto = true;
     }
 
-    public function cancelCrearContacto (){
+    public function cancelCrearContacto()
+    {
         $this->modalCreacionContacto = false;
+    }
+
+    public function submitContacto()
+    {
+        $this->validate();
+
+        $creado = Contacto::create([
+            'cli_id' => $this->cli_id,
+            'con_nombre' => $this->con_nombre,
+            'con_telefono' => $this->con_telefono,
+            'con_email' => $this->con_email
+        ]);
+
+        $this->modalCreacionContacto = false;
+
+        activity('Contactos')
+            ->performedOn($creado)
+            ->log('Creado');
+
+        toast()->success('Contacto añadido con éxito!')->push();
+
+        $this->emit('contactoCreado');
+
+        return redirect()->back();
     }
 
     protected $rules = [
@@ -40,19 +66,4 @@ class CreateContactos extends Component
         'con_email',
         'con_telefono'
     ];
-
-    public function submitContacto()
-    {
-        $this->validate();
-        Contacto::create([
-            'cli_id' => $this->cli_id,
-            'con_nombre' => $this->con_nombre,
-            'con_telefono' => $this->con_telefono,
-            'con_email' => $this->con_email
-        ]);
-        $this->modalCreacionContacto = false;
-        toast()->success('Contacto añadido con éxito!')->push();
-        $this->emit('contactoCreado');
-        return redirect()->back();
-    }
 }
