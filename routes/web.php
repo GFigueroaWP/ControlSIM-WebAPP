@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CotizacionDoc;
 use App\Http\Livewire\Empleados\Empleados;
 use App\Http\Livewire\Empleados\ShowEmpleados;
 use App\Http\Livewire\Clientes\Clientes;
@@ -40,4 +41,5 @@ Route::middleware([
     Route::get('/items', Items::class)->name('items');
     Route::get('/cotizaciones', Cotizaciones::class)->name('cotizaciones');
     Route::get('/cotizaciones/create', CreateCotizaciones::class)->name('createCotizaciones');
+    Route::get('/cotizaciones/{cotizacion}', [CotizacionDoc::class, 'generateCotizacion'])->name('documentoPrueba');
 });

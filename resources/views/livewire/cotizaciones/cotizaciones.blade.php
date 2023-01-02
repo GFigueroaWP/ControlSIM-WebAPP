@@ -56,7 +56,7 @@
                             <td class="py-3 px-6">{{ \Carbon\Carbon::parse($cotizacion->created_at)->format('d-m-Y') }}</td>
                             <td class="py-3 px-6">{{ $cotizacion->cot_estado }}</td>
                             <td class="py-3 px-6">
-
+                                <a href="{{ route('documentoPrueba', $cotizacion->id) }}"><x-jet-button>Generar</x-jet-button></a>
                             </td>
                         </tr>
                         @endforeach

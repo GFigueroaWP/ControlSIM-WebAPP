@@ -6,6 +6,7 @@ use App\Models\Cotizacion;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class Cotizaciones extends Component
 {
     use WithPagination;
