@@ -31,13 +31,18 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('cotizaciones_access')
+                    <x-jet-nav-link href="{{ route('proyectos') }}" :active="request()->routeIs('proyectos')">
+                        {{ __('Proyectos') }}
+                    </x-jet-nav-link>
+                    @endcan
+                    @can('cotizaciones_access')
                         <x-jet-nav-link href="{{ route('cotizaciones') }}" :active="request()->routeIs('cotizaciones')">
                             {{ __('Cotizaciones') }}
                         </x-jet-nav-link>
                     @endcan
-                    @can('cotizaciones_access')
-                    <x-jet-nav-link href="{{ route('proyectos') }}" :active="request()->routeIs('proyectos')">
-                        {{ __('Proyectos') }}
+                    @can('ordenes_access')
+                    <x-jet-nav-link href="{{ route('ordenes') }}" :active="request()->routeIs('ordenes')">
+                        {{ __('Ordenes de trabajo') }}
                     </x-jet-nav-link>
                     @endcan
                     @role('tecnico')
