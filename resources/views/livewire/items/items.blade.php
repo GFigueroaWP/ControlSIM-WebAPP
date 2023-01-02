@@ -11,9 +11,8 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('items_create')
-                            <x-jet-button wire:click="$emit('crearItem')">{{ __('Añadir nuevo item') }}</x-jet-button>
+                        <x-jet-button wire:click="$emit('crearItem')">{{ __('Añadir nuevo item') }}</x-jet-button>
                         @endcan
-                        @livewire('items.create-items')
                     </div>
                     <label for="search_items" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
@@ -68,4 +67,6 @@
             </div>
         </div>
     </div>
+
+    @livewire('items.create-items')
 </div>

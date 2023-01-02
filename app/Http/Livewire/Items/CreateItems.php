@@ -19,13 +19,40 @@ class CreateItems extends Component
         return view('livewire.items.create-items');
     }
 
-    public function crearItem(){
+    public function crearItem()
+    {
         $this->modalCreacionItem = true;
     }
 
-    public function cancelCrearItem(){
+    public function cancelCrearItem()
+    {
         $this->modalCreacionItem = false;
         $this->reset(['it_nombre', 'it_valor']);
+    }
+
+    public function submitItem()
+    {
+
+        $this->validate();
+
+        $creado = Item::create([
+            'it_nombre' => $this->it_nombre,
+            'it_valor' => $this->it_valor
+        ]);
+
+        $this->modalCreacionItem = false;
+
+        $this->reset(['it_nombre', 'it_valor']);
+
+        activity('Productos')
+            ->performedOn($creado)
+            ->log('Creado');
+
+        toast()->success('Producto/Servicio añadido con éxito!')->push();
+
+        $this->emit('itemCreado');
+
+        return redirect()->back();
     }
 
     protected $rules = [
@@ -33,20 +60,5 @@ class CreateItems extends Component
         'it_valor' => 'required'
     ];
 
-    protected $messages = [
-
-    ];
-
-    public function submitItem(){
-        $this->validate();
-        Item::create([
-            'it_nombre' => $this->it_nombre,
-            'it_valor' => $this->it_valor
-        ]);
-        $this->modalCreacionItem = false;
-        toast()->success('Item añadido con éxito!')->push();
-        $this->reset(['it_nombre', 'it_valor']);
-        $this->emit('itemCreado');
-        return redirect()->back();
-    }
+    protected $messages = [];
 }

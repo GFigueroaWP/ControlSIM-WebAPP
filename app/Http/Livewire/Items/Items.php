@@ -16,12 +16,12 @@ class Items extends Component
 
     public function render()
     {
-        $filtro_it = '%'.$this->filtro_it .'%';
+        $filtro_it = '%' . $this->filtro_it . '%';
 
-        return view('livewire.items.items',[
+        return view('livewire.items.items', [
             'items' => Item::latest()
-                    ->orWhere('it_nombre','LIKE',$filtro_it)
-                    ->paginate(10)
+                ->orWhere('it_nombre', 'LIKE', $filtro_it)
+                ->paginate(10)
         ]);
     }
 }
