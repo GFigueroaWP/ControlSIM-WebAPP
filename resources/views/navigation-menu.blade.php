@@ -27,7 +27,7 @@
                     @endcan
                     @can('productos_access')
                         <x-jet-nav-link href="{{ route('productos') }}" :active="request()->routeIs('productos')">
-                            {{ __('Productos') }}
+                            {{ __('Productos / Servicios') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('cotizaciones_access')

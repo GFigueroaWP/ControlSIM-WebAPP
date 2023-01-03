@@ -33,4 +33,8 @@ class OrTrabajo extends Model
     public function tecnicos(){
         return $this->belongsToMany(User::class, 'asignado', 'trabajo_id', 'tecnico_id')->withTimestamps();
     }
+
+    public function tareas(){
+        return $this->hasMany(Tarea::class, 'trabajo_id');
+    }
 }
