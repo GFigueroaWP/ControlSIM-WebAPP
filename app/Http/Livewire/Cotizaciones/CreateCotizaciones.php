@@ -31,6 +31,17 @@ class CreateCotizaciones extends Component
 
     public function render()
     {
+        $this->subtotal = 0;
+        $this->iva = 0;
+        $this->total = 0;
+
+        foreach($this->cotizacionItems as $item){
+            $this->subtotal += $item['prod_valor'] * $item['cantidad'];
+        }
+
+        $this->iva = $this->subtotal * 0.19;
+        $this->total = $this->iva + $this->subtotal;
+
         return view('livewire.cotizaciones.create-cotizaciones',[
             'subtotal' => $this->subtotal,
             'total' => $this->total
@@ -46,9 +57,9 @@ class CreateCotizaciones extends Component
     }
 
     public function addProduct(){
-        foreach($this->cotizacionItems as $key => $cotizacionItem){
+        foreach($this->cotizacionItems as $index => $cotizacionItem){
             if(!$cotizacionItem['is_saved']){
-                $this->addError('cotizacionItems'.$key, 'Esta linea debe ser guardada antes de añadir otro elemento');
+                $this->addError('cotizacionItems'.$index.'producto_id', 'Esta linea debe ser guardada antes de añadir otro elemento');
                 return;
             }
         }
@@ -66,11 +77,13 @@ class CreateCotizaciones extends Component
     public function editProduct($index){
         foreach($this->cotizacionItems as $key => $cotizacionItem){
             if(!$cotizacionItem['is_saved']){
-                $this->addError('cotizacionItems'.$key, 'Esta linea debe ser guardada antes de añadir otro elemento');
+                $this->addError('cotizacionItems'.$index, 'Esta linea debe ser guardada antes de añadir otro elemento');
                 return;
             }
+
         }
         $this->cotizacionItems[$index]['is_saved'] = false;
+        $this->dispatchBrowserEvent('reApplySelect2');
     }
 
     public function saveProduct($index){
@@ -81,18 +94,9 @@ class CreateCotizaciones extends Component
         $this->cotizacionItems[$index]['prod_nombre'] = $producto->prod_nombre;
         $this->cotizacionItems[$index]['prod_valor'] = $producto->prod_valor;
         $this->cotizacionItems[$index]['is_saved'] = true;
-
-        $this->subtotal += $producto->prod_valor * $this->cotizacionItems[$index]['cantidad'];
-        $this->iva = $this->subtotal * 0.19;
-        $this->total = $this->iva + $this->subtotal;
-
     }
 
     public function removeProduct($index){
-        $this->subtotal -= $this->cotizacionItems[$index]['prod_valor'] * $this->cotizacionItems[$index]['cantidad'];
-        $this->iva = $this->subtotal * 0.19;
-        $this->total = $this->iva + $this->subtotal;
-
         unset($this->cotizacionItems[$index]);
         $this->cotizacionItems = array_values($this->cotizacionItems);
     }

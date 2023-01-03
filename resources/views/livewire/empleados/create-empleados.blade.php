@@ -33,7 +33,7 @@
                 <div>
                     <x-jet-label for="us_telefono" value="{{ __('Telefono') }}" />
                     <x-jet-input id="us_telefono" wire:model.lazy='us_telefono' type="text" placeholder='912344678'
-                        class="mt-1 block w-full" />
+                        class="mt-1 telefono block w-full" />
                     <x-jet-input-error for="us_telefono" class="mt-2" />
                 </div>
                 <div>

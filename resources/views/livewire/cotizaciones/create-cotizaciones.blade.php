@@ -14,7 +14,7 @@
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div wire:ignore>
                                 <x-jet-label for="selectCliente" value="{{ __('Seleccione Cliente') }}" />
-                                <select name="selectCliente" id="selectCliente" class="select2 block mt-1 w-full">
+                                <select name="selectCliente" id="selectCliente" class="select2 block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                     <option value="">Seleccione un cliente</option>
                                     @foreach ($clientes as $cliente)
                                     <option value="{{ $cliente->id }}">{{ $cliente->cli_nombre }}</option>
@@ -47,32 +47,32 @@
                                     wire:model="direccion_cli" class="mt-1 block w-full" disabled></x-jet-input>
                             </div>
                             @if ($select_id)
-                                <div class="col-span-2">
-                                    <table class="w-full text-base text-left">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="py-2 px-6">
-                                                    Producto
-                                                </th>
-                                                <th scope="col" class="py-2 px-6">
-                                                    Cantidad
-                                                </th>
-                                                <th scope="col" class="py-2 px-6">
-                                                    Acciones
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($cotizacionItems as $index => $cotizacionItem)
-                                            <tr>
-                                                <td class="py-3 px-6">
-                                                    @if ($cotizacionItem['is_saved'])
+                            <div class="col-span-2">
+                                <table class="w-full text-base text-left">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="py-2 px-6">
+                                                Producto
+                                            </th>
+                                            <th scope="col" class="py-2 px-6">
+                                                Cantidad
+                                            </th>
+                                            <th scope="col" class="py-2 px-6">
+                                                Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($cotizacionItems as $index => $cotizacionItem)
+                                        <tr>
+                                            <td class="py-3 px-6">
+                                                @if ($cotizacionItem['is_saved'])
                                                     <input type="hidden" name="cotizacionItems[{{ $index }}][producto_id]"
-                                                        wire:model="cotizacionItems.{{ $index }}.producto_id">
+                                                    wire:model="cotizacionItems.{{ $index }}.producto_id">
                                                     @if ($cotizacionItem['prod_nombre'] && $cotizacionItem['prod_valor'])
-                                                    {{ $cotizacionItem['prod_nombre'] }} (${{ $cotizacionItem['prod_valor'] }})
+                                                        {{ $cotizacionItem['prod_nombre'] }} (${{ $cotizacionItem['prod_valor'] }})
                                                     @endif
-                                                    @else
+                                                @else
                                                     <div wire:ignore>
                                                         <select name="cotizacionItems[{{ $index }}][producto_id]"
                                                             class="selectItem select2"
@@ -84,70 +84,80 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    @if ($errors->has('cotizacionItems.' . $index))
-                                                    <x-jet-input-error for="cotizacionItems[{{ $index }}][producto_id]"
-                                                        class="mt-2" />
+                                                    @if ($errors->has('cotizacionItems'.$index.'producto_id'))
+                                                        <em class="text-red-600 text-sm">
+                                                            {{ $errors->first('cotizacionItems'.$index.'producto_id') }}
+                                                        </em>
                                                     @endif
-                                                    @endif
-                                                </td>
-                                                <td class="py-3 px-6">
-                                                    @if ($cotizacionItem['is_saved'])
-                                                    <input type="hidden" name="cotizacionItems[{{ $index }}][cantidad]"
-                                                        wire:model="cotizacionItems.{{ $index }}.cantidad">
-                                                    {{ $cotizacionItem['cantidad'] }}
-                                                    @else
-                                                    <x-jet-input type="number" name="cotizacionItems[{{ $index }}][cantidad]"
-                                                        class="" wire:model="cotizacionItems.{{ $index }}.cantidad" />
-                                                    @endif
-                                                </td>
-                                                <td class="py-3 px-6">
-                                                    @if ($cotizacionItem['is_saved'])
-                                                    <x-jet-secondary-button class="m-1"
-                                                        wire:click.prevent="editProduct({{ $index }})">Editar
-                                                    </x-jet-secondary-button>
-                                                    @elseif($this->producto_id2)
-                                                    <x-jet-button class="m-1" wire:click.prevent="saveProduct({{ $index }})">
-                                                        Guardar</x-jet-button>
-                                                    @endif
-                                                    <x-jet-danger-button class="m-1"
-                                                        wire:click.prevent="removeProduct({{ $index }})">Eliminar
-                                                    </x-jet-danger-button>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                @endif
+                                            </td>
+                                            <td class="py-3 px-6">
+                                                @if ($cotizacionItem['is_saved'])
+                                                <input type="hidden" name="cotizacionItems[{{ $index }}][cantidad]"
+                                                    wire:model="cotizacionItems.{{ $index }}.cantidad">
+                                                {{ $cotizacionItem['cantidad'] }}
+                                                @else
+                                                <x-jet-input type="number"
+                                                    name="cotizacionItems[{{ $index }}][cantidad]" class=""
+                                                    wire:model="cotizacionItems.{{ $index }}.cantidad" />
+                                                @endif
+                                            </td>
+                                            <td class="py-3 px-6">
+                                                @if ($cotizacionItem['is_saved'])
+                                                <x-jet-secondary-button class="m-1"
+                                                    wire:click.prevent="editProduct({{ $index }})">Editar
+                                                </x-jet-secondary-button>
+                                                @elseif($this->producto_id2)
+                                                <x-jet-button class="m-1"
+                                                    wire:click.prevent="saveProduct({{ $index }})">
+                                                    Guardar</x-jet-button>
+                                                @endif
+                                                <x-jet-danger-button class="m-1"
+                                                    wire:click.prevent="removeProduct({{ $index }})">Eliminar
+                                                </x-jet-danger-button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <x-jet-button class="m-1" wire:click.prevent="addProduct">Añadir</x-jet-button>
+                            </div>
+                            <div class="col-span-1">
+                                <input type="hidden" class="w-full">
+                            </div>
+                            <div class="col-span-1">
+                                <input type="hidden" class="w-full">
+                            </div>
+                            <div class="col-span-1">
                                 <div>
-                                    <x-jet-button class="m-1" wire:click.prevent="addProduct">Añadir</x-jet-button>
-                                </div>
-                                <div class="col-span-1">
-                                    <input type="hidden" class="w-full">
-                                </div>
-                                <div class="col-span-1">
-                                    <input type="hidden" class="w-full">
-                                </div>
-                                <div class="col-span-1">
-                                    <div>
-                                        <div class="lg:grid grid-cols-2">
-                                            <x-jet-label for="subtotal" value="{{ __('Subtotal') }}" class="text-lg ml-2 my-3 col-span-1"/>
-                                            <x-jet-input type="text" name="subtotal" wire:model="subtotal" class="my-1 col-span-1" disabled/>
-                                        </div>
-                                        <div class="lg:grid grid-cols-2">
-                                            <x-jet-label for="iva" value="{{ __('IVA (19%)') }}"  class="text-lg ml-2 my-3 col-span-1"/>
-                                            <x-jet-input type="text" name="iva" wire:model="iva" class="my-1 col-span-1" disabled/>
-                                        </div>
-                                        <div class="lg:grid grid-cols-2">
-                                            <x-jet-label for="total" value="{{ __('Total') }}"  class="text-lg ml-2 my-3 col-span-1"/>
-                                            <x-jet-input type="text" name="total" wire:model="total" class="my-1 col-span-1" disabled/>
-                                        </div>
+                                    <div class="lg:grid grid-cols-2">
+                                        <x-jet-label for="subtotal" value="{{ __('Subtotal') }}"
+                                            class="text-lg ml-2 my-3 col-span-1" />
+                                        <x-jet-input type="text" name="subtotal" wire:model="subtotal"
+                                            class="my-1 col-span-1" disabled />
+                                    </div>
+                                    <div class="lg:grid grid-cols-2">
+                                        <x-jet-label for="iva" value="{{ __('IVA (19%)') }}"
+                                            class="text-lg ml-2 my-3 col-span-1" />
+                                        <x-jet-input type="text" name="iva" wire:model="iva" class="my-1 col-span-1"
+                                            disabled />
+                                    </div>
+                                    <div class="lg:grid grid-cols-2">
+                                        <x-jet-label for="total" value="{{ __('Total') }}"
+                                            class="text-lg ml-2 my-3 col-span-1" />
+                                        <x-jet-input type="text" name="total" wire:model="total" class="my-1 col-span-1"
+                                            disabled />
                                     </div>
                                 </div>
+                            </div>
                             @endif
                         </div>
                         <div class="my-5">
                             @if ($subtotal!=0)
-                                <x-jet-button class="m-1" wire:click.prevent='submitCotizacion'>Crear cotizacion</x-jet-button>
+                            <x-jet-button class="m-1" wire:click.prevent='submitCotizacion'>Crear cotizacion
+                            </x-jet-button>
                             @endif
                         </div>
                     </form>
@@ -167,7 +177,7 @@
                     return "No hay coincidencias"
                 }
             }
-        });
+        }).css('bg-red-600');
         $('#selectCliente').select2({
             placeholder: 'Seleccione un cliente',
             "language": {

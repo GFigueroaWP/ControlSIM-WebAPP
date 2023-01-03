@@ -9,6 +9,8 @@ use App\Http\Livewire\Cotizaciones\Cotizaciones;
 use App\Http\Livewire\Cotizaciones\CreateCotizaciones;
 use App\Http\Livewire\Productos\Productos;
 use App\Http\Livewire\Proyectos\Proyectos;
+use App\Http\Livewire\Trabajos\CreateOrden;
+use App\Http\Livewire\Trabajos\CreateProyecto;
 use App\Http\Livewire\Trabajos\Ordenes;
 use Illuminate\Support\Facades\Route;
 
@@ -46,10 +48,13 @@ Route::middleware([
     Route::get('/productos', Productos::class)->name('productos');
 
     Route::get('/proyectos', Proyectos::class)->name('proyectos');
+    Route::get('/proyecto/create', CreateProyecto::class)->name('createProyectos');
 
     Route::get('/cotizaciones', Cotizaciones::class)->name('cotizaciones');
     Route::get('/cotizaciones/create', CreateCotizaciones::class)->name('createCotizaciones');
     Route::get('/cotizaciones/{cotizacion}', [CotizacionDoc::class, 'generateCotizacion'])->name('generarCotizacion');
 
     Route::get('/ordenes', Ordenes::class)->name('ordenes');
+    Route::get('/ordenes/create', CreateOrden::class)->name('createOrdenes');
+
 });

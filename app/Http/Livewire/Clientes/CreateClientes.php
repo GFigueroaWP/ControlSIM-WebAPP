@@ -48,18 +48,6 @@ class CreateClientes extends Component
         $this->cli_rut = $formateado;
     }
 
-    protected $rules = [
-        'cli_nombre' => 'required|alpha_num',
-        'cli_razonsocial' => 'required|alpha_num',
-        'cli_giro' => 'required',
-        'cli_rut' => 'required|size:10',
-        'cli_email' => 'email',
-        'cli_telefono' => 'numeric',
-        'cli_direccion' => 'alpha_num',
-        'cli_comuna' => 'alpha_num',
-        'cli_ciudad' => 'alpha_num'
-    ];
-
     public function submitCliente()
     {
         $this->validate();
