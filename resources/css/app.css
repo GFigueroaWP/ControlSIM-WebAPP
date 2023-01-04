@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .select2-container--default .select2-selection--single{
-    @apply h-10 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm
+    @apply h-10 w-full border-gray-300 focus:border-csim focus:ring focus:ring-csim focus:ring-opacity-50 rounded-md shadow-sm
 }
 
 .select2-selection__rendered {

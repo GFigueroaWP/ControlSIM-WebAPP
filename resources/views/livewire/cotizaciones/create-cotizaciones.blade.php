@@ -14,7 +14,7 @@
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div wire:ignore>
                                 <x-jet-label for="selectCliente" value="{{ __('Seleccione Cliente') }}" />
-                                <select name="selectCliente" id="selectCliente" class="select2 block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <select name="selectCliente" id="selectCliente" class="select2 block mt-1 w-full border-gray-300 focus:border-csim focus:ring focus:ring-csim focus:ring-opacity-50 rounded-md shadow-sm">
                                     <option value="">Seleccione un cliente</option>
                                     @foreach ($clientes as $cliente)
                                     <option value="{{ $cliente->id }}">{{ $cliente->cli_nombre }}</option>
