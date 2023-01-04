@@ -18,6 +18,8 @@ abstract class CotizacionState extends State
     public static function config(): StateConfig
     {
         return parent::config()
-            ->default(Emitida::class);
+            ->default(Emitida::class)
+            ->allowTransition(Emitida::class, Aceptada::class)
+            ->allowTransition(Emitida::class, Rechazada::class);
     }
 }

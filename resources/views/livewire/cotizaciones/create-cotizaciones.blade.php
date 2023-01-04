@@ -48,6 +48,9 @@
                             </div>
                             @if ($select_id)
                             <div class="col-span-2">
+                                <x-jet-section-border />
+                            </div>
+                            <div class="col-span-2">
                                 <table class="w-full text-base text-left">
                                     <thead>
                                         <tr>
@@ -124,32 +127,31 @@
                             <div>
                                 <x-jet-button class="m-1" wire:click.prevent="addProduct">Añadir</x-jet-button>
                             </div>
-                            <div class="col-span-1">
-                                <input type="hidden" class="w-full">
+
+                            <div class="col-span-2">
+                                <x-jet-section-border />
                             </div>
                             <div class="col-span-1">
-                                <input type="hidden" class="w-full">
+                                <input type="hidden">
                             </div>
                             <div class="col-span-1">
-                                <div>
-                                    <div class="lg:grid grid-cols-2">
-                                        <x-jet-label for="subtotal" value="{{ __('Subtotal') }}"
-                                            class="text-lg ml-2 my-3 col-span-1" />
-                                        <x-jet-input type="text" name="subtotal" wire:model="subtotal"
-                                            class="my-1 col-span-1" disabled />
-                                    </div>
-                                    <div class="lg:grid grid-cols-2">
-                                        <x-jet-label for="iva" value="{{ __('IVA (19%)') }}"
-                                            class="text-lg ml-2 my-3 col-span-1" />
-                                        <x-jet-input type="text" name="iva" wire:model="iva" class="my-1 col-span-1"
-                                            disabled />
-                                    </div>
-                                    <div class="lg:grid grid-cols-2">
-                                        <x-jet-label for="total" value="{{ __('Total') }}"
-                                            class="text-lg ml-2 my-3 col-span-1" />
-                                        <x-jet-input type="text" name="total" wire:model="total" class="my-1 col-span-1"
-                                            disabled />
-                                    </div>
+                                <div class="lg:grid grid-cols-2">
+                                    <x-jet-label for="subtotal" value="{{ __('Subtotal') }}"
+                                        class="text-lg ml-2 my-3 col-span-1" />
+                                    <x-jet-input type="text" name="subtotal" wire:model="subtotal"
+                                        class="my-1 col-span-1" disabled />
+                                </div>
+                                <div class="lg:grid grid-cols-2">
+                                    <x-jet-label for="iva" value="{{ __('IVA (19%)') }}"
+                                        class="text-lg ml-2 my-3 col-span-1" />
+                                    <x-jet-input type="text" name="iva" wire:model="iva" class="my-1 col-span-1"
+                                        disabled />
+                                </div>
+                                <div class="lg:grid grid-cols-2">
+                                    <x-jet-label for="total" value="{{ __('Total') }}"
+                                        class="text-lg ml-2 my-3 col-span-1" />
+                                    <x-jet-input type="text" name="total" wire:model="total" class="my-1 col-span-1"
+                                        disabled />
                                 </div>
                             </div>
                             @endif

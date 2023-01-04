@@ -17,7 +17,7 @@ class CotizacionDoc extends Controller
         ]);
 
         foreach($cotizacion->productos as $producto){
-            $items[] = (new InvoiceItem())->title($producto->it_nombre)->pricePerUnit($producto->it_valor)->quantity($producto->pivot->cantidad);
+            $items[] = (new InvoiceItem())->title($producto->prod_nombre)->pricePerUnit($producto->prod_valor)->quantity($producto->pivot->cantidad);
         }
 
         $invoice = Invoice::make('cotizacion')
