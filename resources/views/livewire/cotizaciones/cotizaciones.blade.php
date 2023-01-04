@@ -57,8 +57,9 @@
                             <td class="py-3 px-6">{{ $cotizacion->cot_estado }}</td>
                             <td class="py-3 px-6">
                                 <a href="{{ route('generarCotizacion', $cotizacion->id) }}"><x-jet-button>Generar</x-jet-button></a>
-                                <x-jet-button wire:click="$emit('editarEstadoCotizacion', {{ $cotizacion }})">{{ __('Actualizar estado') }}</x-jet-button>
-                                @if ($cotizacion->estado == 'Rechazada')
+                                @if ($cotizacion->cot_estado == 'Emitida')
+                                <x-jet-secondary-button wire:click="$emit('editarEstadoCotizacion', {{ $cotizacion }})">{{ __('Actualizar estado') }}</x-jet-secondary-button>
+                                @elseif ($cotizacion->cot_estado == 'Rechazada')
                                     <x-jet-danger-button>Eliminar</x-jet-danger-button>
                                 @endif
                             </td>

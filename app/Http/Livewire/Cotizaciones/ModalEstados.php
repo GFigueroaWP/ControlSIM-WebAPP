@@ -6,9 +6,11 @@ use App\Models\Cotizacion;
 use App\States\Cotizacion\Aceptada;
 use App\States\Cotizacion\Rechazada;
 use Livewire\Component;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class ModalEstados extends Component
 {
+    use WireToast;
 
     protected $listeners = ['editarEstadoCotizacion'];
     public $modalEstadoCotizacion = false;
@@ -31,13 +33,26 @@ class ModalEstados extends Component
     public function rechazarEstado(){
         $this->cotizacion->cot_estado->transitionTo(Rechazada::class);
         $this->modalEstadoCotizacion = false;
-        return redirect()->route('cotizaciones');
+
+        activity('Cotizaciones')
+            ->performedOn($this->cotizacion)
+            ->log('Rechazada');
+
+        toast()->info('Cotizacion actualizado con éxito!')->push();
+
+        $this->emit('estadoCotizacionActualizado');
+        return redirect()->back();
     }
 
     public function aceptarEstado(){
         $this->cotizacion->cot_estado->transitionTo(Aceptada::class);
         $this->modalEstadoCotizacion = false;
-        return redirect()->route('cotizaciones');
+        activity('Cotizaciones')
+            ->performedOn($this->cotizacion)
+            ->log('Aceptada');
 
+        toast()->info('Cotizacion actualizado con éxito!')->push();
+        $this->emit('estadoCotizacionActualizado');
+        return redirect()->back();
     }
 }

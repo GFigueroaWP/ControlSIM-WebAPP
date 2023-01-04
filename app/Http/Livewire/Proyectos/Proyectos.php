@@ -12,7 +12,6 @@ class Proyectos extends Component
     use WithPagination;
 
     public $filtro_pr;
-    public $modalShowProyecto = false;
     public $proyectoSeleccionado;
 
     public function render()
@@ -25,8 +24,4 @@ class Proyectos extends Component
         ]);
     }
 
-    public function showProgreso(Proyecto $selectProyecto){
-        $this->modalShowProyecto = true;
-        $this->proyectoSeleccionado = $selectProyecto;
-    }
 }

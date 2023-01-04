@@ -11,6 +11,8 @@ class Cotizaciones extends Component
 {
     use WithPagination;
 
+    protected $listeners = ['estadoCotizacionActualizado' => '$refresh'];
+
     public $filtro_cot;
 
     public function render()
