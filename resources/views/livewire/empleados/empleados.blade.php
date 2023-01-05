@@ -11,7 +11,7 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('users_create')
-                        <x-jet-button wire:click="$emit('crearEmpleado')">{{ __('Crear') }}</x-jet-button>
+                        <x-jet-button wire:click="$emit('crearEmpleado')">{{ __('Crear nuevo usuario') }}</x-jet-button>
                         @endcan
                     </div>
                     <div class="relative justify-self-end">

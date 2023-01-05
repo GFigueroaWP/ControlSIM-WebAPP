@@ -23,6 +23,8 @@ class Empleados extends Component
 
         return view('livewire.empleados.empleados', [
             'empleados' => User::latest()
+                ->orWhere('us_email', 'LIKE', $filtro_us)
+                ->orWhere('us_rut', 'LIKE', $filtro_us)
                 ->orWhere('us_nombre', 'LIKE', $filtro_us)
                 ->orWhere('us_apellido', 'LIKE', $filtro_us)
                 ->orWhere('us_username', 'LIKE', $filtro_us)

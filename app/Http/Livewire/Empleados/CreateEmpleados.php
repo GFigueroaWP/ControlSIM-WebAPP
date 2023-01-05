@@ -67,7 +67,7 @@ class CreateEmpleados extends Component
             'us_rut' => $this->us_rut,
             'us_telefono' => $this->us_telefono,
             'us_email' => $this->us_email,
-            'password' => Hash::make($this->password)
+            'password' => Hash::make('ControlSIM123')
         ])->assignRole($this->cargo);
 
         $this->modalCreacionEmpleado = false;

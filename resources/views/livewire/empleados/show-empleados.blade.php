@@ -20,13 +20,13 @@
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_us_username" value="{{ __('Usuario') }}" />
                         <x-jet-input id="show_us_username" wire:model='show_us_username' type="text"
-                            placeholder="Username" class="mt-1 block w-full" />
+                            placeholder="Username" class="mt-1 block w-full disabled" disabled/>
                         <x-jet-input-error for="show_us_username" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_us_rut" value="{{ __('Rut') }}" />
                         <x-jet-input id="show_us_rut" wire:model='show_us_rut' wire:change="formatRut"
-                            wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full"
+                            wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full disabled"
                             disabled />
                         <x-jet-input-error for="show_us_rut" class="mt-2" />
                     </div>
@@ -56,7 +56,8 @@
                     </div>
                 </x-slot>
                 <x-slot name="actions">
-                    <x-jet-button type="submit">{{ __('editar') }}</x-jet-button>
+                    <x-jet-danger-button class="m-1">{{ __('Reiniciar contraseña') }}</x-jet-danger-button>
+                    <x-jet-button type="submit" class="m-1">{{ __('editar') }}</x-jet-button>
                 </x-slot>
             </x-jet-form-section>
         </div>

@@ -15,7 +15,7 @@
                 <div>
                     <x-jet-label for="us_rut" value="{{ __('Rut') }}" />
                     <x-jet-input id="us_rut" wire:model.lazy='us_rut' wire:change="formatRut" type="text"
-                        placeholder='11222333-4' class="mt-1 block w-full" />
+                        placeholder='11.222.333-4' class="mt-1 block w-full" />
                     <x-jet-input-error for="us_rut" class="mt-2" />
                 </div>
                 <div>
@@ -43,17 +43,11 @@
                     <x-jet-input-error for="us_email" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label for="password" value="{{ __('Contraseña') }}" />
-                    <x-jet-input id="password" wire:model.lazy='password' type="password" placeholder='********'
-                        class="mt-1 block w-full" />
-                    <x-jet-input-error for="password" class="mt-2" />
-                </div>
-                <div>
                     <x-jet-label for="cargo" value="{{ __('Cargo') }}" />
                     <select name="cargo" id="cargo" wire:model.lazy='cargo' default=''
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block mt-1 w-full p-2.5"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-csim focus:border-csim block mt-1 w-full p-2.5"
                         value=''>
-                        <option selected value="cargo">cargo</option>
+                        <option selected value="cargo">Cargo</option>
                         @foreach ($roles as $rol)
                         @if ($rol!='super-admin')
                         <option value="{{ $rol }}">{{ $rol }}</option>
@@ -69,8 +63,8 @@
         <x-jet-secondary-button wire:click="cancelCrear" class="m-1">
             {{ _('Cancelar') }}
         </x-jet-secondary-button>
-        <x-jet-danger-button type='submit' wire:click='submitEmpleado' class="m-1">
+        <x-jet-button type='submit' wire:click='submitEmpleado' class="m-1">
             {{ _('Crear') }}
-        </x-jet-danger-button>
+        </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>
