@@ -57,7 +57,11 @@
                             <td class="py-3 px-6">{{ 'COT-'.str_pad($cotizacion->id,5,'0',STR_PAD_LEFT) }}</td>
                             <td class="py-3 px-6">{{ $cotizacion->cliente->cli_nombre }}</td>
                             <td class="py-3 px-6">{{ $cotizacion->created_at }}</td>
-                            <td class="py-3 px-6">{{ $cotizacion->cot_estado }}</td>
+                            <td class="py-3 px-6">
+                                <strong class="{{ $cotizacion->cot_estado }}">
+                                    {{ $cotizacion->cot_estado }}
+                                </strong>
+                            </td>
                             <td class="py-3 px-6">{{ $cotizacion->updated_at }}</td>
                             <td class="py-3 px-6">
                                 <a href="{{ route('generarCotizacion', $cotizacion->id) }}"><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>

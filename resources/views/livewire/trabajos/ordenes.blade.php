@@ -10,9 +10,6 @@
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
-                        @can('ordenes_create')
-                            <a href="{{ route('createOrdenes') }}"><x-jet-button>{{ __('Crear orden') }}</x-jet-button></a>
-                        @endcan
                     </div>
                     <label for="search_ordenes" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">

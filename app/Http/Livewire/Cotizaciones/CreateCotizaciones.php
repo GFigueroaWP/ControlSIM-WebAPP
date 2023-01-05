@@ -42,8 +42,13 @@ class CreateCotizaciones extends Component
         $this->iva = $this->subtotal * 0.19;
         $this->total = $this->iva + $this->subtotal;
 
+        $this->subtotal = '$'.number_format($this->subtotal,0,",",".");
+        $this->iva = '$'.number_format($this->iva,0,",",".");
+        $this->total = '$'.number_format($this->total,0,",",".");
+
         return view('livewire.cotizaciones.create-cotizaciones',[
             'subtotal' => $this->subtotal,
+            'subtotal' => $this->iva,
             'total' => $this->total
         ]);
     }

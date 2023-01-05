@@ -12,43 +12,49 @@
                     <form wire:submit.prevent='submitCotizacion' class="space-y-4">
                         @csrf
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
+                            <div class="col-span-2">
+                                <h1 class="text-lg text-bold">Informacion del cliente</h1>
+                            </div>
                             <div wire:ignore>
                                 <x-jet-label for="selectCliente" value="{{ __('Seleccione Cliente') }}" />
                                 <select name="selectCliente" id="selectCliente" class="select2 block mt-1 w-full border-gray-300 focus:border-csim focus:ring focus:ring-csim focus:ring-opacity-50 rounded-md shadow-sm">
                                     <option value="">Seleccione un cliente</option>
                                     @foreach ($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">{{ $cliente->cli_nombre }}</option>
+                                    <option value="{{ $cliente->id }}">{{ $cliente->cli_razonsocial }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div>
-                                <x-jet-button wire:click="$emit('crearCliente')" class="my-6">{{ __('Añadir nuevo
+                                <x-jet-button wire:click.prevent="$emit('crearCliente')" class="my-6">{{ __('Añadir nuevo
                                     cliente') }}</x-jet-button>
                                 @livewire('clientes.create-clientes')
                             </div>
                             <div>
                                 <x-jet-label for="razon_cli" value="{{ __('Razon social') }}" />
                                 <x-jet-input type="text" name="razon_cli" id="razon_cli" wire:model="razon_cli"
-                                    class="mt-1 block w-full" disabled></x-jet-input>
+                                    class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             <div>
                                 <x-jet-label for="giro_cli" value="{{ __('Giro') }}" />
                                 <x-jet-input type="text" name="giro_cli" id="giro_cli" wire:model="giro_cli"
-                                    class="mt-1 block w-full" disabled></x-jet-input>
+                                    class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             <div>
                                 <x-jet-label for="rut_cli" value="{{ __('Rut') }}" />
                                 <x-jet-input type="text" name="rut_cli" id="rut_cli" wire:model="rut_cli"
-                                    class="mt-1 block w-full" disabled></x-jet-input>
+                                    class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             <div>
                                 <x-jet-label for="direccion_cli" value="{{ __('Direccion') }}" />
                                 <x-jet-input type="text" name="direccion_cli" id="direccion_cli"
-                                    wire:model="direccion_cli" class="mt-1 block w-full" disabled></x-jet-input>
+                                    wire:model="direccion_cli" class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             @if ($select_id)
                             <div class="col-span-2">
                                 <x-jet-section-border />
+                            </div>
+                            <div class="col-span-2">
+                                <h1 class="text-lg text-bold">Productos y servicios</h1>
                             </div>
                             <div class="col-span-2">
                                 <table class="w-full text-base text-left">
@@ -73,7 +79,7 @@
                                                     <input type="hidden" name="cotizacionItems[{{ $index }}][producto_id]"
                                                     wire:model="cotizacionItems.{{ $index }}.producto_id">
                                                     @if ($cotizacionItem['prod_nombre'] && $cotizacionItem['prod_valor'])
-                                                        {{ $cotizacionItem['prod_nombre'] }} (${{ $cotizacionItem['prod_valor'] }})
+                                                        {{ $cotizacionItem['prod_nombre'] }} ({{  '$'.number_format($cotizacionItem['prod_valor'],0,",",".") }})
                                                     @endif
                                                 @else
                                                     <div wire:ignore>
@@ -82,8 +88,7 @@
                                                             wire:model="cotizacionItems.{{ $index }}.producto_id">
                                                             <option value="">Elija un producto</option>
                                                             @foreach ($allProductos as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->prod_nombre }} (${{
-                                                                $item->prod_valor }})</option>
+                                                            <option value="{{ $item->id }}">{{ $item->prod_nombre }} ({{'$'.number_format($item->prod_valor,0,",",".") }})</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -157,7 +162,7 @@
                             @endif
                         </div>
                         <div class="my-5">
-                            @if ($subtotal!=0)
+                            @if ($cotizacionItems)
                             <x-jet-button class="m-1" wire:click.prevent='submitCotizacion'>Crear cotizacion
                             </x-jet-button>
                             @endif

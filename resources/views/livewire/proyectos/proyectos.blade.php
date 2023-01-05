@@ -67,7 +67,11 @@
                             <td class="py-3 px-6">{{ 'PR-'.str_pad($proyecto->id,5,'0',STR_PAD_LEFT) }}</td>
                             @if ($proyecto->cotizacion)
                                 <td class="py-3 px-6">{{ 'COT-'.str_pad($proyecto->cotizacion->id,5,'0',STR_PAD_LEFT) }}</td>
-                                <td class="py-3 px-6">{{ $proyecto->cotizacion->cot_estado }}</td>
+                                <td class="py-3 px-6">
+                                    <strong class="{{ $proyecto->cotizacion->cot_estado }}">
+                                        {{ $proyecto->cotizacion->cot_estado }}
+                                    </strong>
+                                </td>
                             @else
                                 <td class="py-3 px-6">No hay cotizacion asociada</td>
                                 <td></td>

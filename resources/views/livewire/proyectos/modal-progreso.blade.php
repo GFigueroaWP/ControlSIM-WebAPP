@@ -65,25 +65,25 @@
             </div>
         </div>
         <div class="overflow-x-auto border border-gray-200 m-5">
-            <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
+            <table class="min-w-full divide-y-2 divide-gray-200 text-xs w-full text-left">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="py-2 px-5">
                             Cotizacion
                         </th>
-                        <th>
+                        <th class="py-2 px-5">
                             Cliente
                         </th>
-                        <th>
+                        <th class="py-2 px-5">
                             Emitida
                         </th>
-                        <th>
+                        <th class="py-2 px-5">
                             Estado
                         </th>
-                        <th>
+                        <th class="py-2 px-5">
                             Fecha Actualizada
                         </th>
-                        <th>
+                        <th class="py-2 px-5">
                             Acciones
                         </th>
                     </tr>
@@ -100,11 +100,13 @@
                             {{ $this->proyectoSeleccionado->cotizacion->created_at ?? '' }}
                         </td>
                         <td>
-                            {{ $this->proyectoSeleccionado->cotizacion->cot_estado ?? '' }}
+                            <strong class="{{ $this->proyectoSeleccionado->cotizacion->cot_estado ?? '' }}">
+                                {{ $this->proyectoSeleccionado->cotizacion->cot_estado ?? '' }}
+                            </strong>
                         </td>
                         @if ($this->progresoCotizacion != 'Emitida')
                             <td>
-                                fecha actualizada
+                                {{ $this->proyectoSeleccionado->cotizacion->updated_at ?? '' }}
                             </td>
                         @else
                             <td>
@@ -123,8 +125,8 @@
             </table>
         </div>
         @if ($this->progresoCotizacion == 'Aceptada')
-            @if ($this->progresoCotizacion == 'Aceptada')
-                <x-jet-button>Nueva Orden de trabajo</x-jet-button>
+            @if ($this->progresoTrabajo == '')
+                <a href="{{ route('createOrdenes') }}"><x-jet-button>{{ __('Crear orden de trabajo') }}</x-jet-button></a>
             @else
                 <div>
                     <table>
@@ -160,6 +162,6 @@
     </x-slot>
 
     <x-slot name="footer">
-        b
+        <x-jet-button wire:click="$toggle('modalShowProyecto')">{{ __('cerrar') }}</x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>
