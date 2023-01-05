@@ -13,7 +13,7 @@ class CreateClientes extends Component
 
     public $modalCreacionCliente = false;
 
-    public $cli_nombre, $cli_razonsocial, $cli_giro, $cli_rut, $cli_email, $cli_telefono, $cli_direccion, $cli_comuna, $cli_ciudad;
+    public $cli_razonsocial, $cli_giro, $cli_rut, $cli_email, $cli_telefono, $cli_direccion, $cli_comuna, $cli_ciudad;
 
     protected $listeners = ['crearCliente'];
 
@@ -30,7 +30,7 @@ class CreateClientes extends Component
     public function cancelCrear()
     {
         $this->modalCreacionCliente = false;
-        $this->reset(['cli_nombre', 'cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
+        $this->reset(['cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
     }
 
     public function formatRut()
@@ -53,7 +53,6 @@ class CreateClientes extends Component
         $this->validate();
 
         $creado = Cliente::create([
-            'cli_nombre' => $this->cli_nombre,
             'cli_razonsocial' => $this->cli_razonsocial,
             'cli_giro' => $this->cli_giro,
             'cli_rut' => $this->cli_rut,
@@ -66,7 +65,7 @@ class CreateClientes extends Component
 
         $this->modalCreacionCliente = false;
 
-        $this->reset(['cli_nombre', 'cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
+        $this->reset(['cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
 
         activity('Clientes')
             ->performedOn($creado)
@@ -82,7 +81,6 @@ class CreateClientes extends Component
     protected function rules()
     {
         return [
-            'cli_nombre' => 'required|alpha_num',
             'cli_razonsocial' => 'required|alpha_num',
             'cli_giro' => 'required',
             'cli_rut' => ['required', new rutValido],
@@ -95,7 +93,6 @@ class CreateClientes extends Component
     }
 
     protected $messages = [
-        'cli_nombre',
         'cli_razonsocial',
         'cli_giro',
         'cli_rut',

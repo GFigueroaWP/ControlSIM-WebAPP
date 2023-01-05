@@ -20,14 +20,8 @@
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_cli_rut" value="{{ __('Rut') }}" />
                         <x-jet-input id="show_cli_rut" wire:model='show_cli_rut' wire:change="formatRut" type="text"
-                            placeholder="11222333-4" class="mt-1 block w-full" />
+                            placeholder="11222333-4" class="mt-1 block w-full disabled" disabled/>
                         <x-jet-input-error for="show_cli_rut" class="mt-2" />
-                    </div>
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_cli_nombre" value="{{ __('Nombre') }}" />
-                        <x-jet-input id="show_cli_nombre" wire:model='show_cli_nombre' type="text"
-                            placeholder='Nombre empresa' class="mt-1 block w-full" />
-                        <x-jet-input-error for="show_cli_nombre" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_cli_razonsocial" value="{{ __('Razón social') }}" />
@@ -78,7 +72,7 @@
                 </x-slot>
             </x-jet-form-section>
 
-            <x-jet-section-border />
+            {{-- <x-jet-section-border />
 
             <x-jet-action-section>
                 <x-slot name="title">
@@ -122,7 +116,7 @@
                 </x-slot>
             </x-jet-action-section>
 
-            @livewire('clientes.create-contactos', ['cli_id' => $cliente->id])
+            @livewire('clientes.create-contactos', ['cli_id' => $cliente->id]) --}}
         </div>
     </div>
 </div>

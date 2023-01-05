@@ -11,7 +11,7 @@
                 <div class="flex justify-between items-center p-4">
                     <div class="justify-self-start">
                         @can('clientes_create')
-                        <x-jet-button wire:click="$emit('crearCliente')">{{ __('Crear') }}</x-jet-button>
+                        <x-jet-button wire:click="$emit('crearCliente')">{{ __('Crear nuevo Cliente') }}</x-jet-button>
                         @endcan
                     </div>
                     <label for="search_clientes" class="sr-only">Buscar</label>

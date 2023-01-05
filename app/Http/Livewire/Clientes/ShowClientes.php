@@ -11,7 +11,6 @@ class ShowClientes extends Component
     use WireToast;
 
     public $cliente,
-        $show_cli_nombre,
         $show_cli_razonsocial,
         $show_cli_giro,
         $show_cli_rut,
@@ -38,7 +37,6 @@ class ShowClientes extends Component
     public function fillCliente()
     {
         $this->fill([
-            'show_cli_nombre' => $this->cliente->cli_nombre,
             'show_cli_razonsocial' => $this->cliente->cli_razonsocial,
             'show_cli_giro' => $this->cliente->cli_giro,
             'show_cli_rut' => $this->cliente->cli_rut,
@@ -55,7 +53,6 @@ class ShowClientes extends Component
 
         $this->validate();
 
-        $this->cliente->cli_nombre = $this->show_cli_nombre;
         $this->cliente->cli_razonsocial = $this->show_cli_razonsocial;
         $this->cliente->cli_giro = $this->show_cli_giro;
         $this->cliente->cli_rut = $this->show_cli_rut;
@@ -79,7 +76,6 @@ class ShowClientes extends Component
     protected function rules()
     {
         return [
-            'show_cli_nombre' => 'required|alpha_num',
             'show_cli_razonsocial' => 'required|alpha_num',
             'show_cli_giro' => 'required',
             'show_cli_rut' => 'required',
@@ -92,7 +88,6 @@ class ShowClientes extends Component
     }
 
     protected $messages = [
-        'show_cli_nombre',
         'show_cli_razonsocial',
         'show_cli_giro',
         'show_cli_rut',

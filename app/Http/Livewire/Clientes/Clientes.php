@@ -21,7 +21,9 @@ class Clientes extends Component
 
         return view('livewire.clientes.clientes', [
             'clientes' => Cliente::latest()
-                ->orWhere('cli_nombre', 'LIKE', $filtro_cli)
+                ->orWhere('cli_razonsocial', 'LIKE', $filtro_cli)
+                ->orWhere('cli_giro', 'LIKE', $filtro_cli)
+                ->orWhere('cli_rut', 'LIKE', $filtro_cli)
                 ->paginate(10),
         ]);
     }
