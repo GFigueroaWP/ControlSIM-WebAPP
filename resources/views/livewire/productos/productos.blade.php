@@ -50,7 +50,10 @@
                         <tr class="bg-white border-b hover:bg-gray-300">
                             <td class="py-3 px-6">{{ 'PS-'.str_pad($producto->id,5,'0',STR_PAD_LEFT) }}</td>
                             <td class="py-3 px-6">{{ $producto->prod_nombre }}</td>
-                            <td class="py-3 px-6">{{ $producto->prod_valor }}</td>
+                            <td class="py-3 px-6">{{ '$'.number_format($producto->prod_valor,0,",",".") }}</td>
+                            <td class="py-3 px-6">
+                                <x-jet-button>{{ __('Editar') }}</x-jet-button>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

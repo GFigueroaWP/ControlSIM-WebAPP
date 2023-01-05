@@ -13,7 +13,6 @@ class Cliente extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'cli_nombre',
         'cli_razonsocial',
         'cli_giro',
         'cli_rut',
