@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('or_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pr_id')->nullable();
+            $table->bigInteger('cotizacion_id')->nullable();
             $table->string('ot_estado');
             $table->date('ot_inicio');
             $table->date('ot_limite')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('pr_id')->references('id')->on('proyectos')->onDelete('cascade');
+            $table->foreign('cotizacion_id')->references('id')->on('cotizaciones')->onDelete('cascade');
         });
     }
 

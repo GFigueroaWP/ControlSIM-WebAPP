@@ -74,7 +74,7 @@ class CreateEmpleados extends Component
 
         $this->reset([
             'us_username', 'us_nombre', 'us_apellido', 'us_rut',
-            'us_telefono', 'us_email', 'password', 'cargo'
+            'us_telefono', 'us_email', 'cargo'
         ]);
 
         toast()->success('Empleado añadido con éxito!')->push();
@@ -97,7 +97,6 @@ class CreateEmpleados extends Component
             'us_rut' => ['required', new rutValido],
             'us_telefono' => 'required|numeric',
             'us_email' => 'required|email|unique:users',
-            'password' => 'required',
             'cargo' =>  'exists:roles,name'
         ];
     }
@@ -117,7 +116,6 @@ class CreateEmpleados extends Component
         'us_email.required' => 'El campo de Email es obligatorio',
         'us_email.email' => 'El campo de Email debe tener formato email@email.xx',
         'us_email.unique' => 'La dirección de correo ya esta en uso por otro usuario',
-        'password.required' => 'El campo de Contraseña es obligatorio',
         'cargo.exists' => 'El cargo seleccionado no se encuentra en los registros'
     ];
 }

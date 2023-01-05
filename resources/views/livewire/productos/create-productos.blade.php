@@ -27,8 +27,8 @@
         <x-jet-secondary-button wire:click="cancelCrearProducto" class="m-1">
             {{ _('Cancelar') }}
         </x-jet-secondary-button>
-        <x-jet-danger-button type='submit' wire:click='submitProducto' class="m-1">
+        <x-jet-button type='submit' wire:click='submitProducto' class="m-1">
             {{ _('Crear') }}
-        </x-jet-danger-button>
+        </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

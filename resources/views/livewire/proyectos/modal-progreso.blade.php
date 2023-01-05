@@ -91,22 +91,22 @@
                 <tbody class="divide-y divide-gray-200">
                     <tr>
                         <td>
-                            {{ 'COT-'.str_pad($this->proyectoSeleccionado->cotizacion->id ?? '',5,'0',STR_PAD_LEFT) }}
+                            {{ 'COT-'.str_pad($this->proyectoSeleccionado->id ?? '',5,'0',STR_PAD_LEFT) }}
                         </td>
                         <td>
-                            {{ $this->proyectoSeleccionado->cotizacion->cliente->cli_razonsocial ?? '' }}
+                            {{ $this->proyectoSeleccionado->cliente->cli_razonsocial ?? '' }}
                         </td>
                         <td>
-                            {{ $this->proyectoSeleccionado->cotizacion->created_at ?? '' }}
+                            {{ $this->proyectoSeleccionado->created_at ?? '' }}
                         </td>
                         <td>
-                            <strong class="{{ $this->proyectoSeleccionado->cotizacion->cot_estado ?? '' }}">
-                                {{ $this->proyectoSeleccionado->cotizacion->cot_estado ?? '' }}
+                            <strong class="{{ $this->proyectoSeleccionado->cot_estado ?? '' }}">
+                                {{ $this->proyectoSeleccionado->cot_estado ?? '' }}
                             </strong>
                         </td>
                         @if ($this->progresoCotizacion != 'Emitida')
                             <td>
-                                {{ $this->proyectoSeleccionado->cotizacion->updated_at ?? '' }}
+                                {{ $this->proyectoSeleccionado->updated_at ?? '' }}
                             </td>
                         @else
                             <td>
@@ -114,7 +114,7 @@
                             </td>
                         @endif
                         <td>
-                            <a href="{{ route('generarCotizacion', $this->cotizacion_id) }}"><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
+                            <a href="{{ route('generarCotizacion', $this->cotizacion_id) }}" target="_blank" ><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
                             @if ($this->progresoCotizacion == 'Emitida')
                                 <x-jet-secondary-button wire:click="$emit('editarEstadoCotizacion', {{ $this->cotizacion_id }})">{{ __('Actualizar estado') }}</x-jet-secondary-button>
                             @endif

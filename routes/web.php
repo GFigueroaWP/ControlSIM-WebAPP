@@ -53,6 +53,6 @@ Route::middleware([
     Route::get('/cotizaciones/{cotizacion}', [CotizacionDoc::class, 'generateCotizacion'])->name('generarCotizacion');
 
     Route::get('/ordenes', Ordenes::class)->name('ordenes');
-    Route::get('/ordenes/{proyecto}/create', CreateOrden::class)->name('createOrdenes');
+    Route::get('/ordenes/{cotizacion}/create', CreateOrden::class)->name('createOrdenes');
 
 });

@@ -18,29 +18,51 @@
                             <div>
                                 <x-jet-label for="razon_cli" value="{{ __('Razon social') }}" />
                                 <x-jet-input type="text" name="razon_cli" id="razon_cli" wire:model="razon_cli"
-                                    class="mt-1 block w-full" disabled></x-jet-input>
+                                    class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             <div>
                                 <x-jet-label for="giro_cli" value="{{ __('Giro') }}" />
                                 <x-jet-input type="text" name="giro_cli" id="giro_cli" wire:model="giro_cli"
-                                    class="mt-1 block w-full" disabled></x-jet-input>
+                                    class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             <div>
                                 <x-jet-label for="rut_cli" value="{{ __('Rut') }}" />
                                 <x-jet-input type="text" name="rut_cli" id="rut_cli" wire:model="rut_cli"
-                                    class="mt-1 block w-full" disabled></x-jet-input>
+                                    class="mt-1 block w-full disabled" disabled></x-jet-input>
                             </div>
                             <div>
                                 <x-jet-label for="direccion_cli" value="{{ __('Direccion') }}" />
                                 <x-jet-input type="text" name="direccion_cli" id="direccion_cli"
-                                    wire:model="direccion_cli" class="mt-1 block w-full" disabled></x-jet-input>
+                                    wire:model="direccion_cli" class="mt-1 block w-full disabled" disabled></x-jet-input>
+                            </div>
+                            <div class="col-span-2">
+                                <x-jet-section-border />
+                            </div>
+                            <div class="col-span-2">
+                                <h1 class="text-lg font-bold">Cotización asociada</h1>
+                            </div>
+                            <div class="col-span-1 grid grid-cols-2">
+                                <div class="col-span-1">
+                                    <x-jet-label for="cotizacion_id" value="{{ __('Cotizacion_id') }}" />
+                                    <x-jet-input type="text" name="cotizacion_id" id="cotizacion_id"
+                                    wire:model="cotizacion_id" class="mt-1 block w-full disabled" disabled></x-jet-input>
+                                </div>
+                                <div wire:ignore class="col-span-1 mt-7 mx-1">
+                                    <a href="{{ route('generarCotizacion', $this->cotizacion->id) }}" target="_blank" ><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
+                                </div>
+                            </div>
+                            <div class="col-span-2">
+                                <x-jet-section-border />
+                            </div>
+                            <div class="col-span-2">
+                                <h1 class="text-lg font-bold">Técnicos</h1>
                             </div>
                             <div class="col-span-2">
                                 <table class="w-full text-base text-left">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="py-2 px-6">
-                                                Tecnico
+                                                Técnico
                                             </th>
                                             <th scope="col" class="py-2 px-6">
                                                 Acciones
@@ -60,7 +82,7 @@
                                                 @else
                                                     <div wire:ignore>
                                                         <select name="tecnicosSeleccionados[{{ $index }}][tecnico_id]"
-                                                            class="selectTecnico select2"
+                                                            class="selectTecnico select2 w-full"
                                                             wire:model="tecnicosSeleccionados.{{ $index }}.tecnico_id">
                                                             <option value="">Elija un producto</option>
                                                             @foreach ($tecnicos as $tecnico)
@@ -98,60 +120,85 @@
                             <div>
                                 <x-jet-button class="m-1" wire:click.prevent="addTecnico">Añadir tecnico</x-jet-button>
                             </div>
-                            @if ($toggleTareas)
-                            <div class="col-span-2">
-                                {{-- <table class="w-full text-base text-left">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="py-2 px-6">
-                                                Tarea
-                                            </th>
-                                            <th scope="col" class="py-2 px-6">
-                                                Acciones
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($tecnicosSeleccionados as $index => $tecnicoSeleccionado)
-                                        <tr>
-                                            <td class="py-3 px-6">
-                                                @if ($tecnicoSeleccionado['is_saved'])
-                                                    <input type="hidden" name="tecnicosSeleccionados[{{ $index }}][tecnico_id]"
-                                                    wire:model="tecnicosSeleccionados.{{ $index }}.tecnico_id">
-                                                    @if ($tecnicoSeleccionado['tecnico_nombre'] && $tecnicoSeleccionado['tecnico_apellido'])
-                                                        {{ $tecnicoSeleccionado['tecnico_nombre'] }} {{ $tecnicoSeleccionado['tecnico_apellido'] }}
+                            @if ($tecnicosSeleccionados)
+                                <div class="col-span-2">
+                                    <x-jet-section-border />
+                                </div>
+                                <div class="col-span-2">
+                                    <h1 class="text-lg font-bold">Tareas</h1>
+                                </div>
+                                <div class="col-span-2">
+                                    <table class="w-full text-base text-left">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="py-2 px-6">
+                                                    Tarea
+                                                </th>
+                                                <th scope="col" class="py-2 px-6">
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($tareasAgregadas as $index => $tareaAgregada)
+                                            <tr>
+                                                <td class="py-3 px-6">
+                                                    @if ($tareaAgregada['is_saved'])
+                                                        <input type="hidden" name="tareasAgregadas[{{ $index }}][tarea]"
+                                                        wire:model="tareasAgregadas.{{ $index }}.tarea">
+                                                        @if ($tareaAgregada['tarea'])
+                                                            {{ $tareaAgregada['tarea'] }}
+                                                        @endif
+                                                    @else
+                                                        <x-jet-input type="text" wire:model="tareasAgregadas.{{ $index }}.tarea"></x-jet-input>
+                                                        @if ($errors->has('tareasAgregadas'.$index.'tarea'))
+                                                            <em class="text-red-600 text-sm">
+                                                                {{ $errors->first('tareasAgregadas'.$index.'tarea') }}
+                                                            </em>
+                                                        @endif
                                                     @endif
-                                                @else
-                                                    <x-jet-input></x-jet-input>
-                                                    @if ($errors->has('tecnicosSeleccionados'.$index.'tecnico_id'))
-                                                        <em class="text-red-600 text-sm">
-                                                            {{ $errors->first('tecnicosSeleccionados'.$index.'tecnico_id') }}
-                                                        </em>
+                                                </td>
+                                                <td class="py-3 px-6">
+                                                    @if ($tareaAgregada['is_saved'])
+                                                    <x-jet-secondary-button class="m-1"
+                                                        wire:click.prevent="editTarea({{ $index }})">Editar
+                                                    </x-jet-secondary-button>
+                                                    @else
+                                                    <x-jet-button class="m-1"
+                                                        wire:click.prevent="saveTarea({{ $index }})">
+                                                        Guardar</x-jet-button>
                                                     @endif
-                                                @endif
-                                            </td>
-                                            <td class="py-3 px-6">
-                                                @if ($tecnicoSeleccionado['is_saved'])
-                                                <x-jet-secondary-button class="m-1"
-                                                    wire:click.prevent="editTecnico({{ $index }})">Editar
-                                                </x-jet-secondary-button>
-                                                @elseif($this->tecnico_id2)
-                                                <x-jet-button class="m-1"
-                                                    wire:click.prevent="saveTecnico({{ $index }})">
-                                                    Guardar</x-jet-button>
-                                                @endif
-                                                <x-jet-danger-button class="m-1"
-                                                    wire:click.prevent="removeTecnico({{ $index }})">Eliminar
-                                                </x-jet-danger-button>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table> --}}
-                            </div>
-                            <div>
-                                <x-jet-button class="m-1" wire:click.prevent="addTarea">Añadir Tarea</x-jet-button>
-                            </div>
+                                                    <x-jet-danger-button class="m-1"
+                                                        wire:click.prevent="removeTarea({{ $index }})">Eliminar
+                                                    </x-jet-danger-button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <x-jet-button class="m-1" wire:click.prevent="addTarea">Añadir Tarea</x-jet-button>
+                                </div>
+                                @if ($tareasAgregadas)
+                                    <div class="col-span-2">
+                                        <x-jet-section-border />
+                                    </div>
+                                    <div class="col-span-2">
+                                        <h1 class="text-lg font-bold">Fechas de inicio y limite</h1>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <x-jet-label />
+                                        <x-jet-input type="date" min="{{ $this->fechaActual }}" wire:model='fechaInicio'/>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <x-jet-label />
+                                        <x-jet-input type="date" min="{{ $this->fechaInicio }}" wire:model='fechaLimite'/>
+                                    </div>
+                                @endif
+                                @if ($fechaLimite)
+                                    <x-jet-button wire:click.prevent="submitOrden">{{ __('Crear Orden') }}</x-jet-button>
+                                @endif
                             @endif
                         </div>
                     </form>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Proyectos;
 
-use App\Models\Proyecto;
+use App\Models\Cotizacion;
 use Livewire\Component;
 
 class ModalProgreso extends Component
@@ -19,27 +19,27 @@ class ModalProgreso extends Component
         return view('livewire.proyectos.modal-progreso');
     }
 
-    public function showProgreso(Proyecto $selectProyecto){
+    public function showProgreso(Cotizacion $selectCotizacion){
         $this->modalShowProyecto = true;
-        $this->proyectoSeleccionado = $selectProyecto;
+        $this->proyectoSeleccionado = $selectCotizacion;
 
-        $this->cotizacion_id = $this->proyectoSeleccionado->cotizacion->id;
+        $this->cotizacion_id = $this->proyectoSeleccionado->id;
 
-        if($this->proyectoSeleccionado->cotizacion->cot_estado == 'Emitida'){
+        if($this->proyectoSeleccionado->cot_estado == 'Emitida'){
             $this->progresoCotizacion = 'Emitida';
-        }else if($this->proyectoSeleccionado->cotizacion->cot_estado == 'Rechazada'){
+        }else if($this->proyectoSeleccionado->cot_estado == 'Rechazada'){
             $this->progresoCotizacion = 'Rechazada';
-        }else if($this->proyectoSeleccionado->cotizacion->cot_estado == 'Aceptada'){
+        }else if($this->proyectoSeleccionado->cot_estado == 'Aceptada'){
             $this->progresoCotizacion = 'Aceptada';
         }
 
-        if($this->proyectoSeleccionado->trabajo->ot_trabajo ?? '' == 'Planificada'){
+        if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Planificada'){
             $this->progresoTrabajo = 'Planificada';
-        }else if($this->proyectoSeleccionado->trabajo->ot_trabajo ?? '' == 'Iniciada'){
+        }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Iniciada'){
             $this->progresoTrabajo = 'Iniciada';
-        }else if($this->proyectoSeleccionado->trabajo->ot_trabajo ?? '' == 'Cancelada'){
+        }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Cancelada'){
             $this->progresoTrabajo = 'Cancelada';
-        }else if($this->proyectoSeleccionado->trabajo->ot_trabajo ?? '' == 'Completada'){
+        }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Completada'){
             $this->progresoTrabajo = 'Completada';
         }
     }

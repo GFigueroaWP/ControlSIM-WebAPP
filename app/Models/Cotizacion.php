@@ -19,8 +19,8 @@ class Cotizacion extends Model
     protected $table = 'cotizaciones';
 
     protected $fillable = [
-        'cli_id',
-        'pr_id',
+        'cliente_id',
+        'trabajo_id',
         'cot_directorio',
         'cot_subtotal',
         'cot_total'
@@ -44,14 +44,14 @@ class Cotizacion extends Model
         );
     }
 
-    public function proyecto()
+    public function trabajo()
     {
-        return $this->belongsTo(Proyecto::class, 'pr_id');
+        return $this->hasOne(OrTrabajo::class, 'cotizacion_id');
     }
 
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'cli_id');
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
     public function productos(){

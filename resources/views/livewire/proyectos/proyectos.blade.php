@@ -42,9 +42,6 @@
                     <thead class="uppercase">
                         <tr>
                             <th scope="col" class="py-2 px-6">
-                                ID
-                            </th>
-                            <th scope="col" class="py-2 px-6">
                                 Cotizacion
                             </th>
                             <th scope="col" class="py-2 px-6">
@@ -62,37 +59,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($proyectos as $proyecto)
+                        @foreach ($cotizaciones as $cotizacion)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ 'PR-'.str_pad($proyecto->id,5,'0',STR_PAD_LEFT) }}</td>
-                            @if ($proyecto->cotizacion)
-                                <td class="py-3 px-6">{{ 'COT-'.str_pad($proyecto->cotizacion->id,5,'0',STR_PAD_LEFT) }}</td>
+                                <td class="py-3 px-6">{{ 'COT-'.str_pad($cotizacion->id,5,'0',STR_PAD_LEFT) }}</td>
                                 <td class="py-3 px-6">
-                                    <strong class="{{ $proyecto->cotizacion->cot_estado }}">
-                                        {{ $proyecto->cotizacion->cot_estado }}
+                                    <strong class="{{ $cotizacion->cot_estado }}">
+                                        {{ $cotizacion->cot_estado }}
                                     </strong>
                                 </td>
-                            @else
-                                <td class="py-3 px-6">No hay cotizacion asociada</td>
-                                <td></td>
-                            @endif
-                            @if ($proyecto->orden)
-                                <td class="py-3 px-6">{{ $proyecto->orden->id }}</td>
-                                <td class="py-3 px-6">{{ $proyecto->orden->ot_estado }}</td>
+                            @if ($cotizacion->trabajo)
+                                <td class="py-3 px-6">{{ $cotizacion->trabajo->id }}</td>
+                                <td class="py-3 px-6">{{ $cotizacion->trabajo->ot_estado }}</td>
                             @else
                                 <td class="py-3 px-6">No hay orden asociada</td>
                                 <td></td>
                             @endif
                             <td class="py-3 px-6">
-                                <x-jet-button wire:click="$emit('showProgreso',{{ $proyecto }})">Ver</x-jet-button>
+                                <x-jet-button wire:click="$emit('showProgreso',{{ $cotizacion }})">Ver</x-jet-button>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @if ($proyectos->count())
+                @if ($cotizaciones->count())
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    {{ $proyectos->links() }}
+                    {{ $cotizaciones->links() }}
                 </div>
                 @else
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">

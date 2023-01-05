@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Cotizaciones;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Producto;
-use App\Models\Proyecto;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
@@ -116,23 +115,12 @@ class CreateCotizaciones extends Component
             $items[$item['producto_id']] = ['cantidad' => $item['cantidad']];
         }
 
-        $pr_creado = Proyecto::create();
-
         $cot_creado = Cotizacion::create([
-            'cli_id' => $this->seleccionado->id,
-            'pr_id' => $pr_creado->id,
-            'cot_directorio' => 'prueba',
-            'cot_subtotal' => $this->subtotal,
-            'cot_total' => $this->total
-        ]);
-
-        $pr_creado->cot_id = $cot_creado->id;
-        $pr_creado->save();
-
-        $cot_creado->productos()->sync($items);
+            'cliente_id' => $this->seleccionado->id
+        ])->productos()->sync($items);
 
         toast()->success('cotizacion añadida con éxito!')->pushOnNextPage();
-        return redirect()->route('cotizaciones');
+        return redirect()->route('proyectos');
     }
 
     protected $rules = [

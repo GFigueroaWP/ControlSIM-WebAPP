@@ -64,7 +64,7 @@
                             </td>
                             <td class="py-3 px-6">{{ $cotizacion->updated_at }}</td>
                             <td class="py-3 px-6">
-                                <a href="{{ route('generarCotizacion', $cotizacion->id) }}"><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
+                                <a href="{{ route('generarCotizacion', $cotizacion->id) }}" target="_blank" ><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
                                 @if ($cotizacion->cot_estado == 'Emitida')
                                     <x-jet-secondary-button wire:click="$emit('editarEstadoCotizacion', {{ $cotizacion }})">{{ __('Actualizar estado') }}</x-jet-secondary-button>
                                 @endif

@@ -15,7 +15,7 @@ class OrTrabajo extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'pr_id',
+        'cotizacion_id',
         'ot_inicio',
         'ot_limite',
         'ot_completada'
@@ -25,9 +25,9 @@ class OrTrabajo extends Model
         'ot_estado' => TrabajoState::class
     ];
 
-    public function proyecto()
+    public function cotizacion()
     {
-        return $this->belongsTo(Proyecto::class, 'pr_id');
+        return $this->belongsTo(Cotizacion::class, 'cotizacion_id');
     }
 
     public function tecnicos(){
