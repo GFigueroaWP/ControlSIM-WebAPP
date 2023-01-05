@@ -13,7 +13,7 @@
                         @csrf
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div class="col-span-2">
-                                <h1 class="">Datos del cliente</h1>
+                                <h1 class="text-lg font-bold">Datos del cliente</h1>
                             </div>
                             <div>
                                 <x-jet-label for="razon_cli" value="{{ __('Razon social') }}" />

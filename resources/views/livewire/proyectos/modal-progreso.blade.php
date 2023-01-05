@@ -126,7 +126,7 @@
         </div>
         @if ($this->progresoCotizacion == 'Aceptada')
             @if ($this->progresoTrabajo == '')
-                <a href="{{ route('createOrdenes') }}"><x-jet-button>{{ __('Crear orden de trabajo') }}</x-jet-button></a>
+                <a href="{{ route('createOrdenes',$this->proyectoSeleccionado) }}"><x-jet-button>{{ __('Crear orden de trabajo') }}</x-jet-button></a>
             @else
                 <div>
                     <table>
