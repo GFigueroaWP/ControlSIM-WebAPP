@@ -14,6 +14,11 @@
                         <x-jet-button wire:click="$emit('crearEmpleado')">{{ __('Crear') }}</x-jet-button>
                         @endcan
                     </div>
+                    <div class="relative justify-self-end">
+                        @can('users_access')
+                        <x-jet-secondary-button>{{ __('Ver Deshabilitados') }}</x-jet-secondary-button>
+                        @endcan
+                    </div>
                     <label for="search_empleados" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

@@ -14,7 +14,7 @@
                             <a href="{{ route('createOrdenes') }}"><x-jet-button>{{ __('Crear orden') }}</x-jet-button></a>
                         @endcan
                     </div>
-                    <label for="search_empleados" class="sr-only">Buscar</label>
+                    <label for="search_ordenes" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -25,7 +25,7 @@
                             </svg>
                         </div>
                         <input wire:model='filtro_cot' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
-                            name="search_empleados" id="search_empleados" placeholder="Buscar Empleados">
+                            name="search_ordenes" id="search_ordenes" placeholder="Buscar Ordenes de trabajo">
                     </div>
                 </div>
                 <table class=" w-full text-base text-left">

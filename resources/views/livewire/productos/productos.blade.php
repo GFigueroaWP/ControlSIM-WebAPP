@@ -48,7 +48,7 @@
                     <tbody>
                         @foreach ($productos as $producto)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $producto->id }}</td>
+                            <td class="py-3 px-6">{{ 'PS-'.str_pad($producto->id,5,'0',STR_PAD_LEFT) }}</td>
                             <td class="py-3 px-6">{{ $producto->prod_nombre }}</td>
                             <td class="py-3 px-6">{{ $producto->prod_valor }}</td>
                         </tr>

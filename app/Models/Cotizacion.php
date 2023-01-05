@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\States\Cotizacion\CotizacionState;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +29,20 @@ class Cotizacion extends Model
     protected $casts = [
         'cot_estado' => CotizacionState::class
     ];
+
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('d-m-Y')
+        );
+    }
+
+    protected function updatedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('d-m-Y')
+        );
+    }
 
     public function proyecto()
     {

@@ -91,7 +91,7 @@
                 <tbody class="divide-y divide-gray-200">
                     <tr>
                         <td>
-                            {{ $this->proyectoSeleccionado->cotizacion->id ?? '' }}
+                            {{ 'COT-'.str_pad($this->proyectoSeleccionado->cotizacion->id ?? '',5,'0',STR_PAD_LEFT) }}
                         </td>
                         <td>
                             {{ $this->proyectoSeleccionado->cotizacion->cliente->cli_razonsocial ?? '' }}
@@ -112,11 +112,9 @@
                             </td>
                         @endif
                         <td>
-                            <a href="{{ route('generarCotizacion', $this->cotizacion_id) }}"><x-jet-button>Generar</x-jet-button></a>
+                            <a href="{{ route('generarCotizacion', $this->cotizacion_id) }}"><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
                             @if ($this->progresoCotizacion == 'Emitida')
-                            <x-jet-secondary-button wire:click="$emit('editarEstadoCotizacion', {{ $this->cotizacion_id }})">{{ __('Actualizar estado') }}</x-jet-secondary-button>
-                            @elseif ($this->progresoCotizacion == 'Rechazada')
-                                <x-jet-danger-button>Eliminar</x-jet-danger-button>
+                                <x-jet-secondary-button wire:click="$emit('editarEstadoCotizacion', {{ $this->cotizacion_id }})">{{ __('Actualizar estado') }}</x-jet-secondary-button>
                             @endif
                         </td>
                         </td>

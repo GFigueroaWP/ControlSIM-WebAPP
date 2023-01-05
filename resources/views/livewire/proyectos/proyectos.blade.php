@@ -14,6 +14,16 @@
                             <a href="{{ route('createCotizaciones') }}"><x-jet-button>{{ __('Crear cotizacion') }}</x-jet-button></a>
                         @endcan
                     </div>
+                    <div class="justify-self-end">
+                        @can('cotizaciones_access')
+                            <a href="{{ route('cotizaciones') }}"><x-jet-secondary-button>{{ __('Ver cotizaciones') }}</x-jet-secondary-button></a>
+                        @endcan
+                    </div>
+                    <div class="justify-self-end">
+                        @can('ordenes_access')
+                            <a href="{{ route('ordenes') }}"><x-jet-secondary-button>{{ __('Ver ordenes de trabajo') }}</x-jet-secondary-button></a>
+                        @endcan
+                    </div>
                     <label for="search_proyecto" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -38,7 +48,13 @@
                                 Cotizacion
                             </th>
                             <th scope="col" class="py-2 px-6">
+                                Estado Cotización
+                            </th>
+                            <th scope="col" class="py-2 px-6">
                                 Orden de trabajo
+                            </th>
+                            <th scope="col" class="py-2 px-6">
+                                Estado Orden de trabajo
                             </th>
                             <th scope="col" class="py-2 px-6">
                                 Acciones
@@ -48,16 +64,20 @@
                     <tbody>
                         @foreach ($proyectos as $proyecto)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $proyecto->id }}</td>
+                            <td class="py-3 px-6">{{ 'PR-'.str_pad($proyecto->id,5,'0',STR_PAD_LEFT) }}</td>
                             @if ($proyecto->cotizacion)
-                                <td class="py-3 px-6">{{ $proyecto->cotizacion->id }}</td>
+                                <td class="py-3 px-6">{{ 'COT-'.str_pad($proyecto->cotizacion->id,5,'0',STR_PAD_LEFT) }}</td>
+                                <td class="py-3 px-6">{{ $proyecto->cotizacion->cot_estado }}</td>
                             @else
                                 <td class="py-3 px-6">No hay cotizacion asociada</td>
+                                <td></td>
                             @endif
                             @if ($proyecto->orden)
-                                <td class="py-3 px-6">{{ $proyecto->cotizacion->id }}</td>
+                                <td class="py-3 px-6">{{ $proyecto->orden->id }}</td>
+                                <td class="py-3 px-6">{{ $proyecto->orden->ot_estado }}</td>
                             @else
                                 <td class="py-3 px-6">No hay orden asociada</td>
+                                <td></td>
                             @endif
                             <td class="py-3 px-6">
                                 <x-jet-button wire:click="$emit('showProgreso',{{ $proyecto }})">Ver</x-jet-button>

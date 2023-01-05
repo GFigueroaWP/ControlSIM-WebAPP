@@ -368,7 +368,7 @@
             {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
         </p>
         <p>
-            {{ trans('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
+            {{ trans('invoices::invoice.pay_until') }}: {{ \Carbon\Carbon::parse($invoice->getPayUntilDate())->format('d/m/Y') }}
         </p>
 
         <script type="text/php">

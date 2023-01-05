@@ -16,12 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     @can('users_access')
-                        <x-jet-nav-link href="{{ route('empleados') }}" :active="request()->routeIs('empleados')">
+                        <x-jet-nav-link href="{{ route('empleados') }}" :active="request()->routeIs(['empleados','showEmpleados'])">
                             {{ __('Empleados') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('clientes_access')
-                        <x-jet-nav-link href="{{ route('clientes') }}" :active="request()->routeIs('clientes')">
+                        <x-jet-nav-link href="{{ route('clientes') }}" :active="request()->routeIs(['clientes','showClientes'])">
                             {{ __('Clientes') }}
                         </x-jet-nav-link>
                     @endcan
@@ -31,14 +31,9 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('cotizaciones_access')
-                    <x-jet-nav-link href="{{ route('proyectos') }}" :active="request()->routeIs('proyectos')">
+                    <x-jet-nav-link href="{{ route('proyectos') }}" :active="request()->routeIs(['proyectos','cotizaciones'])">
                         {{ __('Proyectos') }}
                     </x-jet-nav-link>
-                    @endcan
-                    @can('cotizaciones_access')
-                        <x-jet-nav-link href="{{ route('cotizaciones') }}" :active="request()->routeIs('cotizaciones')">
-                            {{ __('Cotizaciones') }}
-                        </x-jet-nav-link>
                     @endcan
                     @can('ordenes_access')
                     <x-jet-nav-link href="{{ route('ordenes') }}" :active="request()->routeIs('ordenes')">
