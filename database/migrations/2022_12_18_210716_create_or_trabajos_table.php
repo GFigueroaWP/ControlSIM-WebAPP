@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('or_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('cotizacion_id')->nullable();
+            $table->unsignedbigInteger('cotizacion_id')->nullable();
             $table->string('ot_estado');
             $table->date('ot_inicio');
             $table->date('ot_limite')->nullable();

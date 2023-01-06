@@ -68,8 +68,12 @@
                                     </strong>
                                 </td>
                             @if ($cotizacion->trabajo)
-                                <td class="py-3 px-6">{{ $cotizacion->trabajo->id }}</td>
-                                <td class="py-3 px-6">{{ $cotizacion->trabajo->ot_estado }}</td>
+                                <td class="py-3 px-6">{{ 'COT-'.str_pad($cotizacion->trabajo->id,5,'0',STR_PAD_LEFT) }}</td>
+                                <td class="py-3 px-6">
+                                    <strong class="{{ $cotizacion->trabajo->ot_estado }}">
+                                        {{ $cotizacion->trabajo->ot_estado }}
+                                    </strong>
+                                </td>
                             @else
                                 <td class="py-3 px-6">No hay orden asociada</td>
                                 <td></td>
