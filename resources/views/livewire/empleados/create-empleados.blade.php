@@ -47,7 +47,7 @@
                     <select name="cargo" id="cargo" wire:model.lazy='cargo' default=''
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-csim focus:border-csim block mt-1 w-full p-2.5"
                         value=''>
-                        <option selected value="cargo">Cargo</option>
+                        <option selected value="">Cargo</option>
                         @foreach ($roles as $rol)
                         @if ($rol!='super-admin')
                         <option value="{{ $rol }}">{{ $rol }}</option>

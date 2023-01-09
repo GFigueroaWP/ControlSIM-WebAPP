@@ -12,8 +12,8 @@ class ShowEmpleados extends Component
 
     public $empleado;
 
-    public $show_us_username, $show_us_nombre, $show_us_apellido, $show_us_rut,
-        $show_us_telefono, $show_us_email;
+    public $us_username, $us_nombre, $us_apellido, $us_rut,
+        $us_telefono, $us_email;
 
     public function mount(User $empleado)
     {
@@ -28,12 +28,12 @@ class ShowEmpleados extends Component
     public function fillEmpleado()
     {
         $this->fill([
-            'show_us_username' => $this->empleado->us_username,
-            'show_us_nombre' => $this->empleado->us_nombre,
-            'show_us_apellido' => $this->empleado->us_apellido,
-            'show_us_rut' => $this->empleado->us_rut,
-            'show_us_telefono' => $this->empleado->us_telefono,
-            'show_us_email' => $this->empleado->us_email
+            'us_username' => $this->empleado->us_username,
+            'us_nombre' => $this->empleado->us_nombre,
+            'us_apellido' => $this->empleado->us_apellido,
+            'us_rut' => $this->empleado->us_rut,
+            'us_telefono' => $this->empleado->us_telefono,
+            'us_email' => $this->empleado->us_email
         ]);
     }
 
@@ -41,12 +41,12 @@ class ShowEmpleados extends Component
     {
         $this->validate();
 
-        $this->empleado->us_username = $this->show_us_username;
-        $this->empleado->us_nombre = $this->show_us_nombre;
-        $this->empleado->us_apellido = $this->show_us_apellido;
-        $this->empleado->us_rut = $this->show_us_rut;
-        $this->empleado->us_telefono = $this->show_us_telefono;
-        $this->empleado->us_email = $this->show_us_email;
+        $this->empleado->us_username = $this->us_username;
+        $this->empleado->us_nombre = $this->us_nombre;
+        $this->empleado->us_apellido = $this->us_apellido;
+        $this->empleado->us_rut = $this->us_rut;
+        $this->empleado->us_telefono = $this->us_telefono;
+        $this->empleado->us_email = $this->us_email;
 
         $this->empleado->save();
 
@@ -59,29 +59,31 @@ class ShowEmpleados extends Component
         return redirect()->back();
     }
 
-    protected $rules = [
-        'show_us_username' => 'required|alpha_num|unique:users',
-        'show_us_nombre' => 'required|alpha',
-        'show_us_apellido' => 'required|alpha',
-        'show_us_rut' => 'required',
-        'show_us_telefono' => 'required|numeric',
-        'show_us_email' => 'required|email|unique:users'
-    ];
+    protected function rules()
+    {
+        return [
+            'us_nombre' => 'required|string',
+            'us_apellido' => 'required|string',
+            'us_telefono' => 'required|numeric',
+            'us_email' => 'required|email'
+        ];
+    }
 
     protected $messages = [
-        'show_us_username.required' => 'El campo de Usuario es obligatorio',
-        'show_us_username.alpha_num' => 'El campo de Usuario debe ser en formato alfanumérico',
-        'show_us_username.unique' => 'El nombre de usuario especificado ya esta en uso',
-        'show_us_nombre.required' => 'El campo de Nombre es obligatorio',
-        'show_us_nombre.alpha' => 'El campo de nombre debe ser en formato alfabético',
-        'show_us_apellido.required' => 'El campo de Apellido es obligatorio',
-        'show_us_apellido.alpha' => 'El campo de Apellido debe ser en formato alfabético',
-        'show_us_rut.required' => 'El campo de Rut es obligatorio',
-        'show_us_rut.size' => 'El campo de Rut no puede pasar los 10 caracteres',
-        'show_us_telefono.required' => 'El campo de Teléfono es obligatorio',
-        'show_us_telefono.numeric' => 'El campo de Teléfono debe ser solo numérico',
-        'show_us_email.required' => 'El campo de Email es obligatorio',
-        'show_us_email.email' => 'El campo de Email debe tener formato email@email.xx',
-        'show_us_email.unique' => 'La dirección de correo ya esta en uso por otro usuario'
+        'us_username.required' => 'El campo de Usuario es obligatorio',
+        'us_username.alpha_num' => 'El Nombre de usuario debe ser en formato alfanumérico y sin espacios',
+        'us_username.unique' => 'El Nombre de usuario especificado ya esta en uso',
+        'us_nombre.required' => 'El campo de Nombre es obligatorio',
+        'us_nombre.string' => 'El campo de Nombre debe ser en formato alfabético',
+        'us_apellido.required' => 'El campo de Apellido es obligatorio',
+        'us_apellido.string' => 'El campo de Apellido debe ser en formato alfabético',
+        'us_rut.required' => 'El campo de Rut es obligatorio',
+        'us_rut.unique' => 'El Rut ya se encuentra registrado',
+        'us_rut.min' => 'El Rut no cumple con el tamaño',
+        'us_rut.mix' => 'El Rut no cumple con el tamaño',
+        'us_telefono.required' => 'El campo de Teléfono es obligatorio',
+        'us_telefono.numeric' => 'El campo de Teléfono debe ser solo numérico',
+        'us_email.required' => 'El campo de Email es obligatorio',
+        'us_email.email' => 'El campo de Email debe tener formato email@email.xx'
     ];
 }

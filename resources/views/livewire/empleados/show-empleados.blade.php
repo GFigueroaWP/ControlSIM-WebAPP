@@ -18,41 +18,41 @@
 
                 <x-slot name="form">
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_us_username" value="{{ __('Usuario') }}" />
-                        <x-jet-input id="show_us_username" wire:model='show_us_username' type="text"
+                        <x-jet-label for="us_username" value="{{ __('Usuario') }}" />
+                        <x-jet-input id="us_username" wire:model='us_username' type="text"
                             placeholder="Username" class="mt-1 block w-full disabled" disabled/>
-                        <x-jet-input-error for="show_us_username" class="mt-2" />
+                        <x-jet-input-error for="us_username" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_us_rut" value="{{ __('Rut') }}" />
-                        <x-jet-input id="show_us_rut" wire:model='show_us_rut' wire:change="formatRut"
+                        <x-jet-label for="us_rut" value="{{ __('Rut') }}" />
+                        <x-jet-input id="us_rut" wire:model='us_rut' wire:change="formatRut"
                             wire:keyup="formatRut" type="text" placeholder='11222333-4' class="mt-1 block w-full disabled"
                             disabled />
-                        <x-jet-input-error for="show_us_rut" class="mt-2" />
+                        <x-jet-input-error for="us_rut" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_us_nombre" value="{{ __('Nombre') }}" />
-                        <x-jet-input id="show_us_nombre" wire:model='show_us_nombre' type="text" placeholder='John'
+                        <x-jet-label for="us_nombre" value="{{ __('Nombre') }}" />
+                        <x-jet-input id="us_nombre" wire:model='us_nombre' type="text" placeholder='John'
                             class="mt-1 block w-full" />
-                        <x-jet-input-error for="show_us_nombre" class="mt-2" />
+                        <x-jet-input-error for="us_nombre" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_us_apellido" value="{{ __('Apellido') }}" />
-                        <x-jet-input id="show_us_apellido" wire:model='show_us_apellido' type="text" placeholder='Doe'
+                        <x-jet-label for="us_apellido" value="{{ __('Apellido') }}" />
+                        <x-jet-input id="us_apellido" wire:model='us_apellido' type="text" placeholder='Doe'
                             class="mt-1 block w-full" />
-                        <x-jet-input-error for="show_us_apellido" class="mt-2" />
+                        <x-jet-input-error for="us_apellido" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_us_telefono" value="{{ __('Telefono') }}" />
-                        <x-jet-input id="show_us_telefono" wire:model='show_us_telefono' type="text"
+                        <x-jet-label for="us_telefono" value="{{ __('Telefono') }}" />
+                        <x-jet-input id="us_telefono" wire:model='us_telefono' type="text"
                             placeholder='912344678' class="mt-1 block w-full" />
-                        <x-jet-input-error for="show_us_telefono" class="mt-2" />
+                        <x-jet-input-error for="us_telefono" class="mt-2" />
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="show_us_email" value="{{ __('Email') }}" />
-                        <x-jet-input id="show_us_email" wire:model='show_us_email' type="email"
+                        <x-jet-label for="us_email" value="{{ __('Email') }}" />
+                        <x-jet-input id="us_email" wire:model='us_email' type="email"
                             placeholder='user@controlsim.cl' class="mt-1 block w-full" />
-                        <x-jet-input-error for="show_us_email" class="mt-2" />
+                        <x-jet-input-error for="us_email" class="mt-2" />
                     </div>
                 </x-slot>
                 <x-slot name="actions">

@@ -21,7 +21,7 @@ class Cotizaciones extends Component
 
         return view('livewire.cotizaciones.cotizaciones',[
             'cotizaciones' => Cotizacion::latest()
-                            ->Where('cot_id','LIKE',$filtro_cot)
+                            ->Where('id','LIKE',$filtro_cot)
                             ->paginate(10)
         ]);
     }
