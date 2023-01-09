@@ -11,14 +11,14 @@ class ShowClientes extends Component
     use WireToast;
 
     public $cliente,
-        $show_cli_razonsocial,
-        $show_cli_giro,
-        $show_cli_rut,
-        $show_cli_email,
-        $show_cli_telefono,
-        $show_cli_direccion,
-        $show_cli_comuna,
-        $show_cli_ciudad;
+        $cli_razonsocial,
+        $cli_giro,
+        $cli_rut,
+        $cli_email,
+        $cli_telefono,
+        $cli_direccion,
+        $cli_comuna,
+        $cli_ciudad;
 
     public $listeners = ['contactoCreado' => '$refresh'];
 
@@ -37,14 +37,14 @@ class ShowClientes extends Component
     public function fillCliente()
     {
         $this->fill([
-            'show_cli_razonsocial' => $this->cliente->cli_razonsocial,
-            'show_cli_giro' => $this->cliente->cli_giro,
-            'show_cli_rut' => $this->cliente->cli_rut,
-            'show_cli_email' => $this->cliente->cli_email,
-            'show_cli_telefono' => $this->cliente->cli_telefono,
-            'show_cli_direccion' => $this->cliente->cli_direccion,
-            'show_cli_comuna' => $this->cliente->cli_comuna,
-            'show_cli_ciudad' => $this->cliente->cli_ciudad
+            'cli_razonsocial' => $this->cliente->cli_razonsocial,
+            'cli_giro' => $this->cliente->cli_giro,
+            'cli_rut' => $this->cliente->cli_rut,
+            'cli_email' => $this->cliente->cli_email,
+            'cli_telefono' => $this->cliente->cli_telefono,
+            'cli_direccion' => $this->cliente->cli_direccion,
+            'cli_comuna' => $this->cliente->cli_comuna,
+            'cli_ciudad' => $this->cliente->cli_ciudad
         ]);
     }
 
@@ -53,14 +53,14 @@ class ShowClientes extends Component
 
         $this->validate();
 
-        $this->cliente->cli_razonsocial = $this->show_cli_razonsocial;
-        $this->cliente->cli_giro = $this->show_cli_giro;
-        $this->cliente->cli_rut = $this->show_cli_rut;
-        $this->cliente->cli_email = $this->show_cli_email;
-        $this->cliente->cli_telefono = $this->show_cli_telefono;
-        $this->cliente->cli_direccion = $this->show_cli_direccion;
-        $this->cliente->cli_comuna = $this->show_cli_comuna;
-        $this->cliente->cli_ciudad = $this->show_cli_ciudad;
+        $this->cliente->cli_razonsocial = $this->cli_razonsocial;
+        $this->cliente->cli_giro = $this->cli_giro;
+        $this->cliente->cli_rut = $this->cli_rut;
+        $this->cliente->cli_email = $this->cli_email;
+        $this->cliente->cli_telefono = $this->cli_telefono;
+        $this->cliente->cli_direccion = $this->cli_direccion;
+        $this->cliente->cli_comuna = $this->cli_comuna;
+        $this->cliente->cli_ciudad = $this->cli_ciudad;
 
         $this->cliente->save();
 
@@ -76,25 +76,27 @@ class ShowClientes extends Component
     protected function rules()
     {
         return [
-            'show_cli_razonsocial' => 'required|alpha_num',
-            'show_cli_giro' => 'required',
-            'show_cli_rut' => 'required',
-            'show_cli_email' => 'email',
-            'show_cli_telefono' => 'numeric',
-            'show_cli_direccion' => 'alpha_num',
-            'show_cli_comuna' => 'alpha_num',
-            'show_cli_ciudad' => 'alpha_num'
+            'cli_razonsocial' => 'required|string',
+            'cli_giro' => 'required|string',
+            'cli_email' => 'required|email',
+            'cli_telefono' => 'required|numeric',
+            'cli_direccion' => 'string',
+            'cli_comuna' => 'string',
+            'cli_ciudad' => 'string'
         ];
     }
 
     protected $messages = [
-        'show_cli_razonsocial',
-        'show_cli_giro',
-        'show_cli_rut',
-        'show_cli_email',
-        'show_cli_telefono',
-        'show_cli_direccion',
-        'show_cli_comuna',
-        'show_cli_ciudad'
+        'cli_razonsocial.required' => 'El campo de Razón social es obligatorio',
+        'cli_razonsocial.string' => 'El campo de Razón social debe ser en formato alfanumérico',
+        'cli_giro.required' => 'El campo de Giro es obligatorio',
+        'cli_giro.string' => 'El campo de Giro debe ser en formato alfanumérico',
+        'cli_email.required' => 'El campo de Email es obligatorio',
+        'cli_email.email' => 'El campo de Email debe estar en formato email@email.xx',
+        'cli_telefono.required' => 'El campo de Teléfono es obligatorio',
+        'cli_telefono.numeric' => 'El campo de Teléfono solo debe contener números',
+        'cli_direccion.string' => 'El campo Dirección debe ser en formato alfanumérico',
+        'cli_comuna.string' => 'El campo Comuna debe ser en formato alfanumérico',
+        'cli_ciudad.string' => 'El campo Ciudad debe ser en formato alfanumérico'
     ];
 }

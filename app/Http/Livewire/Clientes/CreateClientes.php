@@ -81,25 +81,33 @@ class CreateClientes extends Component
     protected function rules()
     {
         return [
-            'cli_razonsocial' => 'required|alpha_num',
-            'cli_giro' => 'required',
-            'cli_rut' => ['required', new rutValido],
-            'cli_email' => 'email',
-            'cli_telefono' => 'numeric',
-            'cli_direccion' => 'alpha_num',
-            'cli_comuna' => 'alpha_num',
-            'cli_ciudad' => 'alpha_num'
+            'cli_razonsocial' => 'required|string',
+            'cli_giro' => 'required|string',
+            'cli_rut' => ['required', new rutValido, 'unique:clientes', 'min:11', 'max:12'],
+            'cli_email' => 'required|email|unique:clientes',
+            'cli_telefono' => 'required|numeric',
+            'cli_direccion' => 'string',
+            'cli_comuna' => 'string',
+            'cli_ciudad' => 'string'
         ];
     }
 
     protected $messages = [
-        'cli_razonsocial',
-        'cli_giro',
-        'cli_rut',
-        'cli_email',
-        'cli_telefono',
-        'cli_direccion',
-        'cli_comuna',
-        'cli_ciudad'
+        'cli_razonsocial.required' => 'El campo de Razón social es obligatorio',
+        'cli_razonsocial.string' => 'El campo de Razón social debe ser en formato alfanumérico',
+        'cli_giro.required' => 'El campo de Giro es obligatorio',
+        'cli_giro.string' => 'El campo de Giro debe ser en formato alfanumérico',
+        'cli_rut.required' => 'El campo de Rut es obligatorio',
+        'cli_rut.unique' => 'El Rut ya se encuentra registrado',
+        'cli_rut.min' => 'El Rut no cumple con el tamaño',
+        'cli_rut.max' => 'El Rut no cumple con el tamaño',
+        'cli_email.required' => 'El campo de Email es obligatorio',
+        'cli_email.email' => 'El campo de Email debe estar en formato email@email.xx',
+        'cli_email.unique' => 'El Email ya se encuentra registrado',
+        'cli_telefono.required' => 'El campo de Teléfono es obligatorio',
+        'cli_telefono.numeric' => 'El campo de Teléfono solo debe contener números',
+        'cli_direccion.string' => 'El campo Dirección debe ser en formato alfanumérico',
+        'cli_comuna.string' => 'El campo Comuna debe ser en formato alfanumérico',
+        'cli_ciudad.string' => 'El campo Ciudad debe ser en formato alfanumérico'
     ];
 }

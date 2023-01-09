@@ -7,15 +7,17 @@ use Livewire\WithPagination;
 
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class Empleados extends Component
 {
+    use WireToast;
     use WithPagination;
 
     public $filtro_us;
     public $modalDeshabilitacionEmpleado = false;
 
-    public $listeners = ['empleadoCreado' => '$refresh'];
+    public $listeners = ['empleadoCreado' => '$refresh', 'empleadoDeshabilitado' => '$refresh'];
 
     public function render()
     {
@@ -46,9 +48,15 @@ class Empleados extends Component
     public function deshabilitarEmpleado(User $seleccionado)
     {
         $seleccionado->delete();
+
         activity('empleados')
             ->performedOn($seleccionado)
             ->log('Usuario deshabilitado');
+
+        toast()->success('Empleado deshabilitado con éxito!')->push();
+
+        $this->emit('empleadoDeshabilitado');
+
         $this->modalDeshabilitacionEmpleado = false;
     }
 }
