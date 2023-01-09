@@ -3,6 +3,7 @@
 use App\Http\Controllers\CotizacionDoc;
 use App\Http\Livewire\Empleados\Empleados;
 use App\Http\Livewire\Empleados\ShowEmpleados;
+use App\Http\Livewire\Empleados\EmpleadosDeshabilitados;
 use App\Http\Livewire\Clientes\Clientes;
 use App\Http\Livewire\Clientes\ShowClientes;
 use App\Http\Livewire\Cotizaciones\Cotizaciones;
@@ -39,6 +40,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/empleados', Empleados::class)->name('empleados');
+    Route::get('/empleados/deshabilitados', EmpleadosDeshabilitados::class)->name('empleadosDeshabilitados');
     Route::get('/empleados/{empleado}', ShowEmpleados::class)->name('showEmpleados');
 
     Route::get('/clientes', Clientes::class)->name('clientes');
