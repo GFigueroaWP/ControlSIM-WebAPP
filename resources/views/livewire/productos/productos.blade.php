@@ -52,7 +52,7 @@
                             <td class="py-3 px-6">{{ $producto->prod_nombre }}</td>
                             <td class="py-3 px-6">{{ '$'.number_format($producto->prod_valor,0,",",".") }}</td>
                             <td class="py-3 px-6">
-                                <x-jet-button>{{ __('Editar') }}</x-jet-button>
+                                <x-jet-button wire:click="$emit('modificarProducto', {{ $producto }}) ">{{ __('Editar') }}</x-jet-button>
                             </td>
                         </tr>
                         @endforeach
@@ -72,4 +72,5 @@
     </div>
 
     @livewire('productos.create-productos')
+    @livewire('productos.update-productos')
 </div>

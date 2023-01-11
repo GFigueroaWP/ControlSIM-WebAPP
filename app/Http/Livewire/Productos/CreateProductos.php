@@ -56,9 +56,14 @@ class CreateProductos extends Component
     }
 
     protected $rules = [
-        'prod_nombre' => 'required',
-        'prod_valor' => 'required'
+        'prod_nombre' => 'required|string',
+        'prod_valor' => 'required|numeric'
     ];
 
-    protected $messages = [];
+    protected $messages = [
+        'prod_nombre.required' => 'El Campo de Nombre es Obligatorio',
+        'prod_nombre.string' => 'El Campo de Nombre debe ser alfanumérico',
+        'prod_valor.required' => 'El Campo de Precio es Obligatorio',
+        'prod_valor.string' => 'El Campo de Precio debe ser numérico'
+    ];
 }
