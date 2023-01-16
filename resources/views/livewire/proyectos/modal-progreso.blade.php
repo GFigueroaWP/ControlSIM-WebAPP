@@ -49,12 +49,35 @@
                             <span class="ml-2 text-red-600">Cotizacion Rechazada</span>
                         </li>
                     @endif
-                    <li class="flex items-center justify-end">
+                    @if ($this->progresoTrabajo == '')
+                        <li class="flex items-center justify-end">
                         <span class="h-6 w-6 rounded bg-gray-50 text-center text-[10px] font-bold leading-6 text-gray-600">
                         3
                         </span>
                         <span class="ml-2"> Generar orden de trabajo </span>
-                    </li>
+                        </li>
+                    @endif
+                    @if ($this->progresoTrabajo == 'Planificada')
+                        <li class="flex items-center justify-center text-blue-600">
+                            <span class="h-6 w-6 rounded bg-blue-50 text-center text-[10px] font-bold leading-6">
+                                3
+                            </span>
+                            <span class="ml-2">Trabajo planificado</span>
+                        </li>
+                    @elseif ($this->progresoTrabajo == 'Iniciada')
+                        <li class="flex items-center justify-center">
+                            <span class="rounded bg-green-50 p-1.5 text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                    fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-green-600">Trabajo iniciado</span>
+                        </li>
+                    @endif
                     <li class="flex items-center justify-end">
                         <span class="h-6 w-6 rounded bg-gray-50 text-center text-[10px] font-bold leading-6 text-gray-600">
                         4
@@ -64,15 +87,20 @@
                 </ol>
             </div>
         </div>
+        <div class="grid sm:grid-cols-2">
+            <div class="col-span-1 m-5 justify-self-center">
+                <h1>{{ __('Cliente:') }}</h1>
+            </div>
+            <div class="col-span-1 m-5 justify-self-center">
+                {{ $this->proyectoSeleccionado->cliente->cli_razonsocial ?? '' }}
+            </div>
+        </div>
         <div class="overflow-x-auto border border-gray-200 m-5">
             <table class="min-w-full divide-y-2 divide-gray-200 text-xs w-full text-left">
                 <thead>
                     <tr>
                         <th class="py-2 px-5">
                             Cotizacion
-                        </th>
-                        <th class="py-2 px-5">
-                            Cliente
                         </th>
                         <th class="py-2 px-5">
                             Emitida
@@ -92,9 +120,6 @@
                     <tr>
                         <td>
                             {{ 'COT-'.str_pad($this->proyectoSeleccionado->id ?? '',5,'0',STR_PAD_LEFT) }}
-                        </td>
-                        <td>
-                            {{ $this->proyectoSeleccionado->cliente->cli_razonsocial ?? '' }}
                         </td>
                         <td>
                             {{ $this->proyectoSeleccionado->created_at ?? '' }}
@@ -128,30 +153,51 @@
             @if ($this->progresoTrabajo == '')
                 <a href="{{ route('createOrdenes',$this->proyectoSeleccionado) }}"><x-jet-button>{{ __('Crear orden de trabajo') }}</x-jet-button></a>
             @else
-                <div>
-                    <table>
+                <div class="overflow-x-auto border border-gray-200 m-5">
+                    <table class="min-w-full divide-y-2 divide-gray-200 text-xs w-full text-left">
                         <thead>
+                            <tr>
+                                <th class="py-2 px-5">
+                                    Orden
+                                </th>
+                                <th class="py-2 px-5">
+                                    Fecha Inicio
+                                </th>
+                                <th class="py-2 px-5">
+                                    Feche Limite
+                                </th>
+                                <th class="py-2 px-5">
+                                    Fecha cierre
+                                </th>
+                                <th class="py-2 px-5">
+                                    Estado
+                                </th>
+                                <th class="py-2 px-5">
+                                    Acciones
+                                </th>
+                            </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-200">
                             <tr>
                                 <td>
-                                    Orden
+                                    {{ 'OT-'.str_pad($this->proyectoSeleccionado->trabajo->id ?? '',5,'0',STR_PAD_LEFT) }}
                                 </td>
                                 <td>
-                                    Estado
+                                    {{ $this->proyectoSeleccionado->trabajo->ot_inicio ?? '' }}
                                 </td>
                                 <td>
-                                    FEcha inicio
+                                    {{ $this->proyectoSeleccionado->trabajo->ot_limite ?? '' }}
                                 </td>
                                 <td>
-                                    Fecha limite
+
                                 </td>
                                 <td>
-                                    Fecha completada
+                                    <strong class="{{ $this->proyectoSeleccionado->trabajo->ot_estado ?? '' }}">
+                                        {{ $this->proyectoSeleccionado->trabajo->ot_estado ?? '' }}
+                                    </strong>
                                 </td>
                                 <td>
-                                    Generar
-                                    Actualizar
+                                    <a href="{{ route('showTrabajos', $this->proyectoSeleccionado->trabajo->id ?? '') }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 </td>
                             </tr>
                         </tbody>

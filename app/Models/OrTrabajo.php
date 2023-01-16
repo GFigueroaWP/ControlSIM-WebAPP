@@ -37,4 +37,8 @@ class OrTrabajo extends Model
     public function tareas(){
         return $this->hasMany(Tarea::class, 'trabajo_id');
     }
+
+    public function informes(){
+        return $this->hasMany(Informe::class, 'trabajo_id');
+    }
 }

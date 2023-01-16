@@ -10,6 +10,8 @@ class Proyectos extends Component
 {
     use WithPagination;
 
+    protected $listeners = ['refreshProyecto' => '$refresh'];
+
     public $filtro_pr;
     public $proyectoSeleccionado;
 

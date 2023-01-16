@@ -41,6 +41,7 @@ class ModalEstados extends Component
         toast()->info('Cotizacion actualizado con éxito!')->push();
 
         $this->emit('estadoCotizacionActualizado');
+        $this->emit('refreshProyecto');
         return redirect()->back();
     }
 
@@ -53,6 +54,7 @@ class ModalEstados extends Component
 
         toast()->info('Cotizacion actualizado con éxito!')->push();
         $this->emit('estadoCotizacionActualizado');
+        $this->emit('refreshProyecto');
         return redirect()->back();
     }
 }

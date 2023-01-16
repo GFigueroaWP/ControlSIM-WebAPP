@@ -8,7 +8,7 @@ use Livewire\Component;
 class ModalProgreso extends Component
 {
     public $modalShowProyecto = false;
-    protected $listeners = ['showProgreso'];
+    protected $listeners = ['showProgreso', 'refreshProyecto' => '$refresh'];
     public $proyectoSeleccionado;
     public $progresoCotizacion = '';
     public $progresoTrabajo = '';
@@ -22,6 +22,7 @@ class ModalProgreso extends Component
     public function showProgreso(Cotizacion $selectCotizacion){
         $this->modalShowProyecto = true;
         $this->proyectoSeleccionado = $selectCotizacion;
+        $this->progresoTrabajo = '';
 
         $this->cotizacion_id = $this->proyectoSeleccionado->id;
 
@@ -33,14 +34,16 @@ class ModalProgreso extends Component
             $this->progresoCotizacion = 'Aceptada';
         }
 
-        if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Planificada'){
-            $this->progresoTrabajo = 'Planificada';
-        }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Iniciada'){
-            $this->progresoTrabajo = 'Iniciada';
-        }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Cancelada'){
-            $this->progresoTrabajo = 'Cancelada';
-        }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Completada'){
-            $this->progresoTrabajo = 'Completada';
+        if($this->proyectoSeleccionado->trabajo){
+            if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Planificada'){
+                $this->progresoTrabajo = 'Planificada';
+            }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Iniciada'){
+                $this->progresoTrabajo = 'Iniciada';
+            }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Cancelada'){
+                $this->progresoTrabajo = 'Cancelada';
+            }else if($this->proyectoSeleccionado->trabajo->ot_estado ?? '' == 'Completada'){
+                $this->progresoTrabajo = 'Completada';
+            }
         }
     }
 }
