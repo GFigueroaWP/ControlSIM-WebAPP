@@ -26,7 +26,7 @@ return [
     'total_discount'         => 'Descuento total',
     'taxable_amount'         => 'Base imponible',
     'total_taxes'            => 'Total impuestos',
-    'tax_rate'               => 'Tipo impositivo',
+    'tax_rate'               => 'IVA',
     'total_amount'           => 'Importe total',
     'pay_until'              => 'Valido hasta',
     'amount_in_words'        => 'Cantidad en palabras',

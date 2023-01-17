@@ -4,6 +4,8 @@
     </x-slot>
 
     <x-slot name="content">
+        {{ $this->trabajoSeleccionado }}
+        {{ $this->progresoTrabajo }}
         {{-- Barra de progreso --}}
         <div class="flex justify-center">
             <h2 class="sr-only">Progreso</h2>
@@ -49,22 +51,21 @@
                             <span class="ml-2 text-red-600">Cotizacion Rechazada</span>
                         </li>
                     @endif
-                    @if ($this->progresoTrabajo == '')
+                    @if ($this->progresoTrabajo == 'no')
                         <li class="flex items-center justify-end">
                         <span class="h-6 w-6 rounded bg-gray-50 text-center text-[10px] font-bold leading-6 text-gray-600">
                         3
                         </span>
                         <span class="ml-2"> Generar orden de trabajo </span>
                         </li>
-                    @endif
-                    @if ($this->progresoTrabajo == 'Planificada')
+                    @elseif ($this->progresoTrabajo == 'Planificada')
                         <li class="flex items-center justify-center text-blue-600">
                             <span class="h-6 w-6 rounded bg-blue-50 text-center text-[10px] font-bold leading-6">
                                 3
                             </span>
                             <span class="ml-2">Trabajo planificado</span>
                         </li>
-                    @elseif ($this->progresoTrabajo == 'Iniciada')
+                    @elseif ($this->progresoTrabajo == 'Iniciada' || $this->progresoTrabajo == 'Completada' || $this->progresoTrabajo == 'Cancelada')
                         <li class="flex items-center justify-center">
                             <span class="rounded bg-green-50 p-1.5 text-green-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
@@ -78,12 +79,34 @@
                             <span class="ml-2 text-green-600">Trabajo iniciado</span>
                         </li>
                     @endif
+                    @if ($this->progresoTrabajo == 'no' || $this->progresoTrabajo == 'Planificada' || $this->progresoTrabajo == 'Iniciada')
                     <li class="flex items-center justify-end">
                         <span class="h-6 w-6 rounded bg-gray-50 text-center text-[10px] font-bold leading-6 text-gray-600">
                         4
                         </span>
                         <span class="ml-2"> Estado de orden de trabajo </span>
                     </li>
+                    @elseif ($this->progresoTrabajo == 'Cancelada')
+                    <li class="flex items-center justify-center">
+                        <span class="rounded bg-red-50 p-1.5 text-red-600">
+                            X
+                        </span>
+                        <span class="ml-2 text-red-600">Trabajo Cancelado</span>
+                    </li>
+                    @elseif ($this->progresoTrabajo == 'Completada')
+                        <li class="flex items-center justify-center">
+                            <span class="rounded bg-green-50 p-1.5 text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                    fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-green-600">Trabajo completado</span>
+                        </li>
+                    @endif
                 </ol>
             </div>
         </div>
@@ -150,7 +173,7 @@
             </table>
         </div>
         @if ($this->progresoCotizacion == 'Aceptada')
-            @if ($this->progresoTrabajo == '')
+            @if ($this->progresoTrabajo == 'no')
                 <a href="{{ route('createOrdenes',$this->proyectoSeleccionado) }}"><x-jet-button>{{ __('Crear orden de trabajo') }}</x-jet-button></a>
             @else
                 <div class="overflow-x-auto border border-gray-200 m-5">

@@ -79,7 +79,7 @@
                                 <td></td>
                             @endif
                             <td class="py-3 px-6">
-                                <x-jet-button wire:click="$emit('showProgreso',{{ $cotizacion }})">Ver</x-jet-button>
+                                <x-jet-button wire:click="$emit('showProgreso',{{ $cotizacion }},{{ $cotizacion->trabajo }})">Ver</x-jet-button>
                             </td>
                         </tr>
                         @endforeach

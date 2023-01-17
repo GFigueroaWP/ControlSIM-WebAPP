@@ -55,7 +55,7 @@
                         @foreach ($cotizaciones as $cotizacion)
                         <tr class="bg-white border-b hover:bg-gray-300">
                             <td class="py-3 px-6">{{ 'COT-'.str_pad($cotizacion->id,5,'0',STR_PAD_LEFT) }}</td>
-                            <td class="py-3 px-6">{{ $cotizacion->cliente->cli_nombre }}</td>
+                            <td class="py-3 px-6">{{ $cotizacion->cliente->cli_razonsocial }}</td>
                             <td class="py-3 px-6">{{ $cotizacion->created_at }}</td>
                             <td class="py-3 px-6">
                                 <strong class="{{ $cotizacion->cot_estado }}">

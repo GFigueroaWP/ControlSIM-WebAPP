@@ -13,10 +13,11 @@ use Usernotnull\Toast\Concerns\WireToast;
 use App\States\Trabajo\Iniciada;
 use App\States\Trabajo\Completada;
 use App\States\Trabajo\Cancelada;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ShowTrabajos extends Component
 {
-
+    use AuthorizesRequests;
     use WithFileUploads;
     use WireToast;
 
@@ -29,6 +30,7 @@ class ShowTrabajos extends Component
     public $tarea;
 
     public function mount(OrTrabajo $trabajo){
+        $this->authorize('view', $trabajo);
         $trabajo = $this->trabajo;
         $this->fillDatos();
     }
