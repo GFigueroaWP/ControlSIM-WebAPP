@@ -4,8 +4,6 @@
     </x-slot>
 
     <x-slot name="content">
-        {{ $this->trabajoSeleccionado }}
-        {{ $this->progresoTrabajo }}
         {{-- Barra de progreso --}}
         <div class="flex justify-center">
             <h2 class="sr-only">Progreso</h2>
