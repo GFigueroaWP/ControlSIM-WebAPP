@@ -21,7 +21,6 @@ class EmpleadosDeshabilitados extends Component
 
     public function render()
     {
-        $filtro_us = '%' . $this->filtro_us . '%';
 
         return view('livewire.empleados.empleados-deshabilitados', [
             'empleados' => User::onlyTrashed()

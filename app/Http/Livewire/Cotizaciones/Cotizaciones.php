@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Cotizaciones;
 
+use App\Models\Cliente;
 use App\Models\Cotizacion;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,7 +22,10 @@ class Cotizaciones extends Component
 
         return view('livewire.cotizaciones.cotizaciones',[
             'cotizaciones' => Cotizacion::latest()
-                            ->Where('id','LIKE',$filtro_cot)
+                            ->orWhere('id','LIKE',$filtro_cot)
+                            ->orWhere('created_at','LIKE',$filtro_cot)
+                            ->orWhere('updated_at','LIKE',$filtro_cot)
+                            ->orWhere('cot_estado','LIKE',$filtro_cot)
                             ->paginate(10)
         ]);
     }

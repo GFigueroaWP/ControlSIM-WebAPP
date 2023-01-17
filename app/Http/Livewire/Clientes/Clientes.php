@@ -24,6 +24,9 @@ class Clientes extends Component
                 ->orWhere('cli_razonsocial', 'LIKE', $filtro_cli)
                 ->orWhere('cli_giro', 'LIKE', $filtro_cli)
                 ->orWhere('cli_rut', 'LIKE', $filtro_cli)
+                ->orWhere('cli_direccion', 'LIKE', $filtro_cli)
+                ->orWhere('cli_comuna', 'LIKE', $filtro_cli)
+                ->orWhere('cli_ciudad', 'LIKE', $filtro_cli)
                 ->paginate(10),
         ]);
     }

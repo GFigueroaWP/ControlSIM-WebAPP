@@ -21,6 +21,8 @@ class Productos extends Component
         return view('livewire.productos.productos',[
             'productos' => Producto::latest()
             ->orWhere('prod_nombre', 'LIKE', $filtro_prod)
+            ->orWhere('id', 'LIKE', $filtro_prod)
+            ->orWhere('prod_valor', 'LIKE', $filtro_prod)
             ->paginate(10)
         ]);
     }

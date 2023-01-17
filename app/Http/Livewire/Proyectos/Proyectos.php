@@ -20,8 +20,12 @@ class Proyectos extends Component
         $filtro_pr = '%' . $this->filtro_pr . '%';
         return view('livewire.proyectos.proyectos',[
             'cotizaciones' => Cotizacion::latest()
-            ->orWhere('id', 'LIKE', $filtro_pr)
-            ->paginate(10)
+                            ->orWhere('id','LIKE',$filtro_pr)
+                            ->orWhere('created_at','LIKE',$filtro_pr)
+                            ->orWhere('updated_at','LIKE',$filtro_pr)
+                            ->orWhere('cot_estado','LIKE',$filtro_pr)
+                            ->orWhere('trabajo_id','LIKE',$filtro_pr)
+                            ->paginate(10)
         ]);
     }
 

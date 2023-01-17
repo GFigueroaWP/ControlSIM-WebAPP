@@ -68,7 +68,7 @@
                                     </strong>
                                 </td>
                             @if ($cotizacion->trabajo)
-                                <td class="py-3 px-6">{{ 'COT-'.str_pad($cotizacion->trabajo->id,5,'0',STR_PAD_LEFT) }}</td>
+                                <td class="py-3 px-6">{{ 'OT-'.str_pad($cotizacion->trabajo->id,5,'0',STR_PAD_LEFT) }}</td>
                                 <td class="py-3 px-6">
                                     <strong class="{{ $cotizacion->trabajo->ot_estado }}">
                                         {{ $cotizacion->trabajo->ot_estado }}

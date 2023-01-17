@@ -120,46 +120,46 @@
             <table class="min-w-full divide-y-2 divide-gray-200 text-xs w-full text-left">
                 <thead>
                     <tr>
-                        <th class="py-2 px-5">
+                        <th class="py-1 px-3 text-center">
                             Cotizacion
                         </th>
-                        <th class="py-2 px-5">
+                        <th class="py-1 px-3 text-center">
                             Emitida
                         </th>
-                        <th class="py-2 px-5">
+                        <th class="py-1 px-3 text-center">
                             Estado
                         </th>
-                        <th class="py-2 px-5">
+                        <th class="py-1 px-3 text-center">
                             Fecha Actualizada
                         </th>
-                        <th class="py-2 px-5">
+                        <th class="py-1 px-3 text-center">
                             Acciones
                         </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     <tr>
-                        <td>
+                        <td class="py-1 px-3 text-center">
                             {{ 'COT-'.str_pad($this->proyectoSeleccionado->id ?? '',5,'0',STR_PAD_LEFT) }}
                         </td>
-                        <td>
+                        <td class="py-1 px-3 text-center">
                             {{ $this->proyectoSeleccionado->created_at ?? '' }}
                         </td>
-                        <td>
+                        <td class="py-1 px-3 text-center">
                             <strong class="{{ $this->proyectoSeleccionado->cot_estado ?? '' }}">
                                 {{ $this->proyectoSeleccionado->cot_estado ?? '' }}
                             </strong>
                         </td>
                         @if ($this->progresoCotizacion != 'Emitida')
-                            <td>
+                            <td class="py-1 px-3 text-center">
                                 {{ $this->proyectoSeleccionado->updated_at ?? '' }}
                             </td>
                         @else
-                            <td>
+                            <td class="py-1 px-3 text-center">
                                 No ha sido actualizada
                             </td>
                         @endif
-                        <td>
+                        <td class="py-1 px-3 text-center">
                             <a href="{{ route('generarCotizacion', $this->cotizacion_id) }}" target="_blank" ><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
                             @if ($this->progresoCotizacion == 'Emitida')
                                 <x-jet-secondary-button wire:click="$emit('editarEstadoCotizacion', {{ $this->cotizacion_id }})">{{ __('Actualizar estado') }}</x-jet-secondary-button>
@@ -178,46 +178,46 @@
                     <table class="min-w-full divide-y-2 divide-gray-200 text-xs w-full text-left">
                         <thead>
                             <tr>
-                                <th class="py-2 px-5">
+                                <th class="py-1 px-3 text-center">
                                     Orden
                                 </th>
-                                <th class="py-2 px-5">
+                                <th class="py-1 px-3 text-center">
                                     Fecha Inicio
                                 </th>
-                                <th class="py-2 px-5">
+                                <th class="py-1 px-3 text-center">
                                     Feche Limite
                                 </th>
-                                <th class="py-2 px-5">
+                                <th class="py-1 px-3 text-center">
                                     Fecha cierre
                                 </th>
-                                <th class="py-2 px-5">
+                                <th class="py-1 px-3 text-center">
                                     Estado
                                 </th>
-                                <th class="py-2 px-5">
+                                <th class="py-1 px-3 text-center">
                                     Acciones
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr>
-                                <td>
+                                <td class="py-1 px-3 text-center">
                                     {{ 'OT-'.str_pad($this->proyectoSeleccionado->trabajo->id ?? '',5,'0',STR_PAD_LEFT) }}
                                 </td>
-                                <td>
+                                <td class="py-1 px-3 text-center">
                                     {{ $this->proyectoSeleccionado->trabajo->ot_inicio ?? '' }}
                                 </td>
-                                <td>
+                                <td class="py-1 px-3 text-center">
                                     {{ $this->proyectoSeleccionado->trabajo->ot_limite ?? '' }}
                                 </td>
-                                <td>
+                                <td class="py-1 px-3 text-center">
 
                                 </td>
-                                <td>
+                                <td class="py-1 px-3 text-center">
                                     <strong class="{{ $this->proyectoSeleccionado->trabajo->ot_estado ?? '' }}">
                                         {{ $this->proyectoSeleccionado->trabajo->ot_estado ?? '' }}
                                     </strong>
                                 </td>
-                                <td>
+                                <td class="py-1 px-3 text-center">
                                     <a href="{{ route('showTrabajos', $this->proyectoSeleccionado->trabajo->id ?? '') }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                                 </td>
                             </tr>
