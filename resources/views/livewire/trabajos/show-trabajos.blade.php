@@ -15,11 +15,14 @@
                     {{ __('Identificador de cotización asociada a la orden de trabajo y su respectivo cliente') }}
                 </x-slot>
                 <x-slot name="form">
-                    <div class="col-span-6 sm:col-span-4">
+                    <div class="col-span-4 sm:col-span-2">
                         <x-jet-label for="show_cot" value="{{ __('Cotización') }}" />
                         <x-jet-input id="show_cot" wire:model='show_cot' type="text"
                             placeholder="Cotización" class="mt-1 block w-full disabled" disabled/>
                         <x-jet-input-error for="show_cot" class="mt-2" />
+                    </div>
+                    <div class="col-span-2 sm:col-span-2 pt-7">
+                        <a href="{{ route('generarCotizacion', $this->trabajo->cotizacion->id) }}" target="_blank" ><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_cliente" value="{{ __('Cliente') }}" />
@@ -76,9 +79,11 @@
                                         </td>
                                         @if ($tarea->tar_estado == false)
                                             <td class="py-3 px-6">
-                                                <x-jet-secondary-button wire:click.prevent="completarTarea({{ $tarea }})" wire:loading.attr="disabled">
-                                                    {{ __('completar') }}
-                                                </x-jet-secondary-button>
+                                                @role(['Técnico','super-admin'])
+                                                    <x-jet-secondary-button wire:click.prevent="completarTarea({{ $tarea }})" wire:loading.attr="disabled">
+                                                        {{ __('completar') }}
+                                                    </x-jet-secondary-button>
+                                                @endrole
                                             </td>
                                         @else
                                             <td class="py-3 px-6">
@@ -107,14 +112,18 @@
                 </x-slot>
 
                 <x-slot name="form">
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="file_input" value={{ __('Adjuntar informe') }} />
-                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file" wire:model='informe' />
-                        <p class="mt-1 text-sm text-gray-500" id="file_input_help">Solo archivos PDF</p>
-                        <x-jet-button type="submit" wire:click.prevent="subirInforme">{{ __('subir informe') }}</x-jet-button>
-                    </div>
+                    @role(['Técnico','super-admin'])
+                        <div class="col-span-6 sm:col-span-4">
+                            <x-jet-label for="file_input" value={{ __('Adjuntar informe') }} />
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file" wire:model='informe' />
+                            <p class="mt-1 text-sm text-gray-500" id="file_input_help">Solo archivos PDF</p>
+                            <x-jet-input-error for="informe"></x-jet-input-error>
+                            <x-jet-button type="submit" wire:click.prevent="subirInforme">{{ __('subir informe') }}</x-jet-button>
+                        </div>
+                    @endrole
                     <div class="col-span-6 sm:col-span-4">
                         <div>
+                            @if ($this->trabajo->informes)
                             <table class="w-full text-base text-left">
                                 <thead>
                                     <th>
@@ -143,10 +152,42 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @endif
                         </div>
                     </div>
                 </x-slot>
             </x-jet-form-section>
+            @role(['Administrativo','super-admin'])
+                @if ($this->trabajo->ot_estado == 'Iniciada' || $this->trabajo->ot_estado == 'Planificada')
+                    <x-jet-section-border />
+
+                    <x-jet-form-section submit="actualizarEstado">
+                        <x-slot name="title">
+                            {{ __('Actualizar estado de orden de trabajo') }}
+                        </x-slot>
+
+                        <x-slot name="description">
+                            {{ __('Actualizar la orden de trabajo como completada o cancelada') }}
+                        </x-slot>
+
+                        <x-slot name="form">
+                            <div class="col-span-6 sm:col-span-4">
+                                {{ __('Seleccione que desea hacer con la orden de trabajo') }}
+                            </div>
+                        </x-slot>
+                        <x-slot name="actions">
+                            <x-jet-danger-button class="m-1" wire:click.prevent="cancelarTrabajo">
+                                {{ __('Cancelar Orden de trabajo') }}
+                            </x-jet-danger-button>
+                            @if ($this->trabajo->ot_estado == 'Iniciada')
+                                <x-jet-button class="m-1" wire:click.prevent="cerrarTrabajo">
+                                    {{ __('Completar orden de trabajo') }}
+                                </x-jet-button>
+                            @endif
+                        </x-slot>
+                    </x-jet-form-section>
+                @endif
+            @endrole
         </div>
     </div>
 </div>

@@ -18,6 +18,10 @@ abstract class TrabajoState extends State
     public static function config(): StateConfig
     {
         return parent::config()
-            ->default(Planificada::class);
+            ->default(Planificada::class)
+            ->allowTransition(Planificada::class, Iniciada::class)
+            ->allowTransition(Planificada::class, Cancelada::class)
+            ->allowTransition(Iniciada::class, Completada::class)
+            ->allowTransition(Iniciada::class, Cancelada::class);
     }
 }

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Usernotnull\Toast\Concerns\WireToast;
+use App\States\Trabajo\Iniciada;
+use App\States\Trabajo\Completada;
+use App\States\Trabajo\Cancelada;
 
 class ShowTrabajos extends Component
 {
@@ -52,6 +55,10 @@ class ShowTrabajos extends Component
         $this->tarea->tar_estado = true;
         $this->tarea->tar_completada = Carbon::now();
 
+        if($this->trabajo->ot_estado == 'Planificada'){
+            $this->trabajo->ot_estado->transitionTo(Iniciada::class);
+        }
+
         $this->tarea->save();
 
         $this->emit('refreshTrabajo');
@@ -86,5 +93,12 @@ class ShowTrabajos extends Component
 
     public function descargarInforme(Informe $descargar){
         return Storage::disk('s3')->download('informes/'.$descargar->inf_directorio);
+    }
+
+    public function cancelarTrabajo(){
+        $this->trabajo->ot_estado->transitionTo(Cancelada::class);
+    }
+    public function cerrarTrabajo(){
+        $this->trabajo->ot_estado->transitionTo(Completada::class);
     }
 }

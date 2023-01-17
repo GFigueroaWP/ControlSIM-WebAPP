@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cotizacion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
@@ -12,24 +13,31 @@ class CotizacionDoc extends Controller
 {
     public function generateCotizacion(Cotizacion $cotizacion){
         $customer = new Party([
-            'name'          => 'Empresa Ejemplo S.A.',
-            'phone'         => '+56912345678',
-            'address'       => 'Calle 12 3020 , Concepcion',
+            'name'          => $cotizacion->cliente->cli_razonsocial,
             'custom_fields' => [
-                'correo'    => 'empresa@email.cl',
-                'rut'   => '11.111.111-1'
+                'rut'   => $cotizacion->cliente->cli_rut,
+                'giro'   => $cotizacion->cliente->cli_giro,
+                'direccion'=> $cotizacion->cliente->cli_direccion,
+                'comuna' => $cotizacion->cliente->cli_comuna,
+                'ciudad' => $cotizacion->cliente->cli_ciudad,
+                'telefono' => $cotizacion->cliente->cli_telefono,
+                'email' => $cotizacion->cliente->cli_email,
             ]
         ]);
 
-            $items = [(new InvoiceItem())->title('servicio ejemplo')->pricePerUnit(500000)->quantity(1),
-                        (new InvoiceItem())->title('producto ejemplo')->pricePerUnit(90000)->quantity(3)];
+        foreach($cotizacion->productos as $producto){
+            $items[] = (new InvoiceItem())->title($producto->prod_nombre)->pricePerUnit($producto->prod_valor)->quantity($producto->pivot->cantidad);
+        }
+
+            $fecha = Carbon::parse($cotizacion->created_at)->format('d/m/Y');
+            $fecha2 = Carbon::createFromFormat( 'd/m/Y' , $fecha);
 
         $invoice = Invoice::make('cotizacion')
-            ->status(('Emitida'))
+            ->status(($cotizacion->cot_estado))
             ->sequence('1')
             ->serialNumberFormat('{SEQUENCE}/{SERIES}')
             ->buyer($customer)
-            ->date(now())
+            ->date($fecha2)
             ->dateFormat('m/d/Y')
             ->payUntilDays(14)
             ->currencySymbol('$')
