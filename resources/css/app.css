@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.select2-container--default .select2-selection--single{
+    @apply h-10 w-full border-gray-300 focus:border-csim focus:ring focus:ring-csim focus:ring-opacity-50 rounded-md shadow-sm
+}
+
+.select2-selection__rendered {
+    margin: 5px;
+}
+
+.select2-selection__arrow {
+    margin: 5px;
+}
+
+.disabled{
+    @apply bg-gray-200
+}
+
+.Emitida{
+    @apply rounded bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700
+}
+
+.Aceptada{
+    @apply rounded bg-green-100 px-3 py-1.5 text-xs font-medium text-green-700
+}
+
+.Rechazada{
+    @apply rounded bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700
+}
+
+.Planificada{
+    @apply rounded bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700
+}
+
+.Iniciada{
+    @apply rounded bg-yellow-100 px-3 py-1.5 text-xs font-medium text-yellow-700
+}
+
+.Completada{
+    @apply rounded bg-green-100 px-3 py-1.5 text-xs font-medium text-green-700
+}
+
+.Cancelada{
+    @apply rounded bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700
+}
