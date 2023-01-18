@@ -56,7 +56,7 @@
                     </div>
                 </x-slot>
                 <x-slot name="actions">
-                    <x-jet-danger-button class="m-1">{{ __('Reiniciar contraseña') }}</x-jet-danger-button>
+                    {{-- <x-jet-danger-button class="m-1">{{ __('Reiniciar contraseña') }}</x-jet-danger-button> --}}
                     <x-jet-button type="submit" class="m-1">{{ __('editar') }}</x-jet-button>
                 </x-slot>
             </x-jet-form-section>

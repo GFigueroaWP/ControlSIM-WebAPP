@@ -4,7 +4,11 @@
 
         <ul class="mt-3 list-disc list-inside text-sm text-red-600">
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                @if ($error = 'auth.failed')
+                    <li>Las credenciales son incorrectas.</li>
+                @else
+                    <li>{{ $error }}</li>
+                @endif
             @endforeach
         </ul>
     </div>
