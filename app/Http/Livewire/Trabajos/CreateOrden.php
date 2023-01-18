@@ -7,11 +7,13 @@ use App\Models\OrTrabajo;
 use App\Models\Tarea;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class CreateOrden extends Component
 {
+    use AuthorizesRequests;
     use WireToast;
 
     public $cotizacion;
@@ -26,6 +28,7 @@ class CreateOrden extends Component
     public $fechaInicio, $fechaLimite;
 
     public function mount(Cotizacion $cotizacion){
+        $this->authorize('create', OrTrabajo::class);
         $this->tecnicos = User::role('Técnico')->get();
         $this->cotizacion = $cotizacion;
         $this->fillDatos();

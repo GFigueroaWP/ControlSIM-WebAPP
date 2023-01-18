@@ -3,16 +3,22 @@
 namespace App\Http\Livewire\Productos;
 
 use App\Models\Producto;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Productos extends Component
 {
+    use AuthorizesRequests;
     use WithPagination;
 
     public $listeners = ['productoCreado' => '$refresh'];
 
     public $filtro_prod;
+
+    public function mount(){
+        $this->authorize('viewAny', Producto::class);
+    }
 
     public function render()
     {

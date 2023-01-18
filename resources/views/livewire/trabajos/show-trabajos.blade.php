@@ -80,9 +80,11 @@
                                         @if ($tarea->tar_estado == false)
                                             <td class="py-3 px-6">
                                                 @role(['Técnico','super-admin'])
-                                                    <x-jet-secondary-button wire:click.prevent="completarTarea({{ $tarea }})" wire:loading.attr="disabled">
-                                                        {{ __('completar') }}
-                                                    </x-jet-secondary-button>
+                                                    @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada')
+                                                        <x-jet-secondary-button wire:click.prevent="completarTarea({{ $tarea }})" wire:loading.attr="disabled">
+                                                            {{ __('completar') }}
+                                                        </x-jet-secondary-button>
+                                                    @endif
                                                 @endrole
                                             </td>
                                         @else
@@ -113,13 +115,15 @@
 
                 <x-slot name="form">
                     @role(['Técnico','super-admin'])
-                        <div class="col-span-6 sm:col-span-4">
-                            <x-jet-label for="file_input" value={{ __('Adjuntar informe') }} />
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file" wire:model='informe' />
-                            <p class="mt-1 text-sm text-gray-500" id="file_input_help">Solo archivos PDF</p>
-                            <x-jet-input-error for="informe"></x-jet-input-error>
-                            <x-jet-button type="submit" wire:click.prevent="subirInforme">{{ __('subir informe') }}</x-jet-button>
-                        </div>
+                        @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada')
+                            <div class="col-span-6 sm:col-span-4">
+                                <x-jet-label for="file_input" value={{ __('Adjuntar informe') }} />
+                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file" wire:model='informe' />
+                                <p class="mt-1 text-sm text-gray-500" id="file_input_help">Solo archivos PDF</p>
+                                <x-jet-input-error for="informe"></x-jet-input-error>
+                                <x-jet-button type="submit" wire:click.prevent="subirInforme">{{ __('subir informe') }}</x-jet-button>
+                            </div>
+                        @endif
                     @endrole
                     <div class="col-span-6 sm:col-span-4">
                         <div>
@@ -179,7 +183,7 @@
                             <x-jet-danger-button class="m-1" wire:click.prevent="cancelarTrabajo">
                                 {{ __('Cancelar Orden de trabajo') }}
                             </x-jet-danger-button>
-                            @if ($this->trabajo->ot_estado == 'Iniciada')
+                            @if ($this->progresoTareas == 100 || $this->trabajo->informes->count() != 0)
                                 <x-jet-button class="m-1" wire:click.prevent="cerrarTrabajo">
                                     {{ __('Completar orden de trabajo') }}
                                 </x-jet-button>

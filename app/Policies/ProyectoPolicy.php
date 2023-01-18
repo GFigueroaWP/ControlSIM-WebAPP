@@ -18,7 +18,11 @@ class ProyectoPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if($user->hasRole(['Administrativo','super-admin'])){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

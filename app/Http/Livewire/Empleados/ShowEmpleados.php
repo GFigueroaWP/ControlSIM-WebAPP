@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Empleados;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ShowEmpleados extends Component
 {
+    use AuthorizesRequests;
     use WireToast;
 
     public $empleado;
@@ -17,6 +19,7 @@ class ShowEmpleados extends Component
 
     public function mount(User $empleado)
     {
+        $this->authorize('viewAny', User::class);
         $this->fillEmpleado();
     }
 

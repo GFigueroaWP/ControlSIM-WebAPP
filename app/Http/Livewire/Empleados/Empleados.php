@@ -6,11 +6,13 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Spatie\Permission\Models\Role;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class Empleados extends Component
 {
+    use AuthorizesRequests;
     use WireToast;
     use WithPagination;
 
@@ -18,6 +20,10 @@ class Empleados extends Component
     public $modalDeshabilitacionEmpleado = false;
 
     public $listeners = ['empleadoCreado' => '$refresh', 'empleadoDeshabilitado' => '$refresh'];
+
+    public function mount(){
+        $this->authorize('viewAny', User::class);
+    }
 
     public function render()
     {

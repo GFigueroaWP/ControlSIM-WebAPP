@@ -13,6 +13,7 @@ use App\Http\Livewire\Proyectos\Proyectos;
 use App\Http\Livewire\Trabajos\CreateOrden;
 use App\Http\Livewire\Trabajos\Ordenes;
 use App\Http\Livewire\Trabajos\ShowTrabajos;
+use App\Http\Livewire\Trabajos\TrabajosPropios;
 use Illuminate\Support\Facades\Route;
 
 
@@ -58,5 +59,7 @@ Route::middleware([
     Route::get('/ordenes', Ordenes::class)->name('ordenes');
     Route::get('/ordenes/{cotizacion}/create', CreateOrden::class)->name('createOrdenes');
     Route::get('/ordenes/{trabajo}', ShowTrabajos::class)->name('showTrabajos');
+
+    Route::get('/trabajos', TrabajosPropios::class)->name('trabajos');
 
 });

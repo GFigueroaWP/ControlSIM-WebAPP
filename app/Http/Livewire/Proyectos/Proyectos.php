@@ -3,17 +3,23 @@
 namespace App\Http\Livewire\Proyectos;
 
 use App\Models\Cotizacion;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Proyectos extends Component
 {
+    use AuthorizesRequests;
     use WithPagination;
 
     protected $listeners = ['refreshProyecto' => '$refresh'];
 
     public $filtro_pr;
     public $proyectoSeleccionado;
+
+    public function mount(){
+        $this->authorize('viewAny', Cotizacion::class);
+    }
 
     public function render()
     {

@@ -1,6 +1,6 @@
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Cotizaciones') }}
+        {{ __('Trabajos Asignados') }}
     </h2>
 </x-slot>
 
@@ -14,7 +14,7 @@
                             <a href="{{ route('createCotizaciones') }}"><x-jet-button>{{ __('Crear cotizacion') }}</x-jet-button></a>
                         @endcan
                     </div>
-                    <label for="search_empleados" class="sr-only">Buscar</label>
+                    <label for="search_trabajos" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -24,8 +24,8 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input wire:model='filtro_cot' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
-                            name="search_empleados" id="search_empleados" placeholder="Buscar Empleados">
+                        <input wire:model='filtro_tr' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
+                            name="search_trabajos" id="search_trabajos" placeholder="Buscar trabajos">
                     </div>
                 </div>
                 <table class=" w-full text-base text-left">
@@ -35,13 +35,13 @@
                                 Orden
                             </th>
                             <th scope="col" class="py-2 px-6">
-                                Cliente
-                            </th>
-                            <th scope="col" class="py-2 px-6">
                                 Fecha de inicio
                             </th>
                             <th scope="col" class="py-2 px-6">
                                 Fecha limite
+                            </th>
+                            <th scope="col" class="py-2 px-6">
+                                Estado
                             </th>
                             <th scope="col" class="py-2 px-6">
                                 Fecha completada
@@ -52,26 +52,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cotizaciones as $cotizacion)
+                        @foreach ($trabajos as $trabajo)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $cotizacion->id }}</td>
-                            <td class="py-3 px-6">{{ $cotizacion->cliente->cli_nombre }}</td>
-                            <td class="py-3 px-6">{{ \Carbon\Carbon::parse($cotizacion->created_at)->format('d-m-Y') }}</td>
-                            <td class="py-3 px-6">{{ $cotizacion->cot_estado }}</td>
+                            <td class="py-3 px-6">{{ $trabajo->id }}</td>
+                            <td class="py-3 px-6">{{ $trabajo->ot_inicio}}</td>
+                            <td class="py-3 px-6">{{ $trabajo->ot_limite }}</td>
                             <td class="py-3 px-6">
-                                <x-jet-button>Ver</x-jet-button>
+                                <strong class="{{ $trabajo->ot_estado }}">
+                                    {{ $trabajo->ot_estado }}
+                                </strong></td>
+                            <td class="py-3 px-6">{{ $trabajo->ot_completada }}</td>
+                            <td class="py-3 px-6">
+                                <a href="{{ route('showTrabajos', $trabajo->id) }}"><x-jet-button>{{ __('Ver') }}</x-jet-button></a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @if ($cotizaciones->count())
+                @if ($trabajos->count())
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    {{ $cotizaciones->links() }}
+                    {{ $trabajos->links() }}
                 </div>
                 @else
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    No hay resultados para la búsqueda "{{ $filtro_cot }}"
+                    No hay resultados para la búsqueda "{{ $filtro_tr }}"
                 </div>
                 @endif
             </div>

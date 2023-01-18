@@ -6,14 +6,20 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 use App\Models\Cliente;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Clientes extends Component
 {
+    use AuthorizesRequests;
     use WithPagination;
 
     public $filtro_cli;
 
     public $listeners = ['clienteCreado' => '$refresh'];
+
+    public function mount(){
+        $this->authorize('viewAny', Cliente::class);
+    }
 
     public function render()
     {

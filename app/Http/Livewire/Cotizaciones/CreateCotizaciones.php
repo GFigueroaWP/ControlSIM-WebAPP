@@ -5,11 +5,13 @@ namespace App\Http\Livewire\Cotizaciones;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Producto;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class CreateCotizaciones extends Component
 {
+    use AuthorizesRequests;
     use WireToast;
 
     public $clientes;
@@ -21,6 +23,7 @@ class CreateCotizaciones extends Component
     public $listeners = ['fillCLiente'];
 
     public function mount(){
+        $this->authorize('viewAny', Cotizacion::class);
         $this->allProductos = Producto::all();
         $this->clientes = Cliente::all();
         $this->subtotal = 0;

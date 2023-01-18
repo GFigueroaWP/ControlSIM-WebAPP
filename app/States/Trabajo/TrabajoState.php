@@ -21,6 +21,7 @@ abstract class TrabajoState extends State
             ->default(Planificada::class)
             ->allowTransition(Planificada::class, Iniciada::class)
             ->allowTransition(Planificada::class, Cancelada::class)
+            ->allowTransition(Planificada::class, Completada::class)
             ->allowTransition(Iniciada::class, Completada::class)
             ->allowTransition(Iniciada::class, Cancelada::class);
     }

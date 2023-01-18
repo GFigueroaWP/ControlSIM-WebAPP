@@ -35,11 +35,11 @@
                         {{ __('Proyectos') }}
                     </x-jet-nav-link>
                     @endcan
-                    {{-- @can('trabajos_access')
+                    @role('Técnico')
                     <x-jet-nav-link href="{{ route('trabajos') }}" :active="request()->routeIs('trabajos')">
                         {{ __('Trabajos') }}
                     </x-jet-nav-link>
-                    @endcan --}}
+                    @endrole
                 </div>
             </div>
 

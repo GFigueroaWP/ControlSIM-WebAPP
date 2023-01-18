@@ -30,9 +30,9 @@ class OrTrabajoPolicy
      */
     public function view(User $user, OrTrabajo $orTrabajo)
     {
-        if($user->hasRole(['Administración','super-admin'])){
+        if($user->hasRole(['Administrativo','super-admin'])){
             return true;
-        }elseif($user->hasRole('Técnico') && $orTrabajo->tecnicos->exists($user)){
+        }elseif($user->hasRole('Técnico') && $orTrabajo->tecnicos){
             return true;
         }else{
             return false;
@@ -47,7 +47,11 @@ class OrTrabajoPolicy
      */
     public function create(User $user)
     {
-        //
+        if($user->hasRole(['Administrativo','super-admin'])){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

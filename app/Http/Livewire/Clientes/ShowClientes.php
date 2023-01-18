@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Clientes;
 
 use App\Models\Cliente;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ShowClientes extends Component
 {
+    use AuthorizesRequests;
     use WireToast;
 
     public $cliente,
@@ -25,6 +27,7 @@ class ShowClientes extends Component
     public function mount(Cliente $cliente)
     {
         $this->fillCliente();
+        $this->authorize('viewAny', Cliente::class);
     }
 
     public function render()
