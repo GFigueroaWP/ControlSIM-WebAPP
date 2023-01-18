@@ -31,6 +31,9 @@ class Proyectos extends Component
                             ->orWhere('updated_at','LIKE',$filtro_pr)
                             ->orWhere('cot_estado','LIKE',$filtro_pr)
                             ->orWhere('trabajo_id','LIKE',$filtro_pr)
+                            ->orWhereHas('trabajo',function ($query) use ($filtro_pr){
+                                $query->orWhere('trabajo_id','=',$filtro_pr);
+                            })
                             ->paginate(10)
         ]);
     }

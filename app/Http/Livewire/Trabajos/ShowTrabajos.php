@@ -82,11 +82,11 @@ class ShowTrabajos extends Component
             'trabajo_id' => $this->trabajo->id
         ]);
 
-        $informeCreado->inf_directorio = auth()->user()->us_username.'INF-'.$informeCreado->id.'OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf';
+        $informeCreado->inf_directorio = auth()->user()->us_username.'.INF-'.$informeCreado->id.'.OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf';
 
         $informeCreado->save();
 
-        $this->informe->storeAs('informes', auth()->user()->us_username.'.INF-'.$informeCreado->id.'OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf','s3');
+        $this->informe->storeAs('informes', auth()->user()->us_username.'.INF-'.$informeCreado->id.'.OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf','s3');
 
         toast()->success('Informe añadido añadido con éxito!')->push();
 

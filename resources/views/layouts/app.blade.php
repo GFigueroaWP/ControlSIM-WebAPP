@@ -53,5 +53,6 @@
 
         @yield('scripts')
         @livewireScripts
+        @livewireChartsScripts
     </body>
 </html>

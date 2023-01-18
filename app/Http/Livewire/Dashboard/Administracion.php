@@ -4,12 +4,20 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Cotizacion;
 use App\Models\OrTrabajo;
+use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Carbon\Carbon;
 use Livewire\Component;
 use Spatie\Activitylog\Models\Activity;
 
 class Administracion extends Component
 {
+    public $types = ['emitidas', 'aceptadas', 'rechazadas'];
+
+    public $colors = [
+        'rechazadas' => '#fc8181',
+        'aceptadas' => '#66DA26',
+        'emitidas' => '#cbd5e0',
+    ];
 
     public $cotizacionesEmitidas, $cotizacionesAceptadas, $cotizacionesRechazadas;
     public $trabajosPlanificados, $trabajosIniciados, $trabajosCancelados, $trabajosCompletados;
@@ -17,6 +25,8 @@ class Administracion extends Component
 
     public function render()
     {
+
+
         $this->cotizacionesEmitidas = Cotizacion::whereMonth('created_at',Carbon::now()->month)->count();
         $this->cotizacionesAceptadas = Cotizacion::whereMonth('updated_at',Carbon::now()->month)->where('cot_estado', 'Aceptada')->count();
         $this->cotizacionesRechazadas = Cotizacion::whereMonth('updated_at',Carbon::now()->month)->where('cot_estado', 'Rechazada')->count();
@@ -28,7 +38,20 @@ class Administracion extends Component
 
         $this->actividades = Activity::latest()->take(5)->get();
 
+        $columnChartModel = LivewireCharts::columnChartModel()
+                            ->setTitle('Cotizaciones')
+                            ->addColumn('emitidas',$this->cotizacionesEmitidas,'#cbd5e0')
+                            ->addColumn('aceptadas',$this->cotizacionesAceptadas,'#66DA26')
+                            ->addColumn('rechazadas',$this->cotizacionesRechazadas,'#fc8181')->withGrid();
 
-        return view('livewire.dashboard.administracion');
+        $columnChartModel2 = LivewireCharts::columnChartModel()
+                            ->setTitle('Trabajos')
+                            ->addColumn('planificados',$this->trabajosPlanificados,'#cbd5e0')
+                            ->addColumn('iniciados',$this->trabajosIniciados,'#f6ad55')
+                            ->addColumn('completados',$this->trabajosCompletados,'#66DA26')
+                            ->addColumn('cancelados',$this->trabajosCancelados,'#fc8181')->withGrid();
+
+        return view('livewire.dashboard.administracion')->with(['columnChartModel' => $columnChartModel,
+                                                                'columnChartModel2' => $columnChartModel2]);
     }
 }
