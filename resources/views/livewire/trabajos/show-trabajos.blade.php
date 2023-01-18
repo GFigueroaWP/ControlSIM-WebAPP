@@ -89,7 +89,7 @@
                                             </td>
                                         @else
                                             <td class="py-3 px-6">
-                                                Completada el {{ $tarea->tar_completada }}
+                                                Completada el {{ \Carbon\Carbon::parse( $tarea->tar_completada)->format('d-m-Y')}}
                                             </td>
                                         @endif
                                     </tr>
