@@ -1,6 +1,6 @@
 <x-jet-dialog-modal wire:model='modalShowProyecto'>
     <x-slot name="title">
-        {{ _('Informacion del proyecto') }}
+        {{ __('Informacion del proyecto') }}
     </x-slot>
 
     <x-slot name="content">
