@@ -92,10 +92,10 @@
     {{-- Modal de confirmación de suspension de usuario --}}
     <x-jet-confirmation-modal wire:model='modalDeshabilitacionEmpleado'>
         <x-slot name="title">
-            {{ _('Deshabilitar usuario') }}
+            {{ __('Deshabilitar usuario') }}
         </x-slot>
         <x-slot name="content">
-            {{ _('¿Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser
+            {{ __('¿Desea deshabilitar el acceso a la plataforma del usuario seleccionado? Esta acción no puede ser
             deshecha') }}
         </x-slot>
         <x-slot name="footer">
