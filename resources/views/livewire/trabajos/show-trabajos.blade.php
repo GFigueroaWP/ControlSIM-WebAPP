@@ -148,7 +148,7 @@
                                             {{ $informe->inf_directorio }}
                                         </td>
                                         <td class="py-3 px-6">
-                                            Subido el {{ $informe->created_at }}
+                                            Subido el {{ \Carbon\Carbon::parse( $informe->created_at)->format('d-m-Y')}}
                                         </td>
                                         <td>
                                             <x-jet-button wire:click.prevent='descargarInforme({{ $informe }})'>Descargar</x-jet-button>
