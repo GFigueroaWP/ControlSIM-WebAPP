@@ -184,6 +184,6 @@ class CreateOrden extends Component
     ];
 
     protected $messages = [
-
+        'fechaInicio.required' => 'La fecha de inicio es obligatoria'
     ];
 }

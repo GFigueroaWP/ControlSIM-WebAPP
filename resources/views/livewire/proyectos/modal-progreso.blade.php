@@ -210,7 +210,7 @@
                                     {{ $this->proyectoSeleccionado->trabajo->ot_limite ?? '' }}
                                 </td>
                                 <td class="py-1 px-3 text-center">
-
+                                    {{ $this->proyectoSeleccionado->trabajo->ot_completada ?? '' }}
                                 </td>
                                 <td class="py-1 px-3 text-center">
                                     <strong class="{{ $this->proyectoSeleccionado->trabajo->ot_estado ?? '' }}">

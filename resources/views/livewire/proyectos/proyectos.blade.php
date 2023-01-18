@@ -19,11 +19,6 @@
                             <a href="{{ route('cotizaciones') }}"><x-jet-secondary-button>{{ __('Ver cotizaciones') }}</x-jet-secondary-button></a>
                         @endcan
                     </div>
-                    <div class="justify-self-end">
-                        @can('ordenes_access')
-                            <a href="{{ route('ordenes') }}"><x-jet-secondary-button>{{ __('Ver ordenes de trabajo') }}</x-jet-secondary-button></a>
-                        @endcan
-                    </div>
                     <label for="search_proyecto" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

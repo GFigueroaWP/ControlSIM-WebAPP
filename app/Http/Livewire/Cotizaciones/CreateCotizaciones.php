@@ -120,13 +120,16 @@ class CreateCotizaciones extends Component
 
         $cot_creado = Cotizacion::create([
             'cliente_id' => $this->seleccionado->id
-        ])->productos()->sync($items);
+        ]);
 
         activity('Cotizacion')
             ->performedOn($cot_creado)
             ->log('Creado');
 
+        $cot_creado->productos()->sync($items);
+
         toast()->success('cotizacion añadida con éxito!')->pushOnNextPage();
+
         return redirect()->route('proyectos');
     }
 

@@ -38,7 +38,7 @@ class ModalEstados extends Component
             ->performedOn($this->cotizacion)
             ->log('Rechazado');
 
-        toast()->info('Cotizacion actualizado con éxito!')->push();
+        toast()->info('Cotizacion actualizada con éxito!')->push();
 
         $this->emit('estadoCotizacionActualizado');
         $this->emit('refreshProyecto');
@@ -52,7 +52,7 @@ class ModalEstados extends Component
             ->performedOn($this->cotizacion)
             ->log('Aceptado');
 
-        toast()->info('Cotizacion actualizado con éxito!')->push();
+        toast()->info('Cotizacion actualizada con éxito!')->push();
         $this->emit('estadoCotizacionActualizado');
         $this->emit('refreshProyecto');
         return redirect()->back();

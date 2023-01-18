@@ -24,7 +24,7 @@ class Administracion extends Component
         $this->trabajosPlanificados = OrTrabajo::whereMonth('ot_inicio',Carbon::now()->month)->where('ot_estado', 'Planificada')->count();
         $this->trabajosIniciados = OrTrabajo::whereMonth('updated_at',Carbon::now()->month)->where('ot_estado', 'Iniciada')->count();
         $this->trabajosCancelados = OrTrabajo::whereMonth('updated_at',Carbon::now()->month)->where('ot_estado', 'Cancelada')->count();
-        $this->trabajosCompletados = OrTrabajo::whereMonth('updated_at',Carbon::now()->month)->where('ot_estado', 'Completada')->count();
+        $this->trabajosCompletados = OrTrabajo::whereMonth('ot_completada',Carbon::now()->month)->where('ot_estado', 'Completada')->count();
 
         $this->actividades = Activity::latest()->take(5)->get();
 

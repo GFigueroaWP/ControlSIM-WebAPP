@@ -27,7 +27,9 @@
 
         <div class="ml-12">
             <div class="mt-2 text-sm text-gray-500">
-
+                <h1 class="font-bold my-2 text-xl">Trabajos Asignados: {{ $this->trabajosAsignados }}</h1>
+                <h1 class="font-bold my-2 text-xl text-yellow-500">Trabajos en progreso: {{ $this->trabajosIniciados }}</h1>
+                <h1 class="font-bold my-2 text-xl text-green-500">Trabajos Finalizados: {{$this->trabajosCompletados }}</h1>
             </div>
         </div>
     </div>

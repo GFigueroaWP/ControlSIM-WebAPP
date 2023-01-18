@@ -50,7 +50,7 @@
                     <x-jet-input-error for="cli_comuna" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label for="cli_ciudad" value="{{ __('ciudad') }}" />
+                    <x-jet-label for="cli_ciudad" value="{{ __('Ciudad') }}" />
                     <x-jet-input id="cli_ciudad" wire:model.lazy='cli_ciudad' type="text" placeholder='Ciudad'
                         class="mt-1 block w-full" />
                     <x-jet-input-error for="cli_ciudad" class="mt-2" />

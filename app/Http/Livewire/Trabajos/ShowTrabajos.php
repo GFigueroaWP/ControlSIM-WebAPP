@@ -67,6 +67,8 @@ class ShowTrabajos extends Component
             ->performedOn($this->trabajo)
             ->log('Completado');
 
+            toast()->info('Tarea completada')->push();
+
         $this->emit('refreshTrabajo');
     }
 
@@ -80,11 +82,11 @@ class ShowTrabajos extends Component
             'trabajo_id' => $this->trabajo->id
         ]);
 
-        $informeCreado->inf_directorio = auth()->user()->us_username.'.OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf';
+        $informeCreado->inf_directorio = auth()->user()->us_username.'INF-'.$informeCreado->id.'OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf';
 
         $informeCreado->save();
 
-        $this->informe->storeAs('informes','INF-'.$informeCreado->id.'.OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf','s3');
+        $this->informe->storeAs('informes', auth()->user()->us_username.'.INF-'.$informeCreado->id.'OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf','s3');
 
         toast()->success('Informe añadido añadido con éxito!')->push();
 
@@ -103,14 +105,31 @@ class ShowTrabajos extends Component
 
     public function cancelarTrabajo(){
         $this->trabajo->ot_estado->transitionTo(Cancelada::class);
+
         activity('Trabajo')
             ->performedOn($this->trabajo)
             ->log('Cancelado');
+
+            toast()->success('el trabajo ha sido cancelado con éxito!')->push();
     }
+
     public function cerrarTrabajo(){
+
         $this->trabajo->ot_estado->transitionTo(Completada::class);
+
+        $this->trabajo->ot_completada = Carbon::now();
+
+        $this->trabajo->save();
+
         activity('Trabajo')
             ->performedOn($this->trabajo)
             ->log('Completado');
+
+        toast()->success('el trabajo ha sido completado con éxito!')->push();
     }
+
+    protected $messages = [
+        'mimes' => 'El archivo debe ser pdf',
+        'max' => 'El archivo no debe pesar mas de 2MB'
+    ];
 }

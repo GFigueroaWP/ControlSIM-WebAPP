@@ -9,12 +9,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <div class="flex justify-between items-center p-4">
-                    <div class="justify-self-start">
-                        @can('cotizaciones_create')
-                            <a href="{{ route('createCotizaciones') }}"><x-jet-button>{{ __('Crear cotizacion') }}</x-jet-button></a>
-                        @endcan
-                    </div>
-                    <label for="search_trabajos" class="sr-only">Buscar</label>
+                    {{-- <label for="search_trabajos" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -26,7 +21,7 @@
                         </div>
                         <input wire:model='filtro_tr' class="block p-2 pl-10 w-80 border border-gray-300" type="text"
                             name="search_trabajos" id="search_trabajos" placeholder="Buscar trabajos">
-                    </div>
+                    </div> --}}
                 </div>
                 <table class=" w-full text-base text-left">
                     <thead class="uppercase">

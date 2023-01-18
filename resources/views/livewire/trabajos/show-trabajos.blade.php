@@ -15,15 +15,15 @@
                     {{ __('Identificador de cotización asociada a la orden de trabajo y su respectivo cliente') }}
                 </x-slot>
                 <x-slot name="form">
-                    <div class="col-span-4 sm:col-span-2">
+                    <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_cot" value="{{ __('Cotización') }}" />
                         <x-jet-input id="show_cot" wire:model='show_cot' type="text"
                             placeholder="Cotización" class="mt-1 block w-full disabled" disabled/>
                         <x-jet-input-error for="show_cot" class="mt-2" />
                     </div>
-                    <div class="col-span-2 sm:col-span-2 pt-7">
+                    {{-- <div class="col-span-2 sm:col-span-2 pt-7">
                         <a href="{{ route('generarCotizacion', $this->trabajo->cotizacion->id) }}" target="_blank" ><x-jet-button>{{ __('Generar PDF') }}</x-jet-button></a>
-                    </div>
+                    </div> --}}
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_cliente" value="{{ __('Cliente') }}" />
                         <x-jet-input id="show_cliente" wire:model='show_cliente' type="text" class="mt-1 block w-full disabled"
