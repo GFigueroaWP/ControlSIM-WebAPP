@@ -67,7 +67,7 @@ class ShowClientes extends Component
 
         $this->cliente->save();
 
-        activity('Clientes')
+        activity('Cliente')
             ->performedOn($this->cliente)
             ->log('Actualizado');
 

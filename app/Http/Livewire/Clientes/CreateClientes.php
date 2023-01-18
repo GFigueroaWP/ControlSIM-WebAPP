@@ -67,7 +67,7 @@ class CreateClientes extends Component
 
         $this->reset(['cli_razonsocial', 'cli_giro', 'cli_rut', 'cli_email', 'cli_telefono', 'cli_direccion', 'cli_comuna', 'cli_ciudad']);
 
-        activity('Clientes')
+        activity('Cliente')
             ->performedOn($creado)
             ->log('Creado');
 

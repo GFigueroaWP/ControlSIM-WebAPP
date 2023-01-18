@@ -55,9 +55,9 @@ class Empleados extends Component
     {
         $seleccionado->delete();
 
-        activity('empleados')
+        activity('Empleado')
             ->performedOn($seleccionado)
-            ->log('Usuario deshabilitado');
+            ->log('Deshabilitado');
 
         toast()->success('Empleado deshabilitado con éxito!')->push();
 

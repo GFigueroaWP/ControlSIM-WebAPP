@@ -122,6 +122,10 @@ class CreateCotizaciones extends Component
             'cliente_id' => $this->seleccionado->id
         ])->productos()->sync($items);
 
+        activity('Cotizacion')
+            ->performedOn($cot_creado)
+            ->log('Creado');
+
         toast()->success('cotizacion añadida con éxito!')->pushOnNextPage();
         return redirect()->route('proyectos');
     }

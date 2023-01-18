@@ -44,7 +44,7 @@ class CreateProductos extends Component
 
         $this->reset(['prod_nombre', 'prod_valor']);
 
-        activity('Productos')
+        activity('Producto')
             ->performedOn($creado)
             ->log('Creado');
 

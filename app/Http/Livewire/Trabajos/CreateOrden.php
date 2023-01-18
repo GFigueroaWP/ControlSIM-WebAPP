@@ -171,6 +171,10 @@ class CreateOrden extends Component
 
         $ot_creada->tecnicos()->sync($tecnicos);
 
+        activity('Trabajo')
+            ->performedOn($ot_creada)
+            ->log('Creado');
+
         toast()->success('orden añadida con éxito!')->pushOnNextPage();
         return redirect()->route('proyectos');
     }

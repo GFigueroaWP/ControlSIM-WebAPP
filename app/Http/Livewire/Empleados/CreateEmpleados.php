@@ -79,9 +79,9 @@ class CreateEmpleados extends Component
 
         toast()->success('Empleado añadido con éxito!')->push();
 
-        activity('empleados')
+        activity('Empleado')
             ->performedOn($creado)
-            ->log('Usuario Creado');
+            ->log('Creado');
 
         $this->emit('empleadoCreado');
 

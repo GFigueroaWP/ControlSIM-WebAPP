@@ -63,6 +63,10 @@ class ShowTrabajos extends Component
 
         $this->tarea->save();
 
+        activity('Tarea')
+            ->performedOn($this->trabajo)
+            ->log('Completado');
+
         $this->emit('refreshTrabajo');
     }
 
@@ -84,9 +88,9 @@ class ShowTrabajos extends Component
 
         toast()->success('Informe añadido añadido con éxito!')->push();
 
-        activity('informes')
-            ->performedOn($informeCreado)
-            ->log('Informe añadido Creado');
+        activity('Informe')
+            ->performedOn($this->trabajo)
+            ->log('Añadido');
 
         $this->emit('refreshTrabajo');
 
@@ -99,8 +103,14 @@ class ShowTrabajos extends Component
 
     public function cancelarTrabajo(){
         $this->trabajo->ot_estado->transitionTo(Cancelada::class);
+        activity('Trabajo')
+            ->performedOn($this->trabajo)
+            ->log('Cancelado');
     }
     public function cerrarTrabajo(){
         $this->trabajo->ot_estado->transitionTo(Completada::class);
+        activity('Trabajo')
+            ->performedOn($this->trabajo)
+            ->log('Completado');
     }
 }

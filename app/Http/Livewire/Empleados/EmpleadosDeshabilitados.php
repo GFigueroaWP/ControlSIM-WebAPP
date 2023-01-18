@@ -50,9 +50,9 @@ class EmpleadosDeshabilitados extends Component
 
         User::withTrashed()->where('id',$seleccionado)->restore();
 
-        activity('empleados')
+        activity('Empleado')
             ->performedOn(User::find($seleccionado))
-            ->log('Usuario habilitado');
+            ->log('Habilitado');
 
         $this->modalHabilitacionEmpleado = false;
 

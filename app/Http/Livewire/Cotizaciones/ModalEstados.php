@@ -34,9 +34,9 @@ class ModalEstados extends Component
         $this->cotizacion->cot_estado->transitionTo(Rechazada::class);
         $this->modalEstadoCotizacion = false;
 
-        activity('Cotizaciones')
+        activity('Cotizacion')
             ->performedOn($this->cotizacion)
-            ->log('Rechazada');
+            ->log('Rechazado');
 
         toast()->info('Cotizacion actualizado con éxito!')->push();
 
@@ -48,9 +48,9 @@ class ModalEstados extends Component
     public function aceptarEstado(){
         $this->cotizacion->cot_estado->transitionTo(Aceptada::class);
         $this->modalEstadoCotizacion = false;
-        activity('Cotizaciones')
+        activity('Cotizacion')
             ->performedOn($this->cotizacion)
-            ->log('Aceptada');
+            ->log('Aceptado');
 
         toast()->info('Cotizacion actualizado con éxito!')->push();
         $this->emit('estadoCotizacionActualizado');

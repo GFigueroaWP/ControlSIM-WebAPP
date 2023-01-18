@@ -53,9 +53,9 @@ class ShowEmpleados extends Component
 
         $this->empleado->save();
 
-        activity('empleados')
+        activity('Empleado')
             ->performedOn($this->empleado)
-            ->log('Usuario actualizado');
+            ->log('Actualizado');
 
         toast()->info('Empleado actualizado con éxito!')->push();
 
