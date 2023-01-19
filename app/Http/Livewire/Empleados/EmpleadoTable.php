@@ -11,6 +11,8 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class EmpleadoTable extends DataTableComponent
 {
+    protected $listeners = ['empleadoCreado' => '$refresh', 'empleadoDeshabilitado' => '$refresh'];
+
     protected $model = User::class;
 
     public function configure(): void
