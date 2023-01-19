@@ -19,6 +19,12 @@
                         class="mt-1 block w-full" />
                     <x-jet-input-error for="prod_valor" class="mt-2" />
                 </div>
+                <div class="col-span-2">
+                    <x-jet-label for="prod_detalle" value="{{ __('Descripcion') }}" />
+                    <textarea id="prod_detalle" wire:model='prod_detalle' rows="5" type="text" placeholder='Descripción'
+                    class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-csim focus:border-csim" ></textarea>
+                    <x-jet-input-error for="prod_detalle" class="mt-2" />
+                </div>
             </div>
         </form>
     </x-slot>
