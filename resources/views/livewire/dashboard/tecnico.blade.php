@@ -25,12 +25,10 @@
             <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Trabajos este mes</div>
         </div>
 
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-                <h1 class="font-bold my-2 text-xl">Trabajos Asignados: {{ $this->trabajosAsignados }}</h1>
-                <h1 class="font-bold my-2 text-xl text-yellow-500">Trabajos en progreso: {{ $this->trabajosIniciados }}</h1>
-                <h1 class="font-bold my-2 text-xl text-green-500">Trabajos Finalizados: {{$this->trabajosCompletados }}</h1>
-            </div>
+        <div class="ml-12 h-96">
+            <livewire:livewire-column-chart
+                :column-chart-model="$columnChartModel"
+            />
         </div>
     </div>
 </div>

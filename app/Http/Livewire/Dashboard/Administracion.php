@@ -11,13 +11,6 @@ use Spatie\Activitylog\Models\Activity;
 
 class Administracion extends Component
 {
-    public $types = ['emitidas', 'aceptadas', 'rechazadas'];
-
-    public $colors = [
-        'rechazadas' => '#fc8181',
-        'aceptadas' => '#66DA26',
-        'emitidas' => '#cbd5e0',
-    ];
 
     public $cotizacionesEmitidas, $cotizacionesAceptadas, $cotizacionesRechazadas;
     public $trabajosPlanificados, $trabajosIniciados, $trabajosCancelados, $trabajosCompletados;
