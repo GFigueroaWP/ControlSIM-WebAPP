@@ -9,10 +9,10 @@
         <div class="mt-10 sm:mt-0">
             <x-jet-form-section submit="infoCliente">
                 <x-slot name="title">
-                    {{ __('Cliente y cotización') }}
+                    {{ __('Informacion') }}
                 </x-slot>
                 <x-slot name="description">
-                    {{ __('Identificador de cotización asociada a la orden de trabajo y su respectivo cliente') }}
+                    {{ __('Identificador de cotización asociada a la orden de trabajo y su respectivo cliente, estado de la orden de trabajo y observaciones de cierre') }}
                 </x-slot>
                 <x-slot name="form">
                     <div class="col-span-6 sm:col-span-4">
@@ -35,6 +35,18 @@
                         <x-jet-input id="show_direccion" wire:model='show_direccion' type="text" placeholder='Calle 123, comuna, ciudad'
                             class="mt-1 block w-full disabled" disabled />
                         <x-jet-input-error for="show_direccion" class="mt-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-jet-label for="show_estado" value="{{ __('Estado orden de trabajo') }}" />
+                        <x-jet-input id="show_estado" wire:model='show_estado' type="text" placeholder='Estado'
+                            class="mt-1 block w-50 disabled {{ $this->trabajo->ot_estado }}" disabled />
+                        <x-jet-input-error for="show_estado" class="mt-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-jet-label for="show_observacion" value="{{ __('Observación') }}" />
+                        <textarea id="show_observacion" wire:model='show_observacion' rows="5" type="text" placeholder='Observación'
+                        class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-csim focus:border-csim disabled" disabled></textarea>
+                        <x-jet-input-error for="show_observacion" class="mt-2" />
                     </div>
                 </x-slot>
             </x-jet-form-section>
@@ -59,6 +71,15 @@
                         <div class="w-full bg-gray-400 rounded-full h-2.5">
                             <div class="bg-csim h-2.5 rounded-full" style="width: {{ $this->progresoTareas.'%' }}"></div>
                         </div>
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-jet-label for="add_tarea" value="{{ __('Añadir Tarea') }}" />
+                        <x-jet-input id="add_tarea" wire:model='add_tarea' type="text"
+                            placeholder="tarea" class="mt-1 block w-full" />
+                        <x-jet-input-error for="add_tarea" class="mt-2" />
+                    </div>
+                    <div class="col-span-2 sm:col-span-2 pt-7">
+                        <x-jet-button wire:click.prevent="addTarea">{{ __('Añadir Tarea') }}</x-jet-button>
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <div>
@@ -181,11 +202,11 @@
                             </div>
                         </x-slot>
                         <x-slot name="actions">
-                            <x-jet-danger-button class="m-1" wire:click.prevent="cancelarTrabajo">
+                            <x-jet-danger-button class="m-1" wire:click.prevent="$emit('cancelarTrabajo',{{ $this->trabajo }})">
                                 {{ __('Cancelar Orden de trabajo') }}
                             </x-jet-danger-button>
                             @if ($this->progresoTareas == 100 || $this->trabajo->informes->count() != 0)
-                                <x-jet-button class="m-1" wire:click.prevent="cerrarTrabajo">
+                                <x-jet-button class="m-1" wire:click.prevent="$emit('cerrarTrabajo',{{ $this->trabajo }})">
                                     {{ __('Completar orden de trabajo') }}
                                 </x-jet-button>
                             @endif
@@ -195,4 +216,6 @@
             @endrole
         </div>
     </div>
+    @livewire('trabajos.modal-cancelar')
+    @livewire('trabajos.modal-completar')
 </div>
