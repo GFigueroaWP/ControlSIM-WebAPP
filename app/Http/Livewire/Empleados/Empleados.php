@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Empleados;
 
+use App\Exports\UsersExport;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -64,5 +66,9 @@ class Empleados extends Component
         $this->emit('empleadoDeshabilitado');
 
         $this->modalDeshabilitacionEmpleado = false;
+    }
+
+    public function exportEmpleado(){
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

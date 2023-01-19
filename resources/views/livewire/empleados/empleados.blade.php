@@ -19,6 +19,11 @@
                         <a href="{{ route('empleadosDeshabilitados') }}"><x-jet-secondary-button>{{ __('Ver Deshabilitados') }}</x-jet-secondary-button></a>
                         @endcan
                     </div>
+                    <div class="relative justify-self-end">
+                        @can('users_access')
+                        <x-jet-button wire:click="exportEmpleado">{{ __('Exportar Empleados') }}</x-jet-button>
+                        @endcan
+                    </div>
                     <label for="search_empleados" class="sr-only">Buscar</label>
                     <div class="relative justify-self-end">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
