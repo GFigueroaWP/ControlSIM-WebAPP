@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('prod_nombre');
-            $table->string('prod_detalle');
+            $table->string('prod_detalle')->nullable();
             $table->string('prod_valor');
             $table->timestamps();
             $table->softDeletes();

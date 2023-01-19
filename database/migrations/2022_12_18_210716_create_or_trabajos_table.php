@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedbigInteger('cotizacion_id')->nullable();
             $table->string('ot_estado');
-            $table->string('ot_observacion');
+            $table->string('ot_observacion')->nullable();
             $table->date('ot_inicio');
             $table->date('ot_limite')->nullable();
             $table->date('ot_completada')->nullable();
