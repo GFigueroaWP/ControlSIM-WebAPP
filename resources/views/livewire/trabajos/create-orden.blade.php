@@ -56,7 +56,7 @@
                 </x-slot>
                 <x-slot name="form">
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-button class="m-1" wire:click.prevent="addTecnico">Añadir tecnico</x-jet-button>
+                        <x-jet-button class="m-1" wire:click.prevent="addTecnico" wire:loading.attr="disabled" >Añadir tecnico</x-jet-button>
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <table class="w-full text-base text-left">
@@ -102,15 +102,15 @@
                                     <td class="py-3 px-6">
                                         @if ($tecnicoSeleccionado['is_saved'])
                                         <x-jet-secondary-button class="m-1"
-                                            wire:click.prevent="editTecnico({{ $index }})">Editar
+                                            wire:click.prevent="editTecnico({{ $index }})" wire:loading.attr="disabled" >Editar
                                         </x-jet-secondary-button>
                                         @elseif($this->tecnico_id2)
                                         <x-jet-button class="m-1"
-                                            wire:click.prevent="saveTecnico({{ $index }})">
+                                            wire:click.prevent="saveTecnico({{ $index }})" wire:loading.attr="disabled" >
                                             Guardar</x-jet-button>
                                         @endif
                                         <x-jet-danger-button class="m-1"
-                                            wire:click.prevent="removeTecnico({{ $index }})">Eliminar
+                                            wire:click.prevent="removeTecnico({{ $index }})" wire:loading.attr="disabled" >Eliminar
                                         </x-jet-danger-button>
                                     </td>
                                 </tr>
@@ -169,15 +169,15 @@
                                         <td class="py-3 px-6">
                                             @if ($tareaAgregada['is_saved'])
                                             <x-jet-secondary-button class="m-1"
-                                                wire:click.prevent="editTarea({{ $index }})">Editar
+                                                wire:click.prevent="editTarea({{ $index }})" wire:loading.attr="disabled" >Editar
                                             </x-jet-secondary-button>
                                             @else
                                             <x-jet-button class="m-1"
-                                                wire:click.prevent="saveTarea({{ $index }})">
+                                                wire:click.prevent="saveTarea({{ $index }})" wire:loading.attr="disabled" >
                                                 Guardar</x-jet-button>
                                             @endif
                                             <x-jet-danger-button class="m-1"
-                                                wire:click.prevent="removeTarea({{ $index }})">Eliminar
+                                                wire:click.prevent="removeTarea({{ $index }})" wire:loading.attr="disabled" >Eliminar
                                             </x-jet-danger-button>
                                         </td>
                                     </tr>
@@ -199,20 +199,24 @@
                         </x-slot>
                         <x-slot name="form">
                             <div class="col-span-6 sm:col-span-4">
-                                <x-jet-button class="m-1" wire:click.prevent="addTarea">Añadir Tarea</x-jet-button>
-                            </div>
-                            <div class="col-span-6 sm:col-span-4">
                                 <x-jet-label for="fechaInicio" value="{{ __('Fecha de inicio estimada') }}"/>
                                 <x-jet-input type="date" min="{{ $this->fechaActual }}" wire:model='fechaInicio'/>
                             </div>
-                            <div class="col-span-6 sm:col-span-4">
-                                <x-jet-label for="fechaLimite" value="{{ __('Fecha de termino estimada') }}"/>
-                                <x-jet-input type="date" min="{{ $this->fechaInicio }}" wire:model='fechaLimite'/>
-                            </div>
+                            @if ($this->fechaInicio)
+                                <div class="col-span-6 sm:col-span-4">
+                                    <x-jet-label for="fechaLimite" value="{{ __('Fecha de termino estimada') }}"/>
+                                    <x-jet-input type="date" min="{{ $this->fechaInicio }}" wire:model='fechaLimite'/>
+                                </div>
+                            @else
+                                <div class="col-span-6 sm:col-span-4">
+                                    <x-jet-label for="fechaLimite" value="{{ __('Fecha de termino estimada') }}"/>
+                                    <x-jet-input class="disabled" type="date" min="{{ $this->fechaInicio }}" wire:model='fechaLimite' disabled/>
+                                </div>
+                            @endif
                         </x-slot>
                         @if ($fechaLimite)
                             <x-slot name="actions">
-                                <x-jet-button wire:click.prevent="submitOrden">{{ __('Crear Orden') }}</x-jet-button>
+                                <x-jet-button wire:click.prevent="submitOrden" wire:loading.attr="disabled" >{{ __('Crear Orden') }}</x-jet-button>
                             </x-slot>
                         @endif
                     </x-jet-form-section>

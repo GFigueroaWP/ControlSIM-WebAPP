@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Models\OrTrabajo;
+use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -24,6 +25,12 @@ class Tecnico extends Component
             return $query->where('tecnico_id','=', auth()->user()->id);
         })->whereMonth('ot_completada',Carbon::now()->month)->where('ot_estado', 'Completada')->count();
 
-        return view('livewire.dashboard.tecnico');
+        $columnChartModel = LivewireCharts::columnChartModel()
+                            ->setTitle('Trabajos')
+                            ->addColumn('asignados',$this->trabajosAsignados,'#cbd5e0')
+                            ->addColumn('en progreso',$this->trabajosIniciados,'#f6ad55')
+                            ->addColumn('finalizados',$this->trabajosCompletados,'#66DA26')->withGrid();
+
+        return view('livewire.dashboard.tecnico')->with(['columnChartModel' => $columnChartModel]);
     }
 }

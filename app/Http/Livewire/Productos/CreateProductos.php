@@ -11,7 +11,7 @@ class CreateProductos extends Component
     use WireToast;
 
     public $listeners = ['crearProducto'];
-    public $prod_nombre, $prod_valor;
+    public $prod_nombre, $prod_valor, $prod_detalle;
     public $modalCreacionProducto = false;
 
     public function render()
@@ -27,7 +27,7 @@ class CreateProductos extends Component
     public function cancelCrearProducto()
     {
         $this->modalCreacionProducto = false;
-        $this->reset(['prod_nombre', 'prod_valor']);
+        $this->reset(['prod_nombre', 'prod_valor', 'prod_detalle']);
     }
 
     public function submitProducto()
@@ -37,12 +37,13 @@ class CreateProductos extends Component
 
         $creado = Producto::create([
             'prod_nombre' => $this->prod_nombre,
-            'prod_valor' => $this->prod_valor
+            'prod_valor' => $this->prod_valor,
+            'prod_detalle' => $this->prod_detalle
         ]);
 
         $this->modalCreacionProducto = false;
 
-        $this->reset(['prod_nombre', 'prod_valor']);
+        $this->reset(['prod_nombre', 'prod_valor', 'prod_detalle']);
 
         activity('Producto')
             ->performedOn($creado)
@@ -57,13 +58,15 @@ class CreateProductos extends Component
 
     protected $rules = [
         'prod_nombre' => 'required|string',
-        'prod_valor' => 'required|numeric'
+        'prod_valor' => 'required|numeric',
+        'prod_detalle' => 'string'
     ];
 
     protected $messages = [
         'prod_nombre.required' => 'El Campo de Nombre es Obligatorio',
         'prod_nombre.string' => 'El Campo de Nombre debe ser alfanumérico',
         'prod_valor.required' => 'El Campo de Precio es Obligatorio',
-        'prod_valor.string' => 'El Campo de Precio debe ser numérico'
+        'prod_valor.numeric' => 'El Campo de Precio debe ser numérico',
+        'prod_detalle.string' => 'El Campo de Descripción debe ser alfanumérico'
     ];
 }

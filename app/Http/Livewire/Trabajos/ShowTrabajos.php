@@ -26,8 +26,12 @@ class ShowTrabajos extends Component
     protected $listeners = ['refreshTrabajo' => '$refresh'];
     public $trabajo;
     public $totalTareas, $tareasCompletadas, $progresoTareas;
-    public $show_cot, $show_cliente, $show_direccion;
+    public $show_cot, $show_cliente, $show_direccion, $show_estado, $show_observacion;
+    public $add_tarea;
     public $tarea;
+    public $modalCancelarTrabajo = false;
+    public $modalCompletarTrabajo = false;
+    public $add_observacion;
 
     public function mount(OrTrabajo $trabajo){
         $this->authorize('view', $trabajo);
@@ -48,8 +52,24 @@ class ShowTrabajos extends Component
         $this->fill([
             'show_cot' => 'COT-'.str_pad($this->trabajo->cotizacion->id,5,'0',STR_PAD_LEFT),
             'show_cliente' => $this->trabajo->cotizacion->cliente->cli_razonsocial,
-            'show_direccion' => ''.$this->trabajo->cotizacion->cliente->cli_direccion.' , '.$this->trabajo->cotizacion->cliente->cli_comuna.' , '.$this->trabajo->cotizacion->cliente->cli_ciudad
+            'show_direccion' => ''.$this->trabajo->cotizacion->cliente->cli_direccion.' , '.$this->trabajo->cotizacion->cliente->cli_comuna.' , '.$this->trabajo->cotizacion->cliente->cli_ciudad,
+            'show_estado' => $this->trabajo->ot_estado.'',
+            'show_observacion' => $this->trabajo->ot_observacion.''
         ]);
+    }
+
+    public function addTarea(){
+        $this->validate([
+            'add_tarea' => 'required|string',
+        ]);
+        Tarea::create([
+                'trabajo_id' => $this->trabajo->id,
+                'tar_descripcion' => $this->add_tarea
+            ]);
+
+        toast()->success('Tarea añadida')->push();
+
+        $this->emit('refreshTrabajo');
     }
 
     public function completarTarea(Tarea $tarea){
@@ -82,11 +102,11 @@ class ShowTrabajos extends Component
             'trabajo_id' => $this->trabajo->id
         ]);
 
-        $informeCreado->inf_directorio = auth()->user()->us_username.'INF-'.$informeCreado->id.'OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf';
+        $informeCreado->inf_directorio = auth()->user()->us_username.'.INF-'.$informeCreado->id.'.OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf';
 
         $informeCreado->save();
 
-        $this->informe->storeAs('informes', auth()->user()->us_username.'.INF-'.$informeCreado->id.'OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf','s3');
+        $this->informe->storeAs('informes', auth()->user()->us_username.'.INF-'.$informeCreado->id.'.OT-'.str_pad($this->trabajo->id,5,'0',STR_PAD_LEFT).'.pdf','s3');
 
         toast()->success('Informe añadido añadido con éxito!')->push();
 
@@ -102,9 +122,23 @@ class ShowTrabajos extends Component
     public function descargarInforme(Informe $descargar){
         return Storage::disk('s3')->download('informes/'.$descargar->inf_directorio);
     }
-
+/*
     public function cancelarTrabajo(){
+        $this->modalCancelarTrabajo = true;
+    }
+
+    public function cancelCancelar(){
+        $this->modalCancelarTrabajo = false;
+        $this->reset(['add_observacion']);
+    }
+
+    public function submitCancelar(){
+        $this->trabajo->ot_observacion = $this->add_observacion;
+        $this->trabajo->save();
         $this->trabajo->ot_estado->transitionTo(Cancelada::class);
+
+        $this->modalCancelarTrabajo = false;
+        $this->reset(['add_observacion']);
 
         activity('Trabajo')
             ->performedOn($this->trabajo)
@@ -112,23 +146,38 @@ class ShowTrabajos extends Component
 
             toast()->success('el trabajo ha sido cancelado con éxito!')->push();
     }
+ */
+    /* public function cerrarTrabajo(){
+        $this->modalCompletarTrabajo = true;
+    }
 
-    public function cerrarTrabajo(){
+    public function cancelCompletar(){
+        $this->modalCompletarTrabajo = false;
+        $this->reset(['add_observacion']);
+    }
 
+    public function submitCompletar(){
+        $this->trabajo->ot_observacion = $this->add_observacion;
+        $this->trabajo->save();
         $this->trabajo->ot_estado->transitionTo(Completada::class);
 
         $this->trabajo->ot_completada = Carbon::now();
 
         $this->trabajo->save();
 
+        $this->modalCompletarTrabajo = false;
+        $this->reset(['add_observacion']);
+
         activity('Trabajo')
             ->performedOn($this->trabajo)
             ->log('Completado');
 
         toast()->success('el trabajo ha sido completado con éxito!')->push();
-    }
+    } */
 
     protected $messages = [
+        'add_tarea.required' => 'Debe escribir una tarea',
+        'add_tarea.string' => 'Debe ser alfanumerico',
         'mimes' => 'El archivo debe ser pdf',
         'max' => 'El archivo no debe pesar mas de 2MB'
     ];

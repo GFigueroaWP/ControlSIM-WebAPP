@@ -12,7 +12,7 @@ class UpdateProductos extends Component
 
     protected $listeners = ['modificarProducto'];
     public $modalEdicionProducto = false;
-    public $prod_nombre, $prod_valor, $seleccionado;
+    public $prod_nombre, $prod_valor, $prod_detalle, $seleccionado;
 
     public function render()
     {
@@ -24,14 +24,15 @@ class UpdateProductos extends Component
         $this->seleccionado = $producto;
         $this->fill([
             'prod_nombre' => $producto->prod_nombre,
-            'prod_valor' => $producto->prod_valor
+            'prod_valor' => $producto->prod_valor,
+            'prod_detalle' => $producto->prod_detalle
         ]);
     }
 
     public function cancelEditarProducto()
     {
         $this->modalEdicionProducto = false;
-        $this->reset(['prod_nombre', 'prod_valor']);
+        $this->reset(['prod_nombre', 'prod_valor', 'prod_detalle']);
     }
 
     public function editProducto()
@@ -41,12 +42,13 @@ class UpdateProductos extends Component
 
         $this->seleccionado->prod_nombre = $this->prod_nombre;
         $this->seleccionado->prod_valor = $this->prod_valor;
+        $this->seleccionado->prod_detalle = $this->prod_detalle;
 
         $this->seleccionado->save();
 
         $this->modalEdicionProducto = false;
 
-        $this->reset(['prod_nombre', 'prod_valor']);
+        $this->reset(['prod_nombre', 'prod_valor', 'prod_detalle']);
 
         activity('Producto')
             ->performedOn($this->seleccionado)
@@ -61,13 +63,15 @@ class UpdateProductos extends Component
 
     protected $rules = [
         'prod_nombre' => 'required|string',
-        'prod_valor' => 'required|numeric'
+        'prod_valor' => 'required|numeric',
+        'prod_detalle' => 'string'
     ];
 
     protected $messages = [
         'prod_nombre.required' => 'El Campo de Nombre es Obligatorio',
         'prod_nombre.string' => 'El Campo de Nombre debe ser alfanumérico',
         'prod_valor.required' => 'El Campo de Precio es Obligatorio',
-        'prod_valor.string' => 'El Campo de Precio debe ser numérico'
+        'prod_valor.numeric' => 'El Campo de Precio debe ser numérico',
+        'prod_detalle.string' => 'El Campo de Descripción debe ser alfanumérico'
     ];
 }

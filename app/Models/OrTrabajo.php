@@ -18,7 +18,8 @@ class OrTrabajo extends Model
         'cotizacion_id',
         'ot_inicio',
         'ot_limite',
-        'ot_completada'
+        'ot_completada',
+        'ot_observacion'
     ];
 
     protected $casts = [

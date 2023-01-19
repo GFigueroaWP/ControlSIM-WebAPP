@@ -14,7 +14,8 @@ class Producto extends Model
 
     public $fillable = [
         'prod_nombre',
-        'prod_valor'
+        'prod_valor',
+        'prod_detalle'
     ];
 
     public function cotizaciones()

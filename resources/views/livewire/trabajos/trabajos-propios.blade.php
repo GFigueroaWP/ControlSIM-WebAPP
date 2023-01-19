@@ -49,7 +49,7 @@
                     <tbody>
                         @foreach ($trabajos as $trabajo)
                         <tr class="bg-white border-b hover:bg-gray-300">
-                            <td class="py-3 px-6">{{ $trabajo->id }}</td>
+                            <td class="py-3 px-6">{{ 'OT-'.str_pad($trabajo->id,5,'0',STR_PAD_LEFT) }}</td>
                             <td class="py-3 px-6">{{ $trabajo->ot_inicio}}</td>
                             <td class="py-3 px-6">{{ $trabajo->ot_limite }}</td>
                             <td class="py-3 px-6">

@@ -37,10 +37,6 @@ class CreateOrden extends Component
     {
         $this->fechaActual = Carbon::now()->format('Y-m-d');
 
-        foreach($this->tecnicosSeleccionados as $tecnicoSeleccionado){
-            $this->idSeleccionados = $tecnicoSeleccionado['tecnico_id'];
-        }
-        $this->tecnicos = $this->tecnicos->except($this->idSeleccionados);
         return view('livewire.trabajos.create-orden',[
             'tecnicos' => $this->tecnicos,
             'fechaActual' => $this->fechaActual

@@ -68,15 +68,15 @@
                         </div>
                         <div class="col-span-6 sm:col-span-4">
                             <table class="w-full text-base text-left">
-                                <thead class="w-full">
+                                <thead>
                                     <tr>
-                                        <th scope="col" class="py-2 px-6 w-full">
+                                        <th scope="col" class="py-2 px-6">
                                             Producto
                                         </th>
-                                        <th scope="col" class="py-2 px-6  w-full">
+                                        <th scope="col" class="py-2 px-6">
                                             Cantidad
                                         </th>
-                                        <th scope="col" class="py-2 px-6  w-full">
+                                        <th scope="col" class="py-2 px-6">
                                             Acciones
                                         </th>
                                     </tr>
@@ -94,7 +94,7 @@
                                             @else
                                                 <div wire:ignore>
                                                     <select name="cotizacionItems[{{ $index }}][producto_id]"
-                                                        class="selectItem select2"
+                                                        class="selectItem select2 w-52"
                                                         wire:model="cotizacionItems.{{ $index }}.producto_id">
                                                         <option value="">Elija un producto</option>
                                                         @foreach ($allProductos as $item)
@@ -123,15 +123,15 @@
                                         <td class="py-3 px-6">
                                             @if ($cotizacionItem['is_saved'])
                                             <x-jet-secondary-button class="m-1"
-                                                wire:click.prevent="editProduct({{ $index }})">Editar
+                                                wire:click.prevent="editProduct({{ $index }})" wire:loading.attr="disabled">Editar
                                             </x-jet-secondary-button>
                                             @elseif($this->producto_id2)
                                             <x-jet-button class="m-1"
-                                                wire:click.prevent="saveProduct({{ $index }})">
+                                                wire:click.prevent="saveProduct({{ $index }})" wire:loading.attr="disabled">
                                                 Guardar</x-jet-button>
                                             @endif
                                             <x-jet-danger-button class="m-1"
-                                                wire:click.prevent="removeProduct({{ $index }})">Eliminar
+                                                wire:click.prevent="removeProduct({{ $index }})" wire:loading.attr="disabled">Eliminar
                                             </x-jet-danger-button>
                                         </td>
                                     </tr>
@@ -165,7 +165,7 @@
                     </x-slot>
                     @if ($cotizacionItems)
                         <x-slot name="actions" >
-                            <x-jet-button class="m-1" wire:click.prevent='submitCotizacion'>{{ __('Crear cotizacion') }}</x-jet-button>
+                            <x-jet-button class="m-1" wire:click.prevent='submitCotizacion' wire:loading.attr="disabled">{{ __('Crear cotizacion') }}</x-jet-button>
                         </x-slot>
                     @endif
                 </x-jet-form-section>

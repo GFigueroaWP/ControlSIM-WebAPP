@@ -1,6 +1,6 @@
 <x-jet-dialog-modal wire:model='modalEdicionProducto'>
     <x-slot name="title">
-        {{ _('Añadir nuevo producto o servicio') }}
+        {{ __('Añadir nuevo producto o servicio') }}
     </x-slot>
 
     <x-slot name="content">
@@ -19,16 +19,22 @@
                         class="mt-1 block w-full" />
                     <x-jet-input-error for="prod_valor" class="mt-2" />
                 </div>
+                <div class="col-span-2">
+                    <x-jet-label for="prod_detalle" value="{{ __('Descripcion') }}" />
+                    <textarea id="prod_detalle" wire:model='prod_detalle' rows="5" type="text" placeholder='Descripción'
+                    class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-csim focus:border-csim" ></textarea>
+                    <x-jet-input-error for="prod_detalle" class="mt-2" />
+                </div>
             </div>
         </form>
     </x-slot>
 
     <x-slot name="footer">
         <x-jet-secondary-button wire:click="cancelEditarProducto" class="m-1">
-            {{ _('Cancelar') }}
+            {{ __('Cancelar') }}
         </x-jet-secondary-button>
         <x-jet-button type='submit' wire:click='editProducto' class="m-1">
-            {{ _('Editar') }}
+            {{ __('Editar') }}
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

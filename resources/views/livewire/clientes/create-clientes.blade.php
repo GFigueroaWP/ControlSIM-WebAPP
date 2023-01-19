@@ -1,6 +1,6 @@
 <x-jet-dialog-modal wire:model='modalCreacionCliente'>
     <x-slot name="title">
-        {{ _('Añadir nuevo usuario') }}
+        {{ __('Añadir nuevo usuario') }}
     </x-slot>
 
     <x-slot name="content">
@@ -61,10 +61,10 @@
 
     <x-slot name="footer">
         <x-jet-secondary-button wire:click="cancelCrear" class="m-1">
-            {{ _('Cancelar') }}
+            {{ __('Cancelar') }}
         </x-jet-secondary-button>
         <x-jet-button type='submit' wire:click='submitCliente' class="m-1">
-            {{ _('Crear') }}
+            {{ __('Crear') }}
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

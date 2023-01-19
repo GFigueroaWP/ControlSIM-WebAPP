@@ -1,6 +1,6 @@
 <x-jet-dialog-modal wire:model='modalShowProyecto'>
     <x-slot name="title">
-        {{ _('Informacion del proyecto') }}
+        {{ __('Informacion del proyecto') }}
     </x-slot>
 
     <x-slot name="content">
@@ -204,13 +204,13 @@
                                     {{ 'OT-'.str_pad($this->proyectoSeleccionado->trabajo->id ?? '',5,'0',STR_PAD_LEFT) }}
                                 </td>
                                 <td class="py-1 px-3 text-center">
-                                    {{ $this->proyectoSeleccionado->trabajo->ot_inicio ?? '' }}
+                                    {{ \Carbon\Carbon::parse($this->proyectoSeleccionado->trabajo->ot_inicio)->format('d-m-Y') ?? '' }}
                                 </td>
                                 <td class="py-1 px-3 text-center">
-                                    {{ $this->proyectoSeleccionado->trabajo->ot_limite ?? '' }}
+                                    {{ \Carbon\Carbon::parse($this->proyectoSeleccionado->trabajo->ot_limite)->format('d-m-Y') ?? '' }}
                                 </td>
                                 <td class="py-1 px-3 text-center">
-                                    {{ $this->proyectoSeleccionado->trabajo->ot_completada ?? '' }}
+                                    {{ \Carbon\Carbon::parse($this->proyectoSeleccionado->trabajo->ot_completada)->format('d-m-Y') ?? '' }}
                                 </td>
                                 <td class="py-1 px-3 text-center">
                                     <strong class="{{ $this->proyectoSeleccionado->trabajo->ot_estado ?? '' }}">
