@@ -15,7 +15,7 @@ class Clientes extends Component
 
     public $filtro_cli;
 
-    protected $listeners = ['clienteCreado' => '$refresh'];
+    protected $listeners = ['refreshCliente' => '$refresh'];
 
     public function mount(){
         $this->authorize('viewAny', Cliente::class);

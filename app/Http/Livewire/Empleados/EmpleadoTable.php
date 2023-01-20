@@ -26,7 +26,8 @@ class EmpleadoTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Rut", "us_rut")
                 ->sortable()
                 ->searchable(),
@@ -39,7 +40,7 @@ class EmpleadoTable extends DataTableComponent
             Column::make("Apellido", "us_apellido")
                 ->sortable()
                 ->searchable(),
-            Column::make("")
+            Column::make("Acciones")
             ->label(
                 fn($row, Column $column) => view('livewire.empleados.acciones')->with(['empleado' => $row])
             )

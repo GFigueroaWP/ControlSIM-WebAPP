@@ -73,7 +73,7 @@ class CreateClientes extends Component
 
         toast()->success('Cliente añadido con éxito!')->push();
 
-        $this->emit('clienteCreado');
+        $this->emit('refreshCliente');
 
         return redirect()->back();
     }

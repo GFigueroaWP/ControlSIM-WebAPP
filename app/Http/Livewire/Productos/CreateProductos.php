@@ -51,7 +51,7 @@ class CreateProductos extends Component
 
         toast()->success('Producto/Servicio añadido con éxito!')->push();
 
-        $this->emit('productoCreado');
+        $this->emit('productoRefresh');
 
         return redirect()->back();
     }

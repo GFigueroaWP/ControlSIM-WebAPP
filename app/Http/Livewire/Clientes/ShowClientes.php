@@ -22,7 +22,7 @@ class ShowClientes extends Component
         $cli_comuna,
         $cli_ciudad;
 
-    protected $listeners = ['contactoCreado' => '$refresh'];
+    protected $listeners = ['refreshCliente' => '$refresh'];
 
     public function mount(Cliente $cliente)
     {

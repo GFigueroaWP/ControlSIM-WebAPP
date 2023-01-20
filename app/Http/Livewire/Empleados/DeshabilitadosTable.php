@@ -40,7 +40,7 @@ class DeshabilitadosTable extends DataTableComponent
             Column::make("Apellido", "us_apellido")
                 ->sortable()
                 ->searchable(),
-            Column::make("")
+            Column::make("Acciones")
             ->label(
                 fn($row, Column $column) => view('livewire.empleados.accionesDeshabilitado')->with(['empleado' => $row])
             )

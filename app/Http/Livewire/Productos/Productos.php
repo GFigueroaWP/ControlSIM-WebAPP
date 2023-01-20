@@ -12,7 +12,7 @@ class Productos extends Component
     use AuthorizesRequests;
     use WithPagination;
 
-    protected $listeners = ['productoCreado' => '$refresh'];
+    protected $listeners = ['productoRefresh' => '$refresh'];
 
     public $filtro_prod;
 
