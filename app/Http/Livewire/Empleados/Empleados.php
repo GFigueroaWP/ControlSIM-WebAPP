@@ -43,6 +43,6 @@ class Empleados extends Component
     }
 
     public function exportEmpleado(){
-        return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new UsersExport, 'Empleados.xlsx');
     }
 }

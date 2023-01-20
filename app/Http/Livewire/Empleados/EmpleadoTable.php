@@ -5,17 +5,18 @@ namespace App\Http\Livewire\Empleados;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmpleadoTable extends DataTableComponent
 {
     protected $listeners = ['refreshEmpleado' => '$refresh'];
 
-    protected $model = User::class;
+    /* protected $model = User::class; */
 
-    /* public function builder(): Builder
+    public function builder(): Builder
     {
-        return User::query()->where('deleted_at');
-    } */
+        return User::query()->with('roles');
+    }
 
     public function configure(): void
     {
@@ -40,6 +41,9 @@ class EmpleadoTable extends DataTableComponent
             Column::make("Apellido", "us_apellido")
                 ->sortable()
                 ->searchable(),
+            /* Column::make("Cargo", "getRoleNames().first()")
+                ->sortable()
+                ->searchable(), */
             Column::make("Acciones")
             ->label(
                 fn($row, Column $column) => view('livewire.empleados.acciones')->with(['empleado' => $row])
