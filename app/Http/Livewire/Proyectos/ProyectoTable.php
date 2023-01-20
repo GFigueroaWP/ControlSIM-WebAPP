@@ -46,7 +46,7 @@ class ProyectoTable extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->format(
-                    fn($value, $row, Column $column) => '<strong class="'.$value ?? ' '.'">'.$value ?? ' '.'</strong>'
+                    fn($value, $row, Column $column) => '<strong class="'.$value ?? ' '.'">'.$value ?? ' No planificado '.'</strong>'
                 )
                 ->html(),
             Column::make("Acciones")
