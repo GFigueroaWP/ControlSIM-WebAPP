@@ -37,8 +37,8 @@ class actividadExport implements FromQuery, ShouldAutoSize, WithMapping, WithHea
             $actividad->id,
             $actividad->log_name,
             $actividad->description,
-            $actividad->causer->id,
-            $actividad->causer->us_username,
+            optional($actividad->causer)->id,
+            optional($actividad->causer)->us_username,
             class_basename($actividad->subject),
             $actividad->subject->id,
             $actividad->created_at
