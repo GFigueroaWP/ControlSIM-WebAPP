@@ -23,7 +23,7 @@ class ProyectoTable extends DataTableComponent
             Column::make("Cotización", "id")
                 ->sortable()
                 ->searchable()->format(
-                    fn($value, $row, Column $column) => 'COT-'.str_pad($row->id,5,'0',STR_PAD_LEFT)
+                    fn($value, $row, Column $column) => 'COT-'.str_pad($row->id,5,'0',STR_PAD_LEFT) ?? ''
                 ),
             Column::make("Cliente", "cliente.cli_razonsocial")
                 ->sortable()
