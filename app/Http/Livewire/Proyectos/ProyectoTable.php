@@ -39,6 +39,7 @@ class ProyectoTable extends DataTableComponent
                 )->html(),
             Column::make("Trabajo", "trabajo.id")
                 ->sortable()
+                ->eagerLoadRelations()
                 ->searchable()->format(
                     fn($value, $row, Column $column) => 'OT-'.str_pad($row->trabajo->id,5,'0',STR_PAD_LEFT) ?? ''
                 ),
