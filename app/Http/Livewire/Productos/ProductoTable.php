@@ -22,7 +22,7 @@ class ProductoTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable()->format(
-                    fn($value, $row, Column $column) => 'PS-'.str_pad($row->id,5,'0',STR_PAD_LEFT).$value
+                    fn($value, $row, Column $column) => 'PS-'.str_pad($row->id,5,'0',STR_PAD_LEFT)
                 )->searchable(),
             Column::make("Prod nombre", "prod_nombre")
                 ->sortable()
