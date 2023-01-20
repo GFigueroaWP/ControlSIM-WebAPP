@@ -21,9 +21,7 @@ class Cotizacion extends Model
     protected $fillable = [
         'cliente_id',
         'trabajo_id',
-        'cot_directorio',
-        'cot_subtotal',
-        'cot_total'
+        'cot_directorio'
     ];
 
     protected $casts = [
