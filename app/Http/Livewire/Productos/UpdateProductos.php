@@ -56,7 +56,7 @@ class UpdateProductos extends Component
 
         toast()->info('Producto/Servicio editado')->push();
 
-        $this->emit('productoCreado');
+        $this->emit('productoRefresh');
 
         return redirect()->back();
     }

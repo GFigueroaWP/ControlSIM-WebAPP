@@ -10,7 +10,7 @@ class CreateProductos extends Component
 {
     use WireToast;
 
-    public $listeners = ['crearProducto'];
+    protected $listeners = ['crearProducto'];
     public $prod_nombre, $prod_valor, $prod_detalle;
     public $modalCreacionProducto = false;
 
@@ -51,7 +51,7 @@ class CreateProductos extends Component
 
         toast()->success('Producto/Servicio añadido con éxito!')->push();
 
-        $this->emit('productoCreado');
+        $this->emit('productoRefresh');
 
         return redirect()->back();
     }

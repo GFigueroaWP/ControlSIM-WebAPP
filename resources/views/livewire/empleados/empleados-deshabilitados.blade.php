@@ -11,7 +11,10 @@
                 <div class="flex justify-between items-center p-4">
 
                 </div>
-                <table class=" w-full text-base text-left">
+                <div class="m-5">
+                    <livewire:empleados.deshabilitados-table />
+                </div>
+                {{-- <table class=" w-full text-base text-left">
                     <thead class="uppercase">
                         <tr>
                             <th scope="col" class="py-2 px-6">
@@ -57,26 +60,11 @@
                 <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                     No hay resultados para la búsqueda "{{ $filtro_us }}"
                 </div>
-                @endif
+                @endif --}}
             </div>
         </div>
     </div>
 
     {{-- Modal de confirmación de suspension de usuario --}}
-    <x-jet-confirmation-modal wire:model='modalHabilitacionEmpleado'>
-        <x-slot name="title">
-            {{ __('Habilitar usuario') }}
-        </x-slot>
-        <x-slot name="content">
-            {{ __('¿Desea habilitar el acceso a la plataforma del usuario seleccionado?') }}
-        </x-slot>
-        <x-slot name="footer">
-            <x-jet-secondary-button wire:click="cancelHabilitar" class="m-1">
-                {{ __('Cancelar') }}
-            </x-jet-secondary-button>
-            <x-jet-button wire:click='habilitarEmpleado ({{ $modalHabilitacionEmpleado }})' class="m-1">
-                {{ __('Habilitar') }}
-            </x-jet-button>
-        </x-slot>
-    </x-jet-confirmation-modal>
+    @livewire('empleados.habilitar-empleado')
 </div>

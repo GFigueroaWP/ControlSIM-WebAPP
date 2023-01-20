@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Exports\actividadExport;
 use App\Models\Cotizacion;
 use App\Models\OrTrabajo;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Activitylog\Models\Activity;
 
 class Administracion extends Component
@@ -46,5 +48,9 @@ class Administracion extends Component
 
         return view('livewire.dashboard.administracion')->with(['columnChartModel' => $columnChartModel,
                                                                 'columnChartModel2' => $columnChartModel2]);
+    }
+
+    public function exportActividad(){
+        return Excel::download(new actividadExport, 'Log_de_actividad.xlsx');
     }
 }

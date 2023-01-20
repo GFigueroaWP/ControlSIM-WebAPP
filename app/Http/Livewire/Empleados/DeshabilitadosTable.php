@@ -7,7 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
-class EmpleadoTable extends DataTableComponent
+class DeshabilitadosTable extends DataTableComponent
 {
     protected $listeners = ['refreshEmpleado' => '$refresh'];
 
@@ -15,7 +15,7 @@ class EmpleadoTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return User::query()->with('roles');
+        return User::onlyTrashed();
     }
 
     public function configure(): void
@@ -27,8 +27,7 @@ class EmpleadoTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable()
-                ->searchable(),
+                ->sortable(),
             Column::make("Rut", "us_rut")
                 ->sortable()
                 ->searchable(),
@@ -41,12 +40,9 @@ class EmpleadoTable extends DataTableComponent
             Column::make("Apellido", "us_apellido")
                 ->sortable()
                 ->searchable(),
-            /* Column::make("Cargo", "getRoleNames().first()")
-                ->sortable()
-                ->searchable(), */
             Column::make("Acciones")
             ->label(
-                fn($row, Column $column) => view('livewire.empleados.acciones')->with(['empleado' => $row])
+                fn($row, Column $column) => view('livewire.empleados.accionesDeshabilitado')->with(['empleado' => $row])
             )
             /* ButtonGroupColumn::make('Accionesss')
                 ->attributes(function($row) {

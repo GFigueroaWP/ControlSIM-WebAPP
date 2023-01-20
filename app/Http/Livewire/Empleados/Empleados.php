@@ -19,9 +19,8 @@ class Empleados extends Component
     use WithPagination;
 
     public $filtro_us;
-    public $modalDeshabilitacionEmpleado = false;
 
-    public $listeners = ['empleadoCreado' => '$refresh', 'empleadoDeshabilitado' => '$refresh'];
+    protected $listeners = ['refreshEmpleado' => '$refresh'];
 
     public function mount(){
         $this->authorize('viewAny', User::class);
@@ -43,32 +42,7 @@ class Empleados extends Component
         ]);
     }
 
-    public function confirmEmpleadoDeshabilitacion($id)
-    {
-        $this->modalDeshabilitacionEmpleado = $id;
-    }
-
-    public function cancelDeshabilitar()
-    {
-        $this->modalDeshabilitacionEmpleado = false;
-    }
-
-    public function deshabilitarEmpleado(User $seleccionado)
-    {
-        $seleccionado->delete();
-
-        activity('Empleado')
-            ->performedOn($seleccionado)
-            ->log('Deshabilitado');
-
-        toast()->success('Empleado deshabilitado con éxito!')->push();
-
-        $this->emit('empleadoDeshabilitado');
-
-        $this->modalDeshabilitacionEmpleado = false;
-    }
-
     public function exportEmpleado(){
-        return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new UsersExport, 'Empleados.xlsx');
     }
 }
