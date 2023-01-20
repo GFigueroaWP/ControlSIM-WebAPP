@@ -10,6 +10,8 @@ class ProyectoTable extends DataTableComponent
 {
     protected $model = Cotizacion::class;
 
+    protected $listeners = ['refreshProyecto' => '$refresh'];
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');

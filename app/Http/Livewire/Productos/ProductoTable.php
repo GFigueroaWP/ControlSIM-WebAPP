@@ -10,6 +10,8 @@ class ProductoTable extends DataTableComponent
 {
     protected $model = Producto::class;
 
+    protected $listeners = ['productoRefresh' => '$refresh'];
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
