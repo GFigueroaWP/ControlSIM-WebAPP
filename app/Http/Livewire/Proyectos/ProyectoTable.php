@@ -40,7 +40,7 @@ class ProyectoTable extends DataTableComponent
             Column::make("Trabajo", "trabajo.id")
                 ->sortable()
                 ->searchable()->format(
-                    fn($value, $row, Column $column) => 'OT-'.str_pad($row->trabajo->id,5,'0',STR_PAD_LEFT)
+                    fn($value, $row, Column $column) => 'OT-'.str_pad($row->trabajo->id,5,'0',STR_PAD_LEFT) ?? ''
                 ),
             Column::make("Estado de trabajo", "trabajo.ot_estado")
                 ->sortable()
