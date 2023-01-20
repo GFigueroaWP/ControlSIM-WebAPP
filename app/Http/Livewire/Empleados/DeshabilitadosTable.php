@@ -5,17 +5,18 @@ namespace App\Http\Livewire\Empleados;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
-class EmpleadoTable extends DataTableComponent
+class DeshabilitadosTable extends DataTableComponent
 {
     protected $listeners = ['refreshEmpleado' => '$refresh'];
 
-    protected $model = User::class;
+    /* protected $model = User::class; */
 
-    /* public function builder(): Builder
+    public function builder(): Builder
     {
-        return User::query()->where('deleted_at');
-    } */
+        return User::onlyTrashed();
+    }
 
     public function configure(): void
     {
@@ -41,7 +42,7 @@ class EmpleadoTable extends DataTableComponent
                 ->searchable(),
             Column::make("")
             ->label(
-                fn($row, Column $column) => view('livewire.empleados.acciones')->with(['empleado' => $row])
+                fn($row, Column $column) => view('livewire.empleados.accionesDeshabilitado')->with(['empleado' => $row])
             )
             /* ButtonGroupColumn::make('Accionesss')
                 ->attributes(function($row) {

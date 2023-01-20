@@ -20,7 +20,7 @@ class CreateCotizaciones extends Component
     public $allProductos;
     public $total, $subtotal, $iva;
 
-    public $listeners = ['fillCLiente'];
+    protected $listeners = ['fillCLiente'];
 
     public function mount(){
         $this->authorize('viewAny', Cotizacion::class);

@@ -83,7 +83,7 @@ class CreateEmpleados extends Component
             ->performedOn($creado)
             ->log('Creado');
 
-        $this->emit('empleadoCreado');
+        $this->emit('refreshEmpleado');
 
         return redirect()->back();
     }

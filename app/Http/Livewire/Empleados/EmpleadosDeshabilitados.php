@@ -17,9 +17,8 @@ class EmpleadosDeshabilitados extends Component
     use WithPagination;
 
     public $filtro_us;
-    public $modalHabilitacionEmpleado = false;
 
-    public $listeners = ['empleadoHabilitado' => '$refresh'];
+    protected $listeners = ['refreshEmpleado' => '$refresh'];
 
     public function mount(){
         $this->authorize('viewAny', User::class);
@@ -33,31 +32,5 @@ class EmpleadosDeshabilitados extends Component
                 ->paginate(10),
             'roles' => Role::all()->pluck('name')
         ]);
-    }
-
-    public function confirmEmpleadoHabilitacion($id)
-    {
-        $this->modalHabilitacionEmpleado = $id;
-    }
-
-    public function cancelHabilitar()
-    {
-        $this->modalHabilitacionEmpleado = false;
-    }
-
-    public function habilitarEmpleado($seleccionado)
-    {
-
-        User::withTrashed()->where('id',$seleccionado)->restore();
-
-        activity('Empleado')
-            ->performedOn(User::find($seleccionado))
-            ->log('Habilitado');
-
-        $this->modalHabilitacionEmpleado = false;
-
-        toast()->success('Empleado habilitado con éxito!')->push();
-
-        $this->emit('empleadoHabilitado');
     }
 }

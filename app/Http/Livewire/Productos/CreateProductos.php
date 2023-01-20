@@ -10,7 +10,7 @@ class CreateProductos extends Component
 {
     use WireToast;
 
-    public $listeners = ['crearProducto'];
+    protected $listeners = ['crearProducto'];
     public $prod_nombre, $prod_valor, $prod_detalle;
     public $modalCreacionProducto = false;
 
