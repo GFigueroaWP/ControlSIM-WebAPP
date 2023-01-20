@@ -41,9 +41,12 @@ class EmpleadoTable extends DataTableComponent
             Column::make("Apellido", "us_apellido")
                 ->sortable()
                 ->searchable(),
-            /* Column::make("Cargo", "getRoleNames().first()")
+            Column::make("Cargo")
+                ->label(
+                    fn($row, Column $column) => $row->getrolenames()->first()
+                )
                 ->sortable()
-                ->searchable(), */
+                ->searchable(),
             Column::make("Acciones")
             ->label(
                 fn($row, Column $column) => view('livewire.empleados.acciones')->with(['empleado' => $row])
