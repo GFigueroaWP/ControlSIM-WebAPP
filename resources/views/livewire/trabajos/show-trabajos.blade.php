@@ -36,6 +36,24 @@
                             class="mt-1 block w-full disabled" disabled />
                         <x-jet-input-error for="show_direccion" class="mt-2" />
                     </div>
+                    <div class="col-span-2">
+
+                    </div>
+                    <div class="col-span-2">
+                        <x-jet-label for="show_inicio" value="{{ __('Fecha estimada de inicio') }}" />
+                        <x-jet-input id="show_inicio" wire:model='show_inicio' type="text" placeholder='inicio'
+                            class="mt-1 block w-full disabled" disabled />
+                        <x-jet-input-error for="show_inicio" class="mt-2" />
+                    </div>
+                    <div class="col-span-2">
+                        <x-jet-label for="show_limite" value="{{ __('Fecha estimada de termino') }}" />
+                        <x-jet-input id="show_limite" wire:model='show_limite' type="text" placeholder='limite'
+                            class="mt-1 block w-full disabled" disabled />
+                        <x-jet-input-error for="show_limite" class="mt-2" />
+                    </div>
+                    <div class="col-span-2">
+
+                    </div>
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="show_estado" value="{{ __('Estado orden de trabajo') }}" />
                         <x-jet-input id="show_estado" wire:model='show_estado' type="text" placeholder='Estado'
@@ -50,6 +68,83 @@
                     </div>
                 </x-slot>
             </x-jet-form-section>
+
+            @role(['Administrativo','super-admin'])
+                <x-jet-section-border />
+
+                <x-jet-form-section submit="updateTecnicos">
+                    <x-slot name="title">
+                        {{ __('Técnicos') }}
+                    </x-slot>
+
+                    <x-slot name="description">
+                        {{ __('Técnicos asignados a la tarea') }}
+                    </x-slot>
+
+                    <x-slot name="form">
+                        @role(['Administrativo','super-admin'])
+                        @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada')
+                            <div class="col-span-4">
+                                <x-jet-label for="añadirTecnico" value="{{ __('Añadir técnico al proyecto') }}" />
+                                <div wire:ignore>
+                                    <select name="añadirTecnico"
+                                        class="selectTecnico select2 w-full"
+                                        wire:model="añadirTecnico">
+                                        <option value="">Elija un técnico</option>
+                                        @foreach ($tecnicos as $tecnico)
+                                        <option value="{{ $tecnico->id }}">{{ $tecnico->us_nombre }} {{
+                                            $tecnico->us_apellido }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @if ($errors->has('añadirTecnico'))
+                                    <em class="text-red-600 text-sm">
+                                        {{ $errors->first('añadirTecnico') }}
+                                    </em>
+                                @endif
+                            </div>
+                            <div div class="col-span-2 sm:col-span-2 pt-6">
+                                <x-jet-button wire:click.prevent="addTecnico">{{ __('Añadir Técnico') }}</x-jet-button>
+                            </div>
+                        @endif
+                        @endrole
+                        <div class="col-span-6">
+                            <div>
+                                <table class="table-fixed w-full text-base text-left">
+                                    <thead>
+                                        <th>
+                                            Tecnico
+                                        </th>
+                                        <th>
+                                            Acciones
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($this->trabajo->tecnicos as $tecnico)
+                                        <tr class="bg-white border-b hover:bg-gray-300">
+                                            <td class="py-3 px-6">
+                                                {{ $tecnico->us_nombre }} {{ $tecnico->us_apellido }}
+                                            </td>
+                                            @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada')
+                                                <td class="py-3 px-6">
+                                                    @role(['Administrativo','super-admin'])
+                                                    <x-jet-danger-button wire:click.prevent="removeTecnico({{ $tecnico->id }})">{{ __('Remover del trabajo') }}</x-jet-danger-button>
+                                                    @endrole
+                                                </td>
+                                            @else
+                                                <td class="py-3 px-6">
+
+                                                </td>
+                                            @endif
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </x-slot>
+                </x-jet-form-section>
+            @endrole
 
             <x-jet-section-border />
 
@@ -72,24 +167,29 @@
                             <div class="bg-csim h-2.5 rounded-full" style="width: {{ $this->progresoTareas.'%' }}"></div>
                         </div>
                     </div>
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="add_tarea" value="{{ __('Añadir Tarea') }}" />
-                        <x-jet-input id="add_tarea" wire:model='add_tarea' type="text"
-                            placeholder="tarea" class="mt-1 block w-full" />
-                        <x-jet-input-error for="add_tarea" class="mt-2" />
-                    </div>
-                    <div class="col-span-2 sm:col-span-2 pt-7">
-                        <x-jet-button wire:click.prevent="addTarea">{{ __('Añadir Tarea') }}</x-jet-button>
-                    </div>
-                    <div class="col-span-6 sm:col-span-4">
+                    @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada')
+                        <div class="col-span-6 sm:col-span-4">
+                            <x-jet-label for="add_tarea" value="{{ __('Añadir Tarea') }}" />
+                            <x-jet-input id="add_tarea" wire:model='add_tarea' type="text"
+                                placeholder="tarea" class="mt-1 block w-full" />
+                            <x-jet-input-error for="add_tarea" class="mt-2" />
+                        </div>
+                        <div class="col-span-2 sm:col-span-2 pt-7">
+                            <x-jet-button wire:click.prevent="addTarea">{{ __('Añadir Tarea') }}</x-jet-button>
+                        </div>
+                    @endif
+                    <div class="col-span-6">
                         <div>
-                            <table class="w-full text-base text-left">
+                            <table class="table-fixed w-full text-base text-left">
                                 <thead>
                                     <th>
                                         Tarea
                                     </th>
                                     <th>
                                         Detalle
+                                    </th>
+                                    <th>
+                                        Acciones
                                     </th>
                                 </thead>
                                 <tbody>
@@ -100,19 +200,22 @@
                                         </td>
                                         @if ($tarea->tar_estado == false)
                                             <td class="py-3 px-6">
-                                                @role(['Técnico','super-admin'])
-                                                    @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada')
-                                                        <x-jet-secondary-button wire:click.prevent="completarTarea({{ $tarea }})" wire:loading.attr="disabled">
-                                                            {{ __('completar') }}
-                                                        </x-jet-secondary-button>
-                                                    @endif
-                                                @endrole
+
                                             </td>
                                         @else
                                             <td class="py-3 px-6">
                                                 Completada el {{ \Carbon\Carbon::parse( $tarea->tar_completada)->format('d-m-Y')}}
                                             </td>
                                         @endif
+                                        <td class="py-3 px-6">
+                                            @role(['Técnico','super-admin'])
+                                                @if ($this->trabajo->ot_estado != 'Completada' && $this->trabajo->ot_estado != 'Cancelada' && $tarea->tar_estado == false)
+                                                    <x-jet-secondary-button wire:click.prevent="completarTarea({{ $tarea }})" wire:loading.attr="disabled">
+                                                        {{ __('completar') }}
+                                                    </x-jet-secondary-button>
+                                                @endif
+                                            @endrole
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -219,3 +322,21 @@
     @livewire('trabajos.modal-cancelar')
     @livewire('trabajos.modal-completar')
 </div>
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('.selectTecnico').select2({
+            placeholder: 'Seleccione un tecnico',
+            "language": {
+                "noResults": function(){
+                    return "No hay coincidencias"
+                }
+            }
+        });
+        $('.selectTecnico').on('change', function(e) {
+            @this.set('tecnico_id2', $(this).val())
+        });
+    });
+</script>
+@endsection

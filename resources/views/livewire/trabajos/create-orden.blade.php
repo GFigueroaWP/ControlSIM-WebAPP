@@ -58,8 +58,8 @@
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-button class="m-1" wire:click.prevent="addTecnico" wire:loading.attr="disabled" >Añadir tecnico</x-jet-button>
                     </div>
-                    <div class="col-span-6 sm:col-span-4">
-                        <table class="w-full text-base text-left">
+                    <div class="col-span-6">
+                        <table class="table-fixed w-full text-base text-left">
                             <thead>
                                 <tr>
                                     <th scope="col" class="py-2 px-6">
@@ -85,7 +85,7 @@
                                                 <select name="tecnicosSeleccionados[{{ $index }}][tecnico_id]"
                                                     class="selectTecnico select2 w-full"
                                                     wire:model="tecnicosSeleccionados.{{ $index }}.tecnico_id">
-                                                    <option value="">Elija un producto</option>
+                                                    <option value="">Elija un tecnico</option>
                                                     @foreach ($tecnicos as $tecnico)
                                                     <option value="{{ $tecnico->id }}">{{ $tecnico->us_nombre }} {{
                                                         $tecnico->us_apellido }}</option>
@@ -135,8 +135,8 @@
                         <div class="col-span-6 sm:col-span-4">
                             <x-jet-button class="m-1" wire:click.prevent="addTarea">Añadir Tarea</x-jet-button>
                         </div>
-                        <div class="col-span-6 sm:col-span-4">
-                            <table class="w-full text-base text-left">
+                        <div class="col-span-6">
+                            <table class="table-fixed w-full text-base text-left">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="py-2 px-6">
@@ -198,17 +198,17 @@
                             {{ __('Fechas de inicio y termino estimadas para el proyecto') }}
                         </x-slot>
                         <x-slot name="form">
-                            <div class="col-span-6 sm:col-span-4">
+                            <div class="col-span-3 sm:col-span-2">
                                 <x-jet-label for="fechaInicio" value="{{ __('Fecha de inicio estimada') }}"/>
                                 <x-jet-input type="date" min="{{ $this->fechaActual }}" wire:model='fechaInicio'/>
                             </div>
                             @if ($this->fechaInicio)
-                                <div class="col-span-6 sm:col-span-4">
+                                <div class="col-span-3 sm:col-span-2">
                                     <x-jet-label for="fechaLimite" value="{{ __('Fecha de termino estimada') }}"/>
                                     <x-jet-input type="date" min="{{ $this->fechaInicio }}" wire:model='fechaLimite'/>
                                 </div>
                             @else
-                                <div class="col-span-6 sm:col-span-4">
+                                <div class="col-span-3 sm:col-span-2">
                                     <x-jet-label for="fechaLimite" value="{{ __('Fecha de termino estimada') }}"/>
                                     <x-jet-input class="disabled" type="date" min="{{ $this->fechaInicio }}" wire:model='fechaLimite' disabled/>
                                 </div>

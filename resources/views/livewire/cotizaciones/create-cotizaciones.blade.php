@@ -66,8 +66,8 @@
                         <div class="col-span-6 sm:col-span-4">
                             <x-jet-button class="m-1" wire:click.prevent="addProduct">Añadir</x-jet-button>
                         </div>
-                        <div class="col-span-6 sm:col-span-4">
-                            <table class="w-full text-base text-left">
+                        <div class="col-span-6">
+                            <table class=" table-fixed w-full text-base text-left overflow-auto">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="py-2 px-6">

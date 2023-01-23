@@ -13,7 +13,7 @@
                 <div class="col-span-6">
                     <x-jet-label for="add_observacion" value="{{ __('Observación') }}" />
                     <textarea id="add_observacion" wire:model='add_observacion' rows="5" type="text" placeholder='Observación'
-                    class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-csim focus:border-csim disabled" ></textarea>
+                    class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-csim focus:border-csim" ></textarea>
                     <x-jet-input-error for="add_observacion" class="mt-2" />
                 </div>
             </div>

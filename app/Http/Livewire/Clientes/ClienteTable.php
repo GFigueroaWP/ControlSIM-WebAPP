@@ -38,8 +38,8 @@ class ClienteTable extends DataTableComponent
                 ),
             /* Column::make("Cli email", "cli_email")
                 ->sortable()
-                ->searchable(),
-            Column::make("Cli telefono", "cli_telefono")
+                ->searchable()->isHidden(), */
+            /* Column::make("Cli telefono", "cli_telefono")
                 ->sortable()
                 ->searchable(),
             Column::make("Cli direccion", "cli_direccion")
