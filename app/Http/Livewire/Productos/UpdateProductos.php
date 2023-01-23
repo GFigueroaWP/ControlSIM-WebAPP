@@ -63,15 +63,13 @@ class UpdateProductos extends Component
 
     protected $rules = [
         'prod_nombre' => 'required|string',
-        'prod_valor' => 'required|numeric',
-        'prod_detalle' => 'string'
+        'prod_valor' => 'required|numeric'
     ];
 
     protected $messages = [
         'prod_nombre.required' => 'El Campo de Nombre es Obligatorio',
         'prod_nombre.string' => 'El Campo de Nombre debe ser alfanumérico',
         'prod_valor.required' => 'El Campo de Precio es Obligatorio',
-        'prod_valor.numeric' => 'El Campo de Precio debe ser numérico',
-        'prod_detalle.string' => 'El Campo de Descripción debe ser alfanumérico'
+        'prod_valor.numeric' => 'El Campo de Precio debe ser numérico'
     ];
 }
