@@ -13,23 +13,28 @@ use Spatie\Activitylog\Models\Activity;
 
 class Administracion extends Component
 {
-
+    public $mes_seleccionado, $year_seleccionado, $inicio, $inicio_date, $mes_count, $select_fecha2, $select_fecha, $comparar_date;
     public $cotizacionesEmitidas, $cotizacionesAceptadas, $cotizacionesRechazadas;
     public $trabajosPlanificados, $trabajosIniciados, $trabajosCancelados, $trabajosCompletados;
     public $actividades;
 
+    public function mount(){
+        $this->inicio = Cotizacion::all()->first();
+        $this->inicio_date = Carbon::parse($this->inicio->created_at);
+        $this->mes_count = $this->inicio_date->diffInMonths(Carbon::now());
+    }
+
     public function render()
     {
+        $this->comparar_date = Carbon::parse($this->select_fecha2);
+        $this->cotizacionesEmitidas = Cotizacion::whereMonth('created_at',$this->comparar_date->month)->whereYear('created_at',$this->comparar_date->year)->count();
+        $this->cotizacionesAceptadas = Cotizacion::whereMonth('updated_at',$this->comparar_date->month)->whereYear('updated_at',$this->comparar_date->year)->where('cot_estado', 'Aceptada')->count();
+        $this->cotizacionesRechazadas = Cotizacion::whereMonth('updated_at',$this->comparar_date->month)->whereYear('updated_at',$this->comparar_date->year)->where('cot_estado', 'Rechazada')->count();
 
-
-        $this->cotizacionesEmitidas = Cotizacion::whereMonth('created_at',Carbon::now()->month)->count();
-        $this->cotizacionesAceptadas = Cotizacion::whereMonth('updated_at',Carbon::now()->month)->where('cot_estado', 'Aceptada')->count();
-        $this->cotizacionesRechazadas = Cotizacion::whereMonth('updated_at',Carbon::now()->month)->where('cot_estado', 'Rechazada')->count();
-
-        $this->trabajosPlanificados = OrTrabajo::whereMonth('ot_inicio',Carbon::now()->month)->where('ot_estado', 'Planificada')->count();
-        $this->trabajosIniciados = OrTrabajo::whereMonth('updated_at',Carbon::now()->month)->where('ot_estado', 'Iniciada')->count();
-        $this->trabajosCancelados = OrTrabajo::whereMonth('updated_at',Carbon::now()->month)->where('ot_estado', 'Cancelada')->count();
-        $this->trabajosCompletados = OrTrabajo::whereMonth('ot_completada',Carbon::now()->month)->where('ot_estado', 'Completada')->count();
+        $this->trabajosPlanificados = OrTrabajo::whereMonth('ot_inicio',$this->comparar_date->month)->whereYear('created_at',$this->comparar_date->year)->where('ot_estado', 'Planificada')->count();
+        $this->trabajosIniciados = OrTrabajo::whereMonth('updated_at',$this->comparar_date->month)->whereYear('updated_at',$this->comparar_date->year)->where('ot_estado', 'Iniciada')->count();
+        $this->trabajosCancelados = OrTrabajo::whereMonth('updated_at',$this->comparar_date->month)->whereYear('updated_at',$this->comparar_date->year)->where('ot_estado', 'Cancelada')->count();
+        $this->trabajosCompletados = OrTrabajo::whereMonth('ot_completada',$this->comparar_date->month)->whereYear('ot_completada',$this->comparar_date->year)->where('ot_estado', 'Completada')->count();
 
         $this->actividades = Activity::latest()->take(5)->get();
 
